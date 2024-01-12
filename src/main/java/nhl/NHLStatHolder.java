@@ -46,55 +46,55 @@ public class NHLStatHolder implements Serializable {
     }
 
     /**
-     * Updates the city of a team based on the given name.
+     * Updates the city of a team based on the given full name.
      * 
-     * @param name  The name of the team to update.
-     * @param city  The new city for the team.
+     * @param fullName  The full name of the team to update.
+     * @param city      The new city for the team.
      */
-    public void updateCity(String name, String city) {
-        league.updateCity(name, city);
+    public void updateCity(String fullName, String city) {
+        league.updateCity(fullName, city);
     }
 
     /**
-     * Updates the name of a team based on the given previous name.
+     * Updates the name of a team based on the given full name.
      * 
-     * @param oldName   The old name of the team.
+     * @param fullName  The current full name of the team.
      * @param newName   The new name of the team.
      */
-    public void updateName(String oldName, String newName) {
-        league.updateName(oldName, newName);
+    public void updateName(String fullName, String newName) {
+        league.updateName(fullName, newName);
     }
 
     /**
-     * Updates the conference of a team based on the given name.
+     * Updates the conference of a team based on the given full name.
      * 
-     * @param name  The name of the team to update.
-     * @param city  The new conference of the team.
+     * @param fullName      The full name of the team to update.
+     * @param conference    The new conference of the team.
      */
-    public void updateConference(String name, String conference) {
-        league.updateConference(name, conference);
+    public void updateConference(String fullName, String conference) {
+        league.updateConference(fullName, conference);
     }
 
     /**
-     * Updates the division of a team based on the given name.
+     * Updates the division of a team based on the given full name.
      * 
-     * @param name  The name of the team to update.
-     * @param city  The new division of the team.
+     * @param fullName  The full name of the team to update.
+     * @param division  The new division of the team.
      */
-    public void updateDivision(String name, String division) {
-        league.updateDivision(name, division);
+    public void updateDivision(String fullName, String division) {
+        league.updateDivision(fullName, division);
     }
 
     /**
      * Updates the record for a team by supplying their wins, loses, and overtime loses.
      * 
-     * @param name  The name of the team to update.
-     * @param wins  The new number of wins of the team.
-     * @param loses The new number of loses of the team.
+     * @param fullName      The full name of the team to update.
+     * @param wins          The new number of wins of the team.
+     * @param loses         The new number of loses of the team.
      * @param overtimeLoses The new number of overtime loses of the team.
      */
-    public void updateRecord(String name, int wins, int loses, int overtimeLoses) {
-        league.updateRecord(name, wins, loses, overtimeLoses);
+    public void updateRecord(String fullName, int wins, int loses, int overtimeLoses) {
+        league.updateRecord(fullName, wins, loses, overtimeLoses);
     }
 
     /**

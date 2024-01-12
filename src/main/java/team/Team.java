@@ -6,13 +6,14 @@ package team;
 
 import java.io.Serializable;
 
+import ui.DoubleRounder;
+
 public class Team implements Serializable {
     private static final long serialVersionUID = 535072393016375807L;
     private String city;
     private String name;
     private String conference;
     private String division;
-    private int points;
     private int wins;
     private int loses;
     private int overtimeLoses;
@@ -24,7 +25,6 @@ public class Team implements Serializable {
      * @param teamName  The team's name.
      * @param teamConference    The team's conference.
      * @param teamDivision  The team's division.
-     * @param points    The team's number of points.
      * @param teamWins  The team's number of wins.
      * @param teamLoses The team's number of loses.
      * @param teamOvertimeLoses The team's number of overtime loses.
@@ -34,7 +34,6 @@ public class Team implements Serializable {
         name = teamName;
         conference = teamConference;
         division = teamDivision;
-        points = teamPoints;
         wins = teamWins;
         loses = teamLoses;
         overtimeLoses = teamOvertimeLoses;
@@ -56,7 +55,6 @@ public class Team implements Serializable {
         name = teamName;
         conference = teamConference;
         division = teamDivision;
-        points = 2 * teamWins + teamOvertimeLoses;
         wins = teamWins;
         loses = teamLoses;
         overtimeLoses = teamOvertimeLoses;
@@ -73,7 +71,6 @@ public class Team implements Serializable {
         name = teamName;
         conference = teamConference;
         division = teamDivision;
-        points = 0;
         wins = 0;
         loses = 0;
         overtimeLoses = 0;
@@ -96,10 +93,6 @@ public class Team implements Serializable {
         division = newDivision;
     }
 
-    protected void setPoints(int newPoints) {
-        points = newPoints;
-    }
-
     protected void setWins(int newWins) {
         wins = newWins;
     }
@@ -116,7 +109,6 @@ public class Team implements Serializable {
         wins = newWins;
         loses = newLoses;
         overtimeLoses = newOvertimeLoses;
-        points = wins * 2 + overtimeLoses;
     }
 
     public String getCity() {
@@ -135,10 +127,6 @@ public class Team implements Serializable {
         return division;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
     public int getWins() {
         return wins;
     }
@@ -151,22 +139,36 @@ public class Team implements Serializable {
         return overtimeLoses;
     }
 
+    public int getPoints() {
+        return wins * 2 + overtimeLoses;
+    }
+
+    public int getGamesPlayed() {
+        return wins + loses + overtimeLoses;
+    }
+
+    public double getPointsPercentage() {
+        double pointsPercentage = getPoints() / (getGamesPlayed() * 2.0);
+        pointsPercentage = DoubleRounder.round(pointsPercentage, 3);
+        return pointsPercentage;
+    }
+
     /**
      * Returns the full name of the team consisting of the city and team name.
      * 
      * @return  The team city plus the team name.
      */
-    public String getTeam() {
-        return city + " " + name + "\t";
+    public String getFullName() {
+        return city + " " + name;
     }
 
     /**
-     * Returns the record of the team via the wins, loses and overtime loses.
+     * Returns a string showing the team's record of the form <wins>-<loses>-<overtime_loses>
      * 
-     * @return  The points plus the wins plus the loses plus the overtime loses.
+     * @return  A string showing the team's record.
      */
     public String getRecord() {
-        return "Points: " + points + "\t| Wins: " + wins + "\t| Loses: " + loses + "\t| Overtime Loses: " + overtimeLoses;
+        return wins + "-" + loses + "-" + overtimeLoses;
     }
 
     /**
@@ -175,6 +177,9 @@ public class Team implements Serializable {
      * @return  The team's city and name plus its record and number of points.
      */
     public String toString() {
-        return getTeam() + " | " + getRecord();
+        if (getFullName().length() <= 15) {
+            return getFullName() + "\t\t| GP: " + getGamesPlayed() + "\t| PTS: " + getPoints() + "\t| Record " + getRecord() + "\t|PP%: " + getPointsPercentage();
+        }
+        return getFullName() + "\t| GP: " + getGamesPlayed() + "\t| PTS: " + getPoints() + "\t| Record " + getRecord() + "\t|PP%: " + getPointsPercentage();
     }
 }

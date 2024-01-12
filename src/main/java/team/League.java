@@ -9,11 +9,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
+import ui.BufferGenerator;
 import ui.InputAnalyzer;
 
 public class League implements Serializable {
     private static final long serialVersionUID = 329208573326875283L;
-    private ArrayList<Team> teams = new ArrayList<>();
+    private List<Team> teams = new ArrayList<>();
 
     /**
      * Adds a team to the league (list of teams) given a team's city, name, conference, division
@@ -45,90 +46,60 @@ public class League implements Serializable {
     }
 
     /**
-     * Checks if a team belongs to the league.
+     * Updates the city of a team provided from the given name.
      * 
-     * @param teamName  The team name to check for.
-     * @return  True if the team name is found, and false otherwise.
-     */
-    public boolean checkTeamExists(String team) {
-        for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(team, teams.get(i).getTeam())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Updates the city of a team based on the given name.
-     * 
-     * @param name  The name of the team to update.
+     * @param fullName  The full name of the team to update.
      * @param city  The new city for the team.
      */
-    public void updateCity(String name, String city) {
-        for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(name, teams.get(i).getName())) {
-                teams.get(i).setCity(city);
-            }
-        }
+    public void updateCity(String fullName, String city) {
+        int index = getTeamIndex(fullName);
+        teams.get(index).setCity(city);
     }
 
     /**
-     * Updates the name of a team based on the given previous name.
+     * Updates the name of a team based on the given current full name.
      * 
-     * @param oldName   The old name of the team.
-     * @param newName   The new name of the team.
+     * @param fullName  The current full name of the team.
+     * @param name      The new name of the team.
      */
-    public void updateName(String oldName, String newName) {
-        for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(oldName, teams.get(i).getName())) {
-                teams.get(i).setName(newName);
-            }
-        }
+    public void updateName(String fullName, String name) {
+        int index = getTeamIndex(fullName);
+        teams.get(index).setName(name);
     }
 
     /**
-     * Updates the conference of a team based on the given name.
+     * Updates the conference of a team based on the given full name.
      * 
-     * @param name  The name of the team to update.
-     * @param city  The new conference of the team.
+     * @param fullName      The full name of the team to update.
+     * @param conference    The new conference of the team.
      */
-    public void updateConference(String name, String conference) {
-        for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(name, teams.get(i).getName())) {
-                teams.get(i).setConference(conference);
-            }
-        }
+    public void updateConference(String fullName, String conference) {
+        int index = getTeamIndex(fullName);
+        teams.get(index).setConference(conference);
     }
 
     /**
-     * Updates the division of a team based on the given name.
+     * Updates the division of a team based on the given full name.
      * 
-     * @param name  The name of the team to update.
-     * @param city  The new division of the team.
+     * @param fullName  The full name of the team to update.
+     * @param city      The new division of the team.
      */
-    public void updateDivision(String name, String conference) {
-        for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(name, teams.get(i).getName())) {
-                teams.get(i).setDivision(conference);
-            }
-        }
+    public void updateDivision(String fullName, String division) {
+        int index = getTeamIndex(fullName);
+        teams.get(index).setDivision(division);
     }
 
     /**
      * Updates the record for a team by supplying their wins, loses, and overtime loses.
      * 
-     * @param name  The name of the team to update.
-     * @param wins  The new number of wins of the team.
-     * @param loses The new number of loses of the team.
+     * @param fullName      The full name of the team to update.
+     * @param wins          The new number of wins of the team.
+     * @param loses         The new number of loses of the team.
      * @param overtimeLoses The new number of overtime loses of the team.
      */
-    public void updateRecord(String name, int wins, int loses, int overtimeLoses) {
-        for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(name, teams.get(i).getName())) {
-                teams.get(i).setRecord(wins, loses, overtimeLoses);
-            }
-        }
+    public void updateRecord(String fullName, int wins, int loses, int overtimeLoses) {
+        int index = getTeamIndex(fullName);
+        teams.get(index).setRecord(wins, loses, overtimeLoses);
     }
 
     /**
@@ -137,8 +108,8 @@ public class League implements Serializable {
      * @return  The standings filtered by only points.
      */
     public String getStandings_ByLeague_ByPoints() {
-        ArrayList<Team> leagueStandingsByPoints = sortByPoints(teams);
-        return getLeagueString(leagueStandingsByPoints);
+        sortByPoints();
+        return getLeagueString();
     }
 
     /**
@@ -147,8 +118,13 @@ public class League implements Serializable {
      * @return  The standings for the playoff/wildcard race.
      */
     public String getStandings_ByWildcard_ByPoints() {
-        ArrayList<Team> leagueByWildcard = sortByWildcard(teams);
-        return getWildcardString(leagueByWildcard);
+        if (numInDivision("Atlantic") != 8 || numInDivision("Metropolitan") != 8
+            || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
+            return "Teams are not in Proper Divisions\n";
+        } else {
+            sortByWildcard();
+            return getWildcardString();
+        }
     }
 
     /**
@@ -157,12 +133,16 @@ public class League implements Serializable {
      * @return  The standings filtered by division and then points.
      */
     public String getStandings_ByDivision_ByPoints() {
-        ArrayList<Team> leagueByDivision = sortByDivision(teams);
-        sortByPoints(leagueByDivision.subList(0, 7));
-        sortByPoints(leagueByDivision.subList(8, 15));
-        sortByPoints(leagueByDivision.subList(16, 23));
-        sortByPoints(leagueByDivision.subList(24, 31));
-        return getDivisionString(leagueByDivision);
+        if (numInConference("Eastern") != 8 || numInConference("Western") != 8) {
+            return "Teams are not in Proper Divisions\n";
+        } else {
+            sortByDivision();
+            sortByPoints(0, 7);
+            sortByPoints(8, 15);
+            sortByPoints(16, 23);
+            sortByPoints(24, 31);
+            return getDivisionString();
+        }
     }
 
     /**
@@ -171,10 +151,11 @@ public class League implements Serializable {
      * @return  The standings filtered by conference and then by points.
      */
     public String getStandings_ByConference_ByPoints() {
-        ArrayList<Team> leagueByConference = sortByConference(teams);
-        sortByPoints(leagueByConference.subList(0, 7));
-        sortByPoints(leagueByConference.subList(8, 15));
-        return getConferenceString(leagueByConference);
+        sortByConference();
+        //sortByPoints(0, 7);
+        //sortByPoints(8, 15);
+        //return "";
+        return getConferenceString();
     }
 
     /**
@@ -183,8 +164,8 @@ public class League implements Serializable {
      * @return  The standings filtered by wins.
      */
     public String getStandings_ByLeague_ByWins() {
-        ArrayList<Team> leagueByWins = sortByWins(teams);
-        return getLeagueString(leagueByWins);
+        sortByWins();
+        return getLeagueString();
     }
 
     /**
@@ -193,8 +174,8 @@ public class League implements Serializable {
      * @return  The standings filtered by loses.
      */
     public String getStandings_ByLeague_ByLoses() {
-        ArrayList<Team> leagueByLoses = sortByLoses(teams);
-        return getLeagueString(leagueByLoses);
+        sortByLoses();
+        return getLeagueString();
     }
 
     /**
@@ -203,167 +184,114 @@ public class League implements Serializable {
      * @return  The standings filtered by overtime loses.
      */
     public String getStandings_ByLeague_ByOvertimeLoses() {
-        ArrayList<Team> leagueByOvertimeLsoes = sortByOvertimeLoses(teams);
-        return getLeagueString(leagueByOvertimeLsoes);
+        sortByOvertimeLoses();
+        return getLeagueString();
     }
 
     /**
-     * Sorts a list of teams by the number of points, in descending order.
-     * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * Sorts the list of teams by the number of points, in descending order.
      */
-    private List<Team> sortByPoints(List<Team> list) {
-        for (int i = 0; i < list.size() - 1; i++) {
-            for (int j = 0; j < list.size() - i - 1; j++) {
-                if (list.get(j).getPoints() > list.get(j + 1).getPoints()) {
-                    swapTeams(list, j + 1, j);
+    private void sortByPoints() {
+        for (int i = 0; i < teams.size(); i++) {
+            for (int j = 0; j < teams.size() - i - 1; j++) {
+                if (teams.get(j).getPoints() < teams.get(j + 1).getPoints()) {
+                    swapTeams(j, j + 1);
                 }
             }
         }
-
-        return list;
     }
 
     /**
-     * Sorts a list of teams by the number of points, in descending order.
+     * Sorts some sublist of the list where the endpoints are given as parameters, and are
+     * included, by the number of points, in descending order.
      * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * @param min   The minimum index of the sublist being sorted.
+     * @param max   The maximum index of the sublist being sorted.
      */
-    private ArrayList<Team> sortByPoints(ArrayList<Team> list) {
-        for (int i = 0; i < list.size() - 1; i++) {
-            for (int j = 0; j < list.size() - i - 1; j++) {
-                if (list.get(j).getPoints() > list.get(j + 1).getPoints()) {
-                    swapTeams(list, j, j + 1);
+    private void sortByPoints(int min, int max) {
+        //System.out.println("Sorting the part of the array from " + min + " to " + max);
+        int iterator = 0;
+        for (int i = min; i <= max; i++) {
+            for (int j = min; j <= max - iterator - 1; j++) {
+                //System.out.println("Comparing " + teams.get(j).getFullName() + " with " + teams.get(j).getPoints() + " to " + teams.get(j + 1).getFullName() + " with " + teams.get(j + 1).getPoints());
+                if (teams.get(j).getPoints() < teams.get(j + 1).getPoints()) {
+                    //System.out.println("Swapping " + teams.get(j).getFullName() + " with " + teams.get(j + 1).getFullName());
+                    swapTeams(j, j + 1);
                 }
             }
+            iterator++;
         }
-
-        return list;
     }
 
     /**
-     * Sorts a list of teams by the number of wins, in descending order.
-     * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * Sorts the list of teams by the number of wins, in descending order.
      */
-    private ArrayList<Team> sortByWins(ArrayList<Team> list) {
-        ArrayList<Team> newList = new ArrayList<>();
-
-        int highestWins = 0, index = -1;
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i; j < list.size(); j++) {
-                if (list.get(j).getWins() > highestWins) {
-                    highestWins = list.get(j).getWins();
-                    index = j;
+    private void sortByWins() {
+        for (int i = 0; i < teams.size(); i++) {
+            for (int j = 0; j < teams.size() - i - 1; j++) {
+                if (teams.get(j).getWins() < teams.get(j + 1).getWins()) {
+                    swapTeams(j, j + 1);
                 }
             }
-
-            if (index != -1) {
-                newList.add(list.get(index));
-                newList.get(index).setWins(-1);
-            } else {
-                return newList;
-            }
         }
-        return newList;
     }
 
     /**
-     * Sorts a list of teams by the number of loses, in descending order.
-     * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * Sorts the list of teams by the number of loses, in descending order.
      */
-    private ArrayList<Team> sortByLoses(ArrayList<Team> list) {
-        ArrayList<Team> newList = new ArrayList<>();
-
-        int highestLoses = 0, index = -1;
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i; j < list.size(); j++) {
-                if (list.get(j).getLoses() > highestLoses) {
-                    highestLoses = list.get(j).getLoses();
-                    index = j;
+    private void sortByLoses() {
+        for (int i = 0; i < teams.size(); i++) {
+            for (int j = 0; j < teams.size() - i - 1; j++) {
+                if (teams.get(j).getLoses() < teams.get(j + 1).getLoses()) {
+                    swapTeams(j, j + 1);
                 }
             }
-
-            if (index != -1) {
-                newList.add(list.get(index));
-                list.get(index).setLoses(-1);
-            } else {
-                return newList;
-            }
         }
-        return newList;
     }
 
     /**
-     * Sorts a list of teams by the number of overtime loses, in descending order.
-     * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * Sorts the list of teams by the number of overtime loses, in descending order.
      */
-    private ArrayList<Team> sortByOvertimeLoses(ArrayList<Team> list) {
-        ArrayList<Team> newList = new ArrayList<>();
-
-        int highestOvertimeLoses = 0, index = -1;
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i; j < list.size(); j++) {
-                if (list.get(j).getOvertimeLoses() > highestOvertimeLoses) {
-                    highestOvertimeLoses = list.get(j).getOvertimeLoses();
-                    index = j;
+    private void sortByOvertimeLoses() {
+        for (int i = 0; i < teams.size(); i++) {
+            for (int j = 0; j < teams.size() - i - 1; j++) {
+                if (teams.get(j).getOvertimeLoses() < teams.get(j + 1).getOvertimeLoses()) {
+                    swapTeams(j, j + 1);
                 }
             }
-
-            if (index != -1) {
-                newList.add(list.get(index));
-                newList.get(index).setOvertimeLoses(-1);
-            } else {
-                return newList;
-            }
         }
-        return newList;
     }
 
     /**
      * Sorts a list of teams into a format that shows the wildcard race, showing the east and
      * then the west.
-     * 
-     * @param list  The list to sort.
-     * @return      The new, sorted list.
      */
-    private ArrayList<Team> sortByWildcard(ArrayList<Team> list) {
-        ArrayList<Team> sortedIntoWildcard = sortByDivision(teams);
-        sortByPoints(sortedIntoWildcard.subList(0, 7));
-        sortByPoints(sortedIntoWildcard.subList(8, 15));
-        swapTeams(sortedIntoWildcard, 3, 8);
-        swapTeams(sortedIntoWildcard, 4, 9);
-        swapTeams(sortedIntoWildcard, 5, 10);
-        sortByPoints(sortedIntoWildcard.subList(6, 15));
-        sortByPoints(sortedIntoWildcard.subList(16, 23));
-        sortByPoints(sortedIntoWildcard.subList(24, 31));
-        swapTeams(sortedIntoWildcard, 19, 24);
-        swapTeams(sortedIntoWildcard, 20, 25);
-        swapTeams(sortedIntoWildcard, 21, 26);
-        sortByPoints(sortedIntoWildcard.subList(22, 31));
-        return sortedIntoWildcard;
+    private void sortByWildcard() {
+        sortByDivision();
+        sortByPoints(0, 7);
+        sortByPoints(8, 15);
+        swapTeams(3, 8);
+        swapTeams(4, 9);
+        swapTeams(5, 10);
+        sortByPoints(6, 15);
+        sortByPoints(16, 23);
+        sortByPoints(24, 31);
+        swapTeams(19, 24);
+        swapTeams(20, 25);
+        swapTeams(21, 26);
+        sortByPoints(22, 31);
     }
 
     /**
      * Sorts a list of teams by division, specifically, the Atlantic teams followed by the
      * Metro, then the Central and finally the Pacific.
-     * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
      */
-    private ArrayList<Team> sortByDivision(ArrayList<Team> list) {
-        ArrayList<Team> sortedByDivision = new ArrayList<>();
+    private void sortByDivision() {
+        List<Team> sortedByDivision = new ArrayList<>();
         int index = 0, numberFound = 0;
         while (index < 32 && numberFound < 8) {
-            if (list.get(index).getDivision().equals("Atlantic")) {
-                sortedByDivision.add(list.get(index));
+            if (teams.get(index).getDivision().equals("Atlantic")) {
+                sortedByDivision.add(teams.get(index));
                 numberFound++;
             }
             index++;
@@ -371,8 +299,8 @@ public class League implements Serializable {
         numberFound = 0;
         index = 0;
         while (index < 32 && numberFound < 8) {
-            if (list.get(index).getDivision().equals("Metropolitan")) {
-                sortedByDivision.add(list.get(index));
+            if (teams.get(index).getDivision().equals("Metropolitan")) {
+                sortedByDivision.add(teams.get(index));
                 numberFound++;
             }
             index++;
@@ -380,8 +308,8 @@ public class League implements Serializable {
         numberFound = 0;
         index = 0;
         while (index < 32 && numberFound < 8) {
-            if (list.get(index).getDivision().equals("Central")) {
-                sortedByDivision.add(list.get(index));
+            if (teams.get(index).getDivision().equals("Central")) {
+                sortedByDivision.add(teams.get(index));
                 numberFound++;
             }
             index++;
@@ -389,57 +317,112 @@ public class League implements Serializable {
         numberFound = 0;
         index = 0;
         while (index < 32 && numberFound < 8) {
-            if (list.get(index).getDivision().equals("Pacific")) {
-                sortedByDivision.add(list.get(index));
+            if (teams.get(index).getDivision().equals("Pacific")) {
+                sortedByDivision.add(teams.get(index));
                 numberFound++;
             }
             index++;
         }
-        return sortedByDivision;
+        teams = sortedByDivision;
     }
 
     /**
      * Sorts a list of teams by the conference, putting all Eastern teams before all Western
      * teams.
-     * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
      */
-    private ArrayList<Team> sortByConference(ArrayList<Team> list) {
-        ArrayList<Team> sortedByConference = new ArrayList<>();
+    private void sortByConference() {
+        List<Team> sortedByConference = new ArrayList<>();
         int index = 0, numberFound = 0;
         while (index < 32 && numberFound < 16) {
-            if (list.get(index).getConference().equals("Eastern")) {
-                sortedByConference.add(list.get(index));
+            if (teams.get(index).getConference().equals("Eastern")) {
+                sortedByConference.add(teams.get(index));
                 numberFound++;
             }
             index++;
         }
         numberFound = 0;
         index = 0;
-        while (index < 32 && numberFound < 8) {
-            if (list.get(index).getConference().equals("Western")) {
-                sortedByConference.add(list.get(index));
+        while (index < 32 && numberFound < 16) {
+            if (teams.get(index).getConference().equals("Western")) {
+                sortedByConference.add(teams.get(index));
                 numberFound++;
             }
             index++;
         }
-        return sortedByConference;
+        teams = sortedByConference;
     }
 
     /**
      * Returns a string for the standings assuming the teams are not sorted by division nor by
      * conference.
      * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * @return  A string showing the standings by league.
      */
-    private String getLeagueString(ArrayList<Team> list) {
+    private String getLeagueString() {
         String listString = "";
-
-        for (int i = 0; i < list.size(); i++) {
-            listString += i+1 + ". \t" + list.get(i).toString();
+        listString += "\t\t\t\t\tLeague\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        for (int i = 0; i < teams.size(); i++) {
+            listString += i+1 + ". \t" + teams.get(i).toString();
             listString += "\n";
+        }
+        return listString;
+    }
+
+    /**
+     * Returns a string for the standings assuming the teams are sorted into the wildcard
+     * race.
+     * 
+     * @return  A string showing the wildcard standings.
+     */
+    private String getWildcardString() {
+        String listString = "";
+        int i = 0;
+        listString += "\nEast\n";
+        listString += "\t\t\t\t\tAtlantic\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        while (i < 3) {
+            listString += i+1 + ". \t" + teams.get(i).toString();
+            listString += "\n";
+            i++;
+        }
+        listString += "\n\t\t\t\t\tMetropolitan\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        while (i < 6) {
+            listString += i-2 + ". \t" + teams.get(i).toString();
+            listString += "\n";
+            i++;
+        }
+        listString += "\n\t\t\t\t\tWildcard\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        while (i < 16) {
+            listString += i-5 + ". \t" + teams.get(i).toString();
+            listString += "\n";
+            i++;
+        }
+        listString += BufferGenerator.addLineBuffer(100);
+
+        listString += "West\n";
+        listString += "\t\t\t\t\tCentral\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        while (i < 19) {
+            listString += i-15 + ". \t" + teams.get(i).toString();
+            listString += "\n";
+            i++;
+        }
+        listString += "\n\t\t\t\t\tPacific\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        while (i < 22) {
+            listString += i-18 + ". \t" + teams.get(i).toString();
+            listString += "\n";
+            i++;
+        }
+        listString += "\n\t\t\t\t\tWildcard\n";
+        listString += BufferGenerator.addLineBuffer(100);
+        while (i < 32) {
+            listString +=  i-21 + ". \t" + teams.get(i).toString();
+            listString += "\n";
+            i++;
         }
         return listString;
     }
@@ -447,33 +430,36 @@ public class League implements Serializable {
     /**
      * Returns a string for the standings assuming the teams are sorted by division.
      * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * @return  A string showing the standings by division.
      */
-    private String getDivisionString(ArrayList<Team> list) {
+    private String getDivisionString() {
         String listString = "";
-        listString += "\t\tAtlantic\t\t\n";
+        listString += "\t\t\t\t\tAtlantic\n";
+        listString += BufferGenerator.addLineBuffer(100);
         int i = 0;
         while (i < 8) {
-            listString += list.get(i).toString();
+            listString += i+1 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
-        listString += "\n\t\tMetropolitan\t\t\n";
+        listString += "\t\t\t\t\tMetropolitan\n";
+        listString += BufferGenerator.addLineBuffer(100);
         while (i < 16) {
-            listString += list.get(i).toString();
+            listString += i-7 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
-        listString += "\n\t\tCentral\t\t\n";
+        listString += "\t\t\t\t\tCentral\n";
+        listString += BufferGenerator.addLineBuffer(100);
         while (i < 24) {
-            listString += list.get(i).toString();
+            listString += i-15 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
-        listString += "\n\t\tPacific\t\t\n";
+        listString += "\t\t\t\t\tPacific\n";
+        listString += BufferGenerator.addLineBuffer(100);
         while (i < 32) {
-            listString += list.get(i).toString();
+            listString += i-23 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
@@ -483,21 +469,22 @@ public class League implements Serializable {
     /**
      * Returns a string for the standings assuming the teams are sorted by conference.
      * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * @return  A string showing the standings by conference.
      */
-    private String getConferenceString(ArrayList<Team> list) {
+    private String getConferenceString() {
         String listString = "";
-        listString += "\t\tEast\t\t\n";
+        listString += "\t\t\t\t\tEastern\n";
+        listString += BufferGenerator.addLineBuffer(100);
         int i = 0;
         while (i < 16) {
-            listString += list.get(i).toString();
+            listString += i+1 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
-        listString += "\n\t\tWest\t\t\n";
+        listString += "\t\t\t\t\tWestern\n";
+        listString += BufferGenerator.addLineBuffer(100);
         while (i < 32) {
-            listString += list.get(i).toString();
+            listString += i-15 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
@@ -505,77 +492,76 @@ public class League implements Serializable {
     }
 
     /**
-     * Returns a string for the standings assuming the teams are sorted into the wildcard
-     * race.
+     * Checks if a given team belongs to the league.
      * 
-     * @param list  The list to sort.
-     * @return  The new, sorted list.
+     * @param fullName  The full name to check for.
+     * @return  True if the name is found, and false otherwise.
      */
-    private String getWildcardString(ArrayList<Team> list) {
-        String listString = "";
-        int i = 0;
-        listString += "\t\tEast\t\t\n\t\tAtlantic\t\t\n";
-        while (i < 3) {
-            listString += list.get(i).toString();
-            listString += "\n";
-            i++;
+    public boolean checkTeamExists(String fullName) {
+        for (int i = 0; i < teams.size(); i++) {
+            if (InputAnalyzer.checkSpecificInput(fullName, teams.get(i).getFullName())) {
+                return true;
+            }
         }
-        listString += "\n\t\tMetropolitan\t\t\n";
-        while (i < 6) {
-            listString += list.get(i).toString();
-            listString += "\n";
-            i++;
-        }
-        listString += "\t\tWildcard Race\t\t\n";
-        while (i < 16) {
-            listString +=  list.get(i).toString();
-            listString += "\n";
-            i++;
-        }
-        listString += "\t\tWest\t\t\n\t\tCentral\t\t\n";
-        while (i < 19) {
-            listString += list.get(i).toString();
-            listString += "\n";
-            i++;
-        }
-        listString += "\n\t\tPacific\t\t\n";
-        while (i < 22) {
-            listString += list.get(i).toString();
-            listString += "\n";
-            i++;
-        }
-        listString += "\t\tWildcard Race\t\t\n";
-        while (i < 32) {
-            listString +=  list.get(i).toString();
-            listString += "\n";
-            i++;
-        }
-        return listString;
+        return false;
     }
 
     /**
-     * Swaps two given teams' positions in a list of teams.
+     * Gets the index of a team in the ArrayList of teams by searching for the given full name.
      * 
-     * @param list      The list of the teams.
-     * @param first     The first team to swap.
-     * @param second    The second team to swap.
+     * @param fullName  The name of the team which we are finding the index of.
+     * @return  The index of the team in the ArrayList, if found, and -1 otherwise.
      */
-    private void swapTeams(List<Team> list, int first, int second) {
-        Team temp = list.get(first);
-        list.set(first, list.get(second));
-        list.set(second, temp);
+    private int getTeamIndex(String fullName) {
+        for (int i = 0; i < teams.size(); i++) {
+            if (InputAnalyzer.checkSpecificInput(fullName, teams.get(i).getFullName())) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
-     * Swaps two given teams' positions in a list of teams.
+     * Swaps two given teams' positions in the list of teams.
      * 
-     * @param list      The list of the teams.
-     * @param first     The first team to swap.
-     * @param second    The second team to swap.
+     * @param first     The position of the first team to swap.
+     * @param second    The position of the second team to swap.
      */
-    private void swapTeams(ArrayList<Team> list, int first, int second) {
-        Team temp = list.get(first);
-        list.set(first, list.get(second));
-        list.set(second, temp);
+    private void swapTeams(int first, int second) {
+        Team temp = teams.get(first);
+        teams.set(first, teams.get(second));
+        teams.set(second, temp);
+    }
+
+    /**
+     * Finds the number of teams in a given division.
+     * 
+     * @param division  The division which we are checking for teams of.
+     * @return  The number of teams in the division.
+     */
+    private int numInDivision(String division) {
+        int numInDivision = 0;
+        for (int i = 0; i < teams.size(); i++) {
+            if (InputAnalyzer.checkSpecificInput(teams.get(i).getDivision(), division)) {
+                numInDivision++;
+            }
+        }
+        return numInDivision;
+    }
+
+    /**
+     * Finds the number of teams in a given conference.
+     * 
+     * @param conference    The conference which we are checking for teams of.
+     * @return  The number of teams in the conference.
+     */
+    private int numInConference(String conference) {
+        int numInConference = 0;
+        for (int i = 0; i < teams.size(); i++) {
+            if (InputAnalyzer.checkSpecificInput(teams.get(i).getDivision(), conference)) {
+                numInConference++;
+            }
+        }
+        return numInConference;
     }
 }

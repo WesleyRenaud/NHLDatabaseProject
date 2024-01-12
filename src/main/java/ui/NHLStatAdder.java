@@ -162,14 +162,15 @@ public class NHLStatAdder {
      */
     private void addTeam() {
         BufferGenerator.printBuffer(100);
-        String city = InputAnalyzer.getLineInput("Enter the team's city >> ");
-        String name = InputAnalyzer.getLineInput("Enter the team's name >> ");
-        String conference = InputAnalyzer.getStringInput("Enter the team's conference >> ");
-        String division = InputAnalyzer.getStringInput("Enter a team's division >> ");
-            if (InputAnalyzer.getYesNoInput("Does this team require a record? ")) {
-            int wins = InputAnalyzer.getIntegerInput("Enter the team's number of wins >> ");
-            int loses = InputAnalyzer.getIntegerInput("Enter the team's number of loses >> ");
-            int overtimeLoses = InputAnalyzer.getIntegerInput("Enter the team's number of overtime loses >> ");
+        String city = InputAnalyzer.getLineInput("Enter Team City >> ");
+        String name = InputAnalyzer.getLineInput("Enter Team Name >> ");
+        String conference = InputAnalyzer.getStringInput("Enter Team Conference >> ");
+        String division = InputAnalyzer.getStringInput("Enter Team Division >> ");
+            if (InputAnalyzer.getYesNoInput("Does this team have a record? ")) {
+            int wins = InputAnalyzer.getIntegerInput("Enter Number of Wins >> ");
+            int loses = InputAnalyzer.getIntegerInput("Enter Number of Loses >> ");
+            int overtimeLoses = InputAnalyzer.getIntegerInput("Enter Number of Overtime Loses >> ");
+            InputAnalyzer.readBuffer();
             statHolder.addTeam(city, name, conference, division, wins, loses, overtimeLoses);
         } else {
             statHolder.addTeam(city, name, conference, division);
@@ -180,10 +181,10 @@ public class NHLStatAdder {
      * Updates the city for a team supplied as input.
      */
     private void editTeamCity() {
-        String teamName = InputAnalyzer.getStringInput("Enter the name of the team >> ");
-        if (statHolder.checkTeamExists(teamName)) {
-            String newCity = InputAnalyzer.getStringInput("Enter the new city for the team >> ");
-            statHolder.updateCity(teamName, newCity);
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (statHolder.checkTeamExists(fullName)) {
+            String newCity = InputAnalyzer.getLineInput("Enter New City >> ");
+            statHolder.updateCity(fullName, newCity);
         } else {
             System.out.println("The Team Does not Exist");
         }
@@ -193,10 +194,10 @@ public class NHLStatAdder {
      * Updates the name for a team supplied as input.
      */
     private void editTeamName() {
-        String teamName = InputAnalyzer.getStringInput("Enter the name of the team >> ");
-        if (statHolder.checkTeamExists(teamName)) {
-            String newName = InputAnalyzer.getStringInput("Enter the new name for the team >> ");
-            statHolder.updateName(teamName, newName);
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (statHolder.checkTeamExists(fullName)) {
+            String newName = InputAnalyzer.getLineInput("Enter New Name >> ");
+            statHolder.updateName(fullName, newName);
         } else {
             System.out.println("The Team Does not Exist");
         }
@@ -206,10 +207,10 @@ public class NHLStatAdder {
      * Updates the conference for a team supplied as input.
      */
     private void editTeamConference() {
-        String teamName = InputAnalyzer.getStringInput("Enter the name of the team >> ");
-        if (statHolder.checkTeamExists(teamName)) {
-            String newConference = InputAnalyzer.getStringInput("Enter the new name for the team >> ");
-            statHolder.updateConference(teamName, newConference);
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (statHolder.checkTeamExists(fullName)) {
+            String newConference = InputAnalyzer.getStringInput("Enter New Conference >> ");
+            statHolder.updateConference(fullName, newConference);
         } else {
             System.out.println("The Team Does not Exist");
         }
@@ -219,10 +220,10 @@ public class NHLStatAdder {
      * Updates the division for a team supplied as input.
      */
     private void editTeamDivision() {
-        String teamName = InputAnalyzer.getStringInput("Enter the name of the team >> ");
-        if (statHolder.checkTeamExists(teamName)) {
-            String newDivision = InputAnalyzer.getStringInput("Enter the new name for the team >> ");
-            statHolder.updateDivision(teamName, newDivision);
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (statHolder.checkTeamExists(fullName)) {
+            String newDivision = InputAnalyzer.getStringInput("Enter New Division >> ");
+            statHolder.updateDivision(fullName, newDivision);
         } else {
             System.out.println("The Team Does not Exist");
         }
@@ -232,12 +233,13 @@ public class NHLStatAdder {
      * Updates the record for a team supplied as input.
      */
     private void editTeamRecord() {
-        String teamName = InputAnalyzer.getStringInput("Enter the name of the team >> ");
-        if (statHolder.checkTeamExists(teamName)) {
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (statHolder.checkTeamExists(fullName)) {
             int wins = InputAnalyzer.getIntegerInput("Wins >> ");
             int loses = InputAnalyzer.getIntegerInput("Loses >> ");
             int overtimeLoses = InputAnalyzer.getIntegerInput("Overtime Loses >> ");
-            statHolder.updateRecord(teamName, wins, loses, overtimeLoses);
+            InputAnalyzer.readBuffer();
+            statHolder.updateRecord(fullName, wins, loses, overtimeLoses);
         } else {
             System.out.println("The Team Does not Exist");
         }
@@ -247,7 +249,7 @@ public class NHLStatAdder {
      * Updates the current season stats for a player supplied as input.
      */
     private void editPlayerSeasonStats() {
-        String playerName = InputAnalyzer.getLineInput("Enter the name of the player >> ");
+        String playerName = InputAnalyzer.getLineInput("Enter Full Player Name >> ");
         if (statHolder.checkPlayerExists(playerName)) {
             if (statHolder.checkPlayerIsSkater(playerName)) {
                 editSkaterSeasonStats(playerName);
@@ -288,9 +290,9 @@ public class NHLStatAdder {
      * Adds one or more historical seasons' stats for a player supplied as input.
      */
     private void addPlayerSeasons() {
-        String playerName = InputAnalyzer.getLineInput("Enter the name of the player >> ");
+        String playerName = InputAnalyzer.getLineInput("Enter Full Player Name >> ");
         if (statHolder.checkPlayerExists(playerName)) {
-            int num = InputAnalyzer.getIntegerInput("Enter the number of seasons to add >> ");
+            int num = InputAnalyzer.getIntegerInput("Enter Number of Seasons to Add >> ");
             if (statHolder.checkPlayerIsSkater(playerName)) {
                 for (int i = 0; i < num; i++) {
                     addSkaterSeason(playerName);
@@ -336,9 +338,9 @@ public class NHLStatAdder {
      * Updates the jersey number for a player supplied as input.
      */
     private void editPlayerNumber() {
-        String playerName = InputAnalyzer.getLineInput("Enter the name of the player >> ");
+        String playerName = InputAnalyzer.getLineInput("Enter Full Player Name >> ");
         if (statHolder.checkPlayerExists(playerName)) {
-            int number = InputAnalyzer.getIntegerInput("Enter the new number >> ");
+            int number = InputAnalyzer.getIntegerInput("Enter New Number >> ");
             statHolder.updateNumber(playerName, number);
         } else {
             System.out.println("The Player Does not Exist");
@@ -349,9 +351,9 @@ public class NHLStatAdder {
      * Updates the team for a player supplied as input.
      */
     private void editPlayerTeam() {
-        String playerName = InputAnalyzer.getLineInput("Enter the name of the player >> ");
+        String playerName = InputAnalyzer.getLineInput("Enter Full Player Name >> ");
         if (statHolder.checkPlayerExists(playerName)) {
-            String team = InputAnalyzer.getLineInput("Enter the new team >> ");
+            String team = InputAnalyzer.getLineInput("Enter New Team >> ");
             statHolder.updateTeam(playerName, team);
         } else {
             System.out.println("The Player Does not Exist");

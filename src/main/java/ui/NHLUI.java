@@ -96,7 +96,6 @@ public class NHLUI {
                     input = statsAdder.getUserChoice();
                     if (input != 3) {
                         statsAdder.enterSubDatabase(input);
-                        InputAnalyzer.readBuffer();
                         saveData();
                     }
                 }

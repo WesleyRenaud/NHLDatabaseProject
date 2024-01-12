@@ -96,7 +96,7 @@ public class InputAnalyzer {
         String in = getLineInput(prompt);
         while (!(InputAnalyzer.checkSpecificInput(in, "Yes") || InputAnalyzer.checkSpecificInput(in, "yes") 
                 || InputAnalyzer.checkSpecificInput(in, "No") || InputAnalyzer.checkSpecificInput(in, "no"))) {
-            System.out.print("Error - input must be a yes/no answer");
+            System.out.println("Error - input must be a yes/no answer");
             in = getLineInput(prompt);       
         }
         if (InputAnalyzer.checkSpecificInput(in, "Yes") || InputAnalyzer.checkSpecificInput(in, "yes")) {
