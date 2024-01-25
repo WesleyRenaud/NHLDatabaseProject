@@ -9,7 +9,10 @@ import java.io.Serializable;
 
 import utilities.DoubleRounder;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 public class Team implements Serializable {
     private static final long serialVersionUID = 535072393016375807L;
     private String city;

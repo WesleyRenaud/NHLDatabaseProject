@@ -5,12 +5,18 @@
 
 package ui;
 
+<<<<<<< HEAD
 
 import input.InputAnalyzer;
 import input.InputReader;
 import utilities.BufferGenerator;
 import team.League;
 
+=======
+import team.League;
+import utilities.BufferGenerator;
+import utilities.InputAnalyzer;
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 
 public class NHLTeamEditor {
     private League league;
@@ -24,6 +30,7 @@ public class NHLTeamEditor {
      */
     protected void addTeam() {
         BufferGenerator.printBuffer(100);
+<<<<<<< HEAD
         String city = InputReader.getLineInput(" * Enter Team City >> ");
         String name = InputReader.getLineInput(" * Enter Team Name >> ");
         String conference = InputReader.getStringInput(" * Enter Team Conference >> ");
@@ -33,17 +40,32 @@ public class NHLTeamEditor {
             int loses = InputReader.getIntegerInput(" * Enter Number of Loses >> ");
             int overtimeLoses = InputReader.getIntegerInput(" * Enter Number of Overtime Loses >> ");
             InputReader.readBuffer();
+=======
+        String city = InputAnalyzer.getLineInput("Enter Team City >> ");
+        String name = InputAnalyzer.getLineInput("Enter Team Name >> ");
+        String conference = InputAnalyzer.getStringInput("Enter Team Conference >> ");
+        String division = InputAnalyzer.getStringInput("Enter Team Division >> ");
+            if (InputAnalyzer.getYesNoInput("Does this team have a record? ")) {
+            int wins = InputAnalyzer.getIntegerInput("Enter Number of Wins >> ");
+            int loses = InputAnalyzer.getIntegerInput("Enter Number of Loses >> ");
+            int overtimeLoses = InputAnalyzer.getIntegerInput("Enter Number of Overtime Loses >> ");
+            InputAnalyzer.readBuffer();
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
             league.addTeam(city, name, conference, division, wins, loses, overtimeLoses);
         } else {
             league.addTeam(city, name, conference, division);
         }
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 
     /**
      * Updates the city for a team supplied as input.
      */
     protected void editTeamCity() {
+<<<<<<< HEAD
         String fullName = InputReader.getLineInput(" * Enter Full Team Name or c to Cancel >> ");
         if (!(InputAnalyzer.checkSpecificInput(fullName, "C") || InputAnalyzer.checkSpecificInput(fullName, "c"))) {
             if (league.checkTeamExists(fullName)) {
@@ -52,6 +74,14 @@ public class NHLTeamEditor {
             } else {
                 System.out.println(" ! The Team Does not Exist !");
             }
+=======
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (league.checkTeamExists(fullName)) {
+            String newCity = InputAnalyzer.getLineInput("Enter New City >> ");
+            league.updateCity(fullName, newCity);
+        } else {
+            System.out.println("The Team Does not Exist");
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         }
     }
 
@@ -59,6 +89,7 @@ public class NHLTeamEditor {
      * Updates the name for a team supplied as input.
      */
     protected void editTeamName() {
+<<<<<<< HEAD
         String fullName = InputReader.getLineInput(" * Enter Full Team Name or c to Cancel >> ");
         if (!(InputAnalyzer.checkSpecificInput(fullName, "C") || InputAnalyzer.checkSpecificInput(fullName, "c"))) {
             if (league.checkTeamExists(fullName)) {
@@ -67,6 +98,14 @@ public class NHLTeamEditor {
             } else {
                 System.out.println(" ! The Team Does not Exist !");
             }
+=======
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (league.checkTeamExists(fullName)) {
+            String newName = InputAnalyzer.getLineInput("Enter New Name >> ");
+            league.updateName(fullName, newName);
+        } else {
+            System.out.println("The Team Does not Exist");
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         }
     }
 
@@ -74,6 +113,7 @@ public class NHLTeamEditor {
      * Updates the conference for a team supplied as input.
      */
     protected void editTeamConference() {
+<<<<<<< HEAD
         String fullName = InputReader.getLineInput(" * Enter Full Team Name  or c to Cancel >> ");
         if (!(InputAnalyzer.checkSpecificInput(fullName, "C") || InputAnalyzer.checkSpecificInput(fullName, "c"))) {
             if (league.checkTeamExists(fullName)) {
@@ -84,12 +124,22 @@ public class NHLTeamEditor {
             }
         }
         InputReader.readBuffer();
+=======
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (league.checkTeamExists(fullName)) {
+            String newConference = InputAnalyzer.getStringInput("Enter New Conference >> ");
+            league.updateConference(fullName, newConference);
+        } else {
+            System.out.println("The Team Does not Exist");
+        }
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
      * Updates the division for a team supplied as input.
      */
     protected void editTeamDivision() {
+<<<<<<< HEAD
         String fullName = InputReader.getLineInput(" * Enter Full Team Name or c to Cancel >> ");
         if (!(InputAnalyzer.checkSpecificInput(fullName, "C") || InputAnalyzer.checkSpecificInput(fullName, "c"))) {
             if (league.checkTeamExists(fullName)) {
@@ -100,12 +150,22 @@ public class NHLTeamEditor {
             }
         }
         InputReader.readBuffer();
+=======
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (league.checkTeamExists(fullName)) {
+            String newDivision = InputAnalyzer.getStringInput("Enter New Division >> ");
+            league.updateDivision(fullName, newDivision);
+        } else {
+            System.out.println("The Team Does not Exist");
+        }
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
      * Updates the record for a team supplied as input.
      */
     protected void editTeamRecord() {
+<<<<<<< HEAD
         String fullName = InputReader.getLineInput(" * Enter Full Team Name or c to Cancel >> ");
         if (!(InputAnalyzer.checkSpecificInput(fullName, "C") || InputAnalyzer.checkSpecificInput(fullName, "c"))) {
             if (league.checkTeamExists(fullName)) {
@@ -118,5 +178,17 @@ public class NHLTeamEditor {
             }
         }
         InputReader.readBuffer();
+=======
+        String fullName = InputAnalyzer.getLineInput("Enter Full Team Name >> ");
+        if (league.checkTeamExists(fullName)) {
+            int wins = InputAnalyzer.getIntegerInput("Wins >> ");
+            int loses = InputAnalyzer.getIntegerInput("Loses >> ");
+            int overtimeLoses = InputAnalyzer.getIntegerInput("Overtime Loses >> ");
+            InputAnalyzer.readBuffer();
+            league.updateRecord(fullName, wins, loses, overtimeLoses);
+        } else {
+            System.out.println("The Team Does not Exist");
+        }
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }   
 }

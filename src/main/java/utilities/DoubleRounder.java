@@ -6,12 +6,15 @@ package utilities;
 public class DoubleRounder {
     
     /**
+<<<<<<< HEAD
      * Credit for round method
      * 
      * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
      */
 
     /**
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
      * Rounds a given double to a given number of places.
      * 
      * @param value     The double to round.

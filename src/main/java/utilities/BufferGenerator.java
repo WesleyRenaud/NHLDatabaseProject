@@ -5,7 +5,10 @@
 package utilities;
 
 public class BufferGenerator {
+<<<<<<< HEAD
     private static int SCREEN_WIDTH = 212;
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     
     /**
      * Prints a given number of dashes followed by a newline character.
@@ -20,6 +23,7 @@ public class BufferGenerator {
     }
 
     /**
+<<<<<<< HEAD
      * Prints enough dashes to cover the width of the screen followed by a newline
      * character.
      */
@@ -31,6 +35,8 @@ public class BufferGenerator {
     }
 
     /**
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
      * Generates a string of a given number of dashes.
      * 
      * @param num   The number of dashes to add to the string.
@@ -58,6 +64,7 @@ public class BufferGenerator {
         string += "\n";
         return string;
     }
+<<<<<<< HEAD
 
     /**
      * Generates a string of enough dashes to cover the width of the screen followed by 
@@ -73,4 +80,6 @@ public class BufferGenerator {
         string += "\n";
         return string;
     }
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 }

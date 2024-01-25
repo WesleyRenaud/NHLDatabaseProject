@@ -4,12 +4,16 @@
 
 package season;
 
+<<<<<<< HEAD
 
 import java.io.Serializable;
 
 
 public abstract class Season implements Serializable {
     private static final long serialVersionUID = 3469746612261262771L;
+=======
+public abstract class Season {
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     private int gamesPlayed;
     private String year;
 
@@ -20,7 +24,10 @@ public abstract class Season implements Serializable {
     protected void setYear(String newYear) {
         year = newYear;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 
     public int getGamesPlayed() {
         return gamesPlayed;
@@ -29,6 +36,7 @@ public abstract class Season implements Serializable {
     public String getYear() {
         return year;
     }
+<<<<<<< HEAD
 
     public int getPoints() {
         if (getClass().equals(SkaterSeason.class)) {
@@ -78,4 +86,6 @@ public abstract class Season implements Serializable {
         }
         return -1;
     }
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 }

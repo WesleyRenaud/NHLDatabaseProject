@@ -5,14 +5,22 @@
 
 package team;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import input.InputAnalyzer;
 import utilities.BufferGenerator;
 
+=======
+import utilities.BufferGenerator;
+import utilities.InputAnalyzer;
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 
 public class League implements Serializable {
     private static final long serialVersionUID = 329208573326875283L;
@@ -104,18 +112,26 @@ public class League implements Serializable {
         teams.get(index).setRecord(wins, loses, overtimeLoses);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     /**
      * Returns a string showing the standings filtered by points.
      * 
      * @return  The standings filtered by only points.
      */
     public String getStandings_ByLeague_ByPoints() {
+<<<<<<< HEAD
         if (teams.size() > 0) {
             sortByPoints();
             return getLeagueString();
         }
         return "\n ! No Teams In League !\n\n";
+=======
+        sortByPoints();
+        return getLeagueString();
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -126,7 +142,11 @@ public class League implements Serializable {
     public String getStandings_ByWildcard_ByPoints() {
         if (numInDivision("Atlantic") != 8 || numInDivision("Metropolitan") != 8
             || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
+<<<<<<< HEAD
             return "\n ! Teams are not in Proper Divisions ! \n\n";
+=======
+            return "Teams are not in Proper Divisions\n";
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         } else {
             sortByWildcard();
             return getWildcardString();
@@ -139,6 +159,7 @@ public class League implements Serializable {
      * @return  The standings filtered by division and then points.
      */
     public String getStandings_ByDivision_ByPoints() {
+<<<<<<< HEAD
         if (numInDivision("Atlantic") != 8 || numInDivision("Metropolitan") != 8
             || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
             return "\n ! Teams are not in Proper Divisions ! \n\n";
@@ -149,6 +170,18 @@ public class League implements Serializable {
         sortByPoints(16, 23);
         sortByPoints(24, 31);
         return getDivisionString();
+=======
+        if (numInConference("Eastern") != 8 || numInConference("Western") != 8) {
+            return "Teams are not in Proper Divisions\n";
+        } else {
+            sortByDivision();
+            sortByPoints(0, 7);
+            sortByPoints(8, 15);
+            sortByPoints(16, 23);
+            sortByPoints(24, 31);
+            return getDivisionString();
+        }
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -157,12 +190,19 @@ public class League implements Serializable {
      * @return  The standings filtered by conference and then by points.
      */
     public String getStandings_ByConference_ByPoints() {
+<<<<<<< HEAD
         if (numInConference("Eastern") != 16 || numInConference("Western") != 16) {
             return "\n ! Teams are not in Proper Conferences ! \n\n";
         }
         sortByConference();
         sortByPoints(0, 15);
         sortByPoints(16, 31);
+=======
+        sortByConference();
+        //sortByPoints(0, 7);
+        //sortByPoints(8, 15);
+        //return "";
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         return getConferenceString();
     }
 
@@ -172,11 +212,16 @@ public class League implements Serializable {
      * @return  The standings filtered by wins.
      */
     public String getStandings_ByLeague_ByWins() {
+<<<<<<< HEAD
         if (teams.size() > 0) {
             sortByWins();
             return getLeagueString();
         }
         return "\n ! No Teams In League !\n\n";
+=======
+        sortByWins();
+        return getLeagueString();
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -185,11 +230,16 @@ public class League implements Serializable {
      * @return  The standings filtered by loses.
      */
     public String getStandings_ByLeague_ByLoses() {
+<<<<<<< HEAD
         if (teams.size() > 0) {
             sortByLoses();
             return getLeagueString();
         }
         return "\n ! No Teams In League !\n\n";
+=======
+        sortByLoses();
+        return getLeagueString();
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -198,6 +248,7 @@ public class League implements Serializable {
      * @return  The standings filtered by overtime loses.
      */
     public String getStandings_ByLeague_ByOvertimeLoses() {
+<<<<<<< HEAD
         if (teams.size() > 0) {
             sortByOvertimeLoses();
             return getLeagueString();
@@ -206,6 +257,12 @@ public class League implements Serializable {
     }
 
 
+=======
+        sortByOvertimeLoses();
+        return getLeagueString();
+    }
+
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     /**
      * Sorts the list of teams by the number of points, in descending order.
      */
@@ -227,10 +284,20 @@ public class League implements Serializable {
      * @param max   The maximum index of the sublist being sorted.
      */
     private void sortByPoints(int min, int max) {
+<<<<<<< HEAD
         int iterator = 0;
         for (int i = min; i <= max; i++) {
             for (int j = min; j <= max - iterator - 1; j++) {
                 if (teams.get(j).getPoints() < teams.get(j + 1).getPoints()) {
+=======
+        //System.out.println("Sorting the part of the array from " + min + " to " + max);
+        int iterator = 0;
+        for (int i = min; i <= max; i++) {
+            for (int j = min; j <= max - iterator - 1; j++) {
+                //System.out.println("Comparing " + teams.get(j).getFullName() + " with " + teams.get(j).getPoints() + " to " + teams.get(j + 1).getFullName() + " with " + teams.get(j + 1).getPoints());
+                if (teams.get(j).getPoints() < teams.get(j + 1).getPoints()) {
+                    //System.out.println("Swapping " + teams.get(j).getFullName() + " with " + teams.get(j + 1).getFullName());
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
                     swapTeams(j, j + 1);
                 }
             }
@@ -367,7 +434,10 @@ public class League implements Serializable {
         teams = sortedByConference;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     /**
      * Returns a string for the standings assuming the teams are not sorted by division nor by
      * conference.
@@ -377,7 +447,11 @@ public class League implements Serializable {
     private String getLeagueString() {
         String listString = "";
         listString += "\t\t\t\t\tLeague\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         for (int i = 0; i < teams.size(); i++) {
             listString += i+1 + ". \t" + teams.get(i).toString();
             listString += "\n";
@@ -396,45 +470,73 @@ public class League implements Serializable {
         int i = 0;
         listString += "\nEast\n";
         listString += "\t\t\t\t\tAtlantic\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 3) {
             listString += i+1 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
         listString += "\n\t\t\t\t\tMetropolitan\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 6) {
             listString += i-2 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
         listString += "\n\t\t\t\t\tWildcard\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 16) {
             listString += i-5 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
 
         listString += "West\n";
         listString += "\t\t\t\t\tCentral\n";
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+
+        listString += "West\n";
+        listString += "\t\t\t\t\tCentral\n";
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 19) {
             listString += i-15 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
         listString += "\n\t\t\t\t\tPacific\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 22) {
             listString += i-18 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
         listString += "\n\t\t\t\t\tWildcard\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 32) {
             listString +=  i-21 + ". \t" + teams.get(i).toString();
             listString += "\n";
@@ -451,7 +553,11 @@ public class League implements Serializable {
     private String getDivisionString() {
         String listString = "";
         listString += "\t\t\t\t\tAtlantic\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         int i = 0;
         while (i < 8) {
             listString += i+1 + ". \t" + teams.get(i).toString();
@@ -459,21 +565,33 @@ public class League implements Serializable {
             i++;
         }
         listString += "\t\t\t\t\tMetropolitan\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 16) {
             listString += i-7 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
         listString += "\t\t\t\t\tCentral\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 24) {
             listString += i-15 + ". \t" + teams.get(i).toString();
             listString += "\n";
             i++;
         }
         listString += "\t\t\t\t\tPacific\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 32) {
             listString += i-23 + ". \t" + teams.get(i).toString();
             listString += "\n";
@@ -490,7 +608,11 @@ public class League implements Serializable {
     private String getConferenceString() {
         String listString = "";
         listString += "\t\t\t\t\tEastern\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         int i = 0;
         while (i < 16) {
             listString += i+1 + ". \t" + teams.get(i).toString();
@@ -498,7 +620,11 @@ public class League implements Serializable {
             i++;
         }
         listString += "\t\t\t\t\tWestern\n";
+<<<<<<< HEAD
         listString += BufferGenerator.addLineBufferForScreenWidth();
+=======
+        listString += BufferGenerator.addLineBuffer(100);
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
         while (i < 32) {
             listString += i-15 + ". \t" + teams.get(i).toString();
             listString += "\n";
@@ -507,7 +633,10 @@ public class League implements Serializable {
         return listString;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     /**
      * Checks if a given team belongs to the league.
      * 
