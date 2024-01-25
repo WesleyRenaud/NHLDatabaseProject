@@ -4,15 +4,22 @@
 
 package ui;
 
+
 import java.io.IOException;
 
-import nhl.NHLStatHolder;
+import input.InputReader;
+import utilities.BufferGenerator;
+import utilities.Saver;
+import team.League;
+import player.Players;
+
 
 public class NHLUI {
+    private static NHLStatEditor statsEditor;
     private static NHLStatReader statsReader;
-    private static NHLStatAdder statsAdder;
-    private static NHLStatHolder statHolder;
     private static Saver saver;
+    private static League league;
+    private static Players players;
 
     /**
      * Loads the data into the stat reader and the stat adder.
@@ -20,13 +27,15 @@ public class NHLUI {
     private static void loadData() {
         initializeInterfaces();
         try {
-            statHolder = (NHLStatHolder) saver.loadObject("data.txt");
+            league = (League) saver.loadObject("teams.txt");
+            players = (Players) saver.loadObject("players.txt");
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            statHolder = new NHLStatHolder();
+            league = new League();
+            players = new Players();
         }
-        statsAdder.setStatHolder(statHolder);
-        statsReader.setStatHolder(statHolder);
+        statsEditor.setData(league, players);
+        statsReader.setData(league, players);
     }
 
     /**
@@ -34,7 +43,7 @@ public class NHLUI {
      */
     private static void initializeInterfaces() {
         statsReader = new NHLStatReader();
-        statsAdder = new NHLStatAdder();
+        statsEditor = new NHLStatEditor();
         saver = new Saver();
     }
 
@@ -43,43 +52,44 @@ public class NHLUI {
      */
     private static void saveData() {
         try {
-            saver.saveObject(statHolder, "data.txt");
+            saver.saveObject(league, "teams.txt");
+            saver.saveObject(players, "players.txt");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        
     }
+    
 
     /**
      * Displays all options of the program.
      */
-    private static void displayMenuOnFirstTime() {
-        System.out.println("\t\tWelcome to NHL Stat Analyzer -> Explore the Menu Below");
-        BufferGenerator.printBuffer(100);
+    private static void printMenuOnFirstTime() {
+        System.out.println("\n\t\t\t\t\t\t\t\t\tWelcome to NHL Stat Analyzer -> Explore the Menu Below");
+        BufferGenerator.printBufferForScreenWidth();
         printMenuOptions();
-        BufferGenerator.printBuffer(100);
+        BufferGenerator.printBufferForScreenWidth();
     }
 
     /**
      * Helper method to print the options of the menu
      */
     private static void printMenuOptions() {
-        System.out.println("Enter data into the database [1]");
-        System.out.println("Print Standings for this season [2] ");
-        System.out.println("Print out standings from a previous season [3] ");
-        System.out.println("Individual player lookup [4] ");
-        System.out.println("Print out stats leaders for a specific team [5] ");
-        System.out.println("Print out league leaders for a specific stat [6] ");
-        System.out.println("Exit the program ['Q' or 'q']");
+        System.out.println(" ~ Enter data into the database [1]");
+        System.out.println(" ~ Print Standings for this season [2] ");
+        System.out.println(" ~ Print out standings from a previous season [3] ");
+        System.out.println(" ~ Individual player lookup [4] ");
+        System.out.println(" ~ Print out stats leaders for a specific team [5] ");
+        System.out.println(" ~ Print out league leaders for a specific stat [6] ");
+        System.out.println(" ~ Exit the program ['Q' or 'q']");
     }
 
     /**
      * Re-prints the menu without the title.
      */
     private static void reprintMenu() {
-        BufferGenerator.printBuffer(100);
+        BufferGenerator.printBufferForScreenWidth();
         printMenuOptions();
-        BufferGenerator.printBuffer(100);
+        BufferGenerator.printBufferForScreenWidth();
     }
 
     /**
@@ -91,11 +101,11 @@ public class NHLUI {
         switch (taskNumber) {
             case 1:
             int input = -1;
-                while (input != 3) {
-                    statsAdder.displayMenu();
-                    input = statsAdder.getUserChoice();
-                    if (input != 3) {
-                        statsAdder.enterSubDatabase(input);
+                while (input != 0) {
+                    statsEditor.printMenu();
+                    input = statsEditor.getUserChoice();
+                    if (input != 0) {
+                        statsEditor.enterSubDatabase(input);
                         saveData();
                     }
                 }
@@ -125,10 +135,10 @@ public class NHLUI {
 
     public static void main(String[] args) {
         loadData();
-        displayMenuOnFirstTime();
+        printMenuOnFirstTime();
 
         while (true) {
-            int input = InputAnalyzer.getValidInput("Enter Menu Choice or 'Q'/'q' to Quit >> ", 6);
+            int input = InputReader.getValidInput(" * Enter Choice or 'Q'/'q' to Quit >> ", 6);
             completeTask(input);
             reprintMenu();
         }

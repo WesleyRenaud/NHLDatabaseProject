@@ -4,8 +4,9 @@
 
 package season;
 
+
 public class SkaterSeason extends Season {
-    private int points;
+    private static final long serialVersionUID = 2310624046159046390L;
     private int goals;
     private int assists;
     private int plusMinus;
@@ -15,22 +16,16 @@ public class SkaterSeason extends Season {
      * 
      * @param playerYear        The year which the season occurred.
      * @param playerGamesPlayed The number of games played during the season.
-     * @param playerPoints      The number of points scored during the season.
      * @param playerGoals       The number of goals scored during the season.
      * @param playerAssists     The number of assists scored during the season.
      * @param playerPlusMinus   The plus-minus during the season.
      */
-    public SkaterSeason(String playerYear, int playerGamesPlayed, int playerPoints, int playerGoals, int playerAssists, int playerPlusMinus) {
-        setYear(playerYear);
-        setGamesPlayed(playerGamesPlayed);
-        setPoints(playerPoints);
-        setGoals(playerGoals);
-        setAssists(playerAssists);
-        setPlusMinus(playerPlusMinus);
-    }
-    
-    protected void setPoints(int playerPoints) {
-        points = playerPoints;
+    public SkaterSeason(String year, int gamesPlayed, int playerGoals, int playerAssists, int playerPlusMinus) {
+        setYear(year);
+        setGamesPlayed(gamesPlayed);
+        goals = playerGoals;
+        assists = playerAssists;
+        plusMinus = playerPlusMinus;
     }
 
     protected void setGoals(int playerGoals) {
@@ -44,6 +39,7 @@ public class SkaterSeason extends Season {
     protected void setPlusMinus(int playerPlusMinus) {
         plusMinus = playerPlusMinus;
     }
+    
 
     public int getGoals() {
         return goals;
@@ -54,18 +50,19 @@ public class SkaterSeason extends Season {
     }
 
     public int getPoints() {
-        return points;
+        return goals + assists;
     }
 
     public int getPlusMinus() {
         return plusMinus;
     }
 
+
     /**
      * Creates a String generation of the skater season.
      */
     @Override
     public String toString() {
-        return "Games Played: " + "\t| Points: " + points + getGamesPlayed() + "\t| Goals: " + goals + "\t| Assists: " + assists  + "\t| Plus/Minus: " + plusMinus + "\n";
+        return "Games Played: " + getGamesPlayed() + "\t| Goals: " + goals + "\t| Assists: " + assists  + "\t| Points: " + getPoints() + "\t| Plus/Minus: " + plusMinus + "\n";
     }
 }

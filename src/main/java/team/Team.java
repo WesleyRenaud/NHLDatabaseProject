@@ -4,9 +4,11 @@
 
 package team;
 
+
 import java.io.Serializable;
 
-import ui.DoubleRounder;
+import utilities.DoubleRounder;
+
 
 public class Team implements Serializable {
     private static final long serialVersionUID = 535072393016375807L;
@@ -111,6 +113,7 @@ public class Team implements Serializable {
         overtimeLoses = newOvertimeLoses;
     }
 
+
     public String getCity() {
         return city;
     }
@@ -171,6 +174,7 @@ public class Team implements Serializable {
         return wins + "-" + loses + "-" + overtimeLoses;
     }
 
+    
     /**
      * Returns a string showing the team and its record.
      * 

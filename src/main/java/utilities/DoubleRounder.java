@@ -1,10 +1,16 @@
-package ui;
+package utilities;
 
 /**
  * A class used for rounding doubles to a certain number of places.
  */
 public class DoubleRounder {
     
+    /**
+     * Credit for round method
+     * 
+     * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+     */
+
     /**
      * Rounds a given double to a given number of places.
      * 
