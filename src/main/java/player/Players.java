@@ -1,16 +1,10 @@
 /**
-<<<<<<< HEAD
  * A class used as a data structure for all players in the database. The class manages the data
  * structure and retrieves data from it.
-=======
- * A class used as a data structure for all players in the database. The class manages
- * the data structure and retrieves data from it.
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
  */
 
 package player;
 
-<<<<<<< HEAD
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,73 +45,21 @@ public class Players implements Serializable {
      */
     public void addGoalie(String name, String birthday, String handedness, boolean retired, int number, String team) {
         players.add(new Skater(name, birthday, handedness, retired, number, team));
-=======
-import java.io.Serializable;
-
-import java.util.ArrayList;
-
-public class Players implements Serializable {
-    private static final long serialVersionUID = -2181392019916751192L;
-    private ArrayList<Player> players;
-
-    /**
-     * Updates the current season's stats for a given skater.
-     * 
-     * @param playerName    The skater whose stats are being updated.
-     * @param gamesPlayed   The new number of games played.
-     * @param points        The new number of points.
-     * @param goals         The new number of goals.
-     * @param assists       The new number of assists.
-     * @param plusMinus     The new plus-minus.
-     */
-    public void updateSkaterSeasonStats(String playerName, int gamesPlayed, int points, int goals, int assists, int plusMinus) {
-        int index = getPlayerIndex(playerName);
-        players.get(index).updateSkaterSeason(gamesPlayed, points, goals, assists, plusMinus);
-    }
-
-    /**
-     * Updates the current season's stats for a given goalie.
-     * 
-     * @param playerName            The goalie whose stats are being updated.
-     * @param gamesPlayed           The new number of games played.
-     * @param wins                  The new number of wins.
-     * @param loses                 The new number of loses.
-     * @param overtimeLoses         The new number of overtime loses.
-     * @param savePercentage        The new save percentage.
-     * @param goalsAgainstAverage   The new goals against average.
-     */
-    public void updateGoalieSeasonStats(String playerName, int gamesPlayed, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
-        int index = getPlayerIndex(playerName);
-        players.get(index).updateGoalieSeason(gamesPlayed, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
      * Appends a season to a given skater's career.
      * 
-<<<<<<< HEAD
      * @param name          The skater whose stats are being updated
      * @param season        The season being added.
      * @param gamesPlayed   The number of games played during the season.
-=======
-     * @param playerName    The skater whose stats are being updated
-     * @param season        The season being added.
-     * @param gamesPlayed   The number of games played during the season.
-     * @param points        The number of points during the season.
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
      * @param goals         The number of goals during the season.
      * @param assists       The number of assists during the season.
      * @param plusMinus     he plus-minus during the season.
      */
-<<<<<<< HEAD
     public void addSkaterSeason(String name, String season, int gamesPlayed, int goals, int assists, int plusMinus) {
         int index = getPlayerIndex(name);
         players.get(index).addSkaterSeason(season, gamesPlayed, goals, assists, plusMinus);
-=======
-    public void addSkaterSeason(String playerName, String season, int gamesPlayed, int points, int goals, int assists, int plusMinus) {
-        int index = getPlayerIndex(playerName);
-        players.get(index).addSkaterSeason(season, gamesPlayed, points, goals, assists, plusMinus);
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -125,17 +67,12 @@ public class Players implements Serializable {
      * 
      * @param playerName            The goalie whose  stats are being updated.
      * @param season                The season being added.
-<<<<<<< HEAD
-=======
-     * @param gamesPlayed           The number of games played during the eason.
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
      * @param wins                  The number of wins during the season.
      * @param loses                 The number of loses during the season.
      * @param overtimeLoses         The number of overtime loses during the season.
      * @param savePercentage        The save percentafe during the season
      * @param goalsAgainstAverage   The goals against average during the season.
      */
-<<<<<<< HEAD
     public void addGoalieSeason(String playerName, String season, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
         int index = getPlayerIndex(playerName);
         players.get(index).addGoalieSeason(season, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
@@ -169,11 +106,6 @@ public class Players implements Serializable {
     public void updateGoalieSeasonStats(String playerName, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
         int index = getPlayerIndex(playerName);
         players.get(index).updateGoalieSeason(wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
-=======
-    public void addGoalieSeason(String playerName, String season, int gamesPlayed, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
-        int index = getPlayerIndex(playerName);
-        players.get(index).addGoalieSeason(season, gamesPlayed, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -198,23 +130,6 @@ public class Players implements Serializable {
         players.get(index).setTeam(team);
     }
 
-<<<<<<< HEAD
-=======
-    /**
-     * Returns the index in the array of a specific player.
-     * 
-     * @param playerName    The name of the player to get the index of.
-     * @return  The index of the player if it is found, and -1 otherwise.
-     */
-    private int getPlayerIndex(String playerName) {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getName().equals(playerName)) {
-                return i;
-            }
-        }
-        return -1;
-    }
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 
     /**
      * Returns a string showing a given player's stats during the most recent season.
@@ -278,7 +193,6 @@ public class Players implements Serializable {
         return players.get(index).getStatsUntilEnd(lastSeason);
     }
 
-<<<<<<< HEAD
 
     /**
      * Gets the skaters' stats of a team, sorted by points.
@@ -289,7 +203,7 @@ public class Players implements Serializable {
     public String getTeamLeaders_InPoints(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         sortByPoints(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
     }
 
     /**
@@ -301,7 +215,7 @@ public class Players implements Serializable {
     public String getTeamLeaders_InGoals(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         sortByGoals(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
     }
 
     /**
@@ -313,7 +227,7 @@ public class Players implements Serializable {
     public String getTeamLeaders_InAssists(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         sortByAssists(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
     }
 
     /**
@@ -325,7 +239,7 @@ public class Players implements Serializable {
     public String getTeamLeaders_InPlusMinus(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         sortByPlusMinus(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
     }
 
     /**
@@ -337,7 +251,7 @@ public class Players implements Serializable {
     public String getTeamLeaders_InWins(String team) {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
         sortByWins(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
     }
 
     /**
@@ -349,7 +263,7 @@ public class Players implements Serializable {
     public String getTeamLeaders_InSavePercentage(String team) {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
         sortBySavePercentage(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
     }
 
     /**
@@ -361,7 +275,84 @@ public class Players implements Serializable {
     public String getTeamLeaders_InGoalsAgainstAverage(String team) {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
         sortByGoalsAgainstAverage(teamPlayers);
-        return getTeamPlayersString(teamPlayers);
+        return getPlayersString(teamPlayers);
+    }
+
+    /**
+     * Gets the league leaders in points.
+     * 
+     * @return  A string showing the league leaders in points.
+     */
+    public String getPointLeaders() {
+        List<Player> currentPlayers = getCurrentSkaters();
+        sortByPoints(currentPlayers);
+        return getPlayersString(currentPlayers);
+    }
+
+    /**
+     * Gets the league leaders in goals.
+     * 
+     * @return  A string showing the league leaders in goals.
+     */
+    public String getGoalLeaders() {
+        List<Player> currentPlayers = getCurrentSkaters();
+        sortByGoals(currentPlayers);
+        return getPlayersString(currentPlayers);
+    }
+
+    /**
+     * Gets the league leaders in assists.
+     * 
+     * @return  A string showing the league leaders in assists.
+     */
+    public String getAssistLeaders() {
+        List<Player> currentPlayers = getCurrentSkaters();
+        sortByAssists(currentPlayers);
+        return getPlayersString(currentPlayers);
+    }
+
+    /**
+     * Gets the league leaders in plus-minus.
+     * 
+     * @return  A string showing the league leaders in plus-minus.
+     */
+    public String getPlusMinusLeaders() {
+        List<Player> currentPlayers = getCurrentSkaters();
+        sortByPlusMinus(currentPlayers);
+        return getPlayersString(currentPlayers);
+    }
+
+    /**
+     * Gets the league leaders in wins.
+     * 
+     * @return  A string showing the league leaders in wins.
+     */
+    public String getWinLeaders() {
+        List<Player> currentPlayers = getCurrentGoalies();
+        sortByWins(currentPlayers);
+        return getPlayersString(currentPlayers);
+    }
+
+    /**
+     * Gets the league leaders in save percentage.
+     * 
+     * @return  A string showing the league leaders in save percentage.
+     */
+    public String getSavePercentageLeaders() {
+        List<Player> currentPlayers = getCurrentGoalies();
+        sortBySavePercentage(currentPlayers);
+        return getPlayersString(currentPlayers);
+    }
+
+    /**
+     * Gets the league leaders in goals against average.
+     * 
+     * @return  A string showing the league leaders in goals against average.
+     */
+    public String getGoalsAgainstAverageLeaders() {
+        List<Player> currentPlayers = getCurrentGoalies();
+        sortByGoalsAgainstAverage(currentPlayers);
+        return getPlayersString(currentPlayers);
     }
 
 
@@ -489,6 +480,36 @@ public class Players implements Serializable {
         }
     }
 
+    /**
+     * Gets a list of all of the current skaters in the league.
+     * 
+     * @return  A list of all of the current skaters in the league.
+     */
+    private List<Player> getCurrentSkaters() {
+        List<Player> currentPlayers = new ArrayList<>();
+        for (int i = 0; i < players.size(); i++) {
+            if (!players.get(i).isRetired() && players.get(i).isSkater()) {
+                currentPlayers.add(players.get(i));
+            }
+        }
+        return currentPlayers;
+    }
+
+    /**
+     * Gets a list of all of the current goalies in the league.
+     * 
+     * @return  A list of all of the current goalies in the league.
+     */
+    private List<Player> getCurrentGoalies() {
+        List<Player> currentPlayers = new ArrayList<>();
+        for (int i = 0; i < players.size(); i++) {
+            if (!players.get(i).isRetired()  && players.get(i).isGoalie()) {
+                currentPlayers.add(players.get(i));
+            }
+        }
+        return currentPlayers;
+    }
+
 
     /**
      * Returns the string of a team's players ordered by number of points.
@@ -496,7 +517,7 @@ public class Players implements Serializable {
      * @param list  The list of the teams of the player.
      * @return  The string of players' stats from the list.
      */
-    private String getTeamPlayersString(List<Player> list) {
+    private String getPlayersString(List<Player> list) {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
             listString += list.get(i).getCurrentSeasonStats_WithPlayerInformation();
@@ -515,16 +536,6 @@ public class Players implements Serializable {
         Player temp = list.get(first);
         list.set(first, list.get(second));
         list.set(second, temp);
-=======
-    /**
-     * Gets the player's stats of a team, sorted by points.
-     * 
-     * @param team  The team to get the players' stats of.
-     * @return  A string showing the team's player sorted by points.
-     */
-    public String getTeamLeaders(String team) {
-        return null;
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
     }
 
     /**
@@ -535,11 +546,7 @@ public class Players implements Serializable {
      */
     public boolean checkPlayerExists(String playerName) {
         for (int i = 0; i < players.size(); i++) {
-<<<<<<< HEAD
             if (InputAnalyzer.checkSpecificInput(players.get(i).getName(), playerName)) {
-=======
-            if (players.get(i).getName().equals(playerName)) {
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
                 return true;
             }
         }
@@ -572,7 +579,6 @@ public class Players implements Serializable {
         }
         return false;
     }   
-<<<<<<< HEAD
 
     /**
      * Returns the index in the array of a specific player.
@@ -588,6 +594,4 @@ public class Players implements Serializable {
         }
         return -1;
     }
-=======
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 }

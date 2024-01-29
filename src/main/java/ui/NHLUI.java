@@ -7,21 +7,12 @@ package ui;
 
 import java.io.IOException;
 
-<<<<<<< HEAD
 import input.InputReader;
 import utilities.BufferGenerator;
 import utilities.Saver;
 import team.League;
 import player.Players;
 
-=======
-
-import utilities.BufferGenerator;
-import utilities.InputAnalyzer;
-import utilities.Saver;
-import team.League;
-import player.Players;
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 
 public class NHLUI {
     private static NHLStatEditor statsEditor;
@@ -110,17 +101,10 @@ public class NHLUI {
         switch (taskNumber) {
             case 1:
             int input = -1;
-<<<<<<< HEAD
                 while (input != 0) {
                     statsEditor.printMenu();
                     input = statsEditor.getUserChoice();
                     if (input != 0) {
-=======
-                while (input != 3) {
-                    statsEditor.displayMenu();
-                    input = statsEditor.getUserChoice();
-                    if (input != 3) {
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
                         statsEditor.enterSubDatabase(input);
                         saveData();
                     }

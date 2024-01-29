@@ -15,10 +15,6 @@ import utilities.BufferGenerator;
 import utilities.BirthdayHandler;
 import season.Season;
 import season.SkaterSeason;
-<<<<<<< HEAD
-=======
-import utilities.InputAnalyzer;
->>>>>>> 6814e25f9da3ed0ca82d45bef8836113876b42a0
 import season.GoalieSeason;
 
 
