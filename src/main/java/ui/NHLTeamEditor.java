@@ -23,20 +23,16 @@ public class NHLTeamEditor {
      * Adds a team to the league with a city, name, conference, division, and possibly a record.
      */
     protected void addTeam() {
-        BufferGenerator.printBuffer(100);
+        BufferGenerator.printBufferForScreenWidth();
         String city = InputReader.getLineInput(" * Enter Team City >> ");
         String name = InputReader.getLineInput(" * Enter Team Name >> ");
         String conference = InputReader.getStringInput(" * Enter Team Conference >> ");
         String division = InputReader.getStringInput(" * Enter Team Division >> ");
-            if (InputReader.getYesNoInput(" * Does this team have a record? ")) {
-            int wins = InputReader.getIntegerInput(" * Enter Number of Wins >> ");
-            int loses = InputReader.getIntegerInput(" * Enter Number of Loses >> ");
-            int overtimeLoses = InputReader.getIntegerInput(" * Enter Number of Overtime Loses >> ");
-            InputReader.readBuffer();
-            league.addTeam(city, name, conference, division, wins, loses, overtimeLoses);
-        } else {
-            league.addTeam(city, name, conference, division);
-        }
+        int wins = InputReader.getIntegerInput(" * Enter Number of Wins >> ");
+        int loses = InputReader.getIntegerInput(" * Enter Number of Loses >> ");
+        int overtimeLoses = InputReader.getIntegerInput(" * Enter Number of Overtime Loses >> ");
+        InputReader.readBuffer();
+        league.addTeam(city, name, conference, division, wins, loses, overtimeLoses);
     }
     
 

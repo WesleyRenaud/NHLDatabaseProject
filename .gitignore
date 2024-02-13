@@ -6,3 +6,4 @@ gradle
 .gradle
 .vscode
 ..
+.DS_Store

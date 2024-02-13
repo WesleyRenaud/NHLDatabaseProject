@@ -53,6 +53,10 @@ public abstract class Player implements Serializable {
         retired = playerRetired;
     }
 
+    protected void setName(String newName) {
+        name = newName;
+    }
+
     public void setNumber(int playerNumber) {
         number = playerNumber;
     }
@@ -64,16 +68,17 @@ public abstract class Player implements Serializable {
     /**
      * Updates the skater stats for the current season.
      * 
+     * @param season        The season of which the stats are being updated.
      * @param gamesPlayed   The number of games played during the season.
      * @param goals         The number of goals scored during the season.
      * @param assists       The number of assists scored during the season.
      * @param plusMinus     The plus-minus during the season.
      */
-    public void updateSkaterSeason(int gamesPlayed, int goals, int assists, int plusMinus) {
-        if (seasons.size() > 0) {
-            seasons.set(seasons.size()-1, new SkaterSeason("2022-2024", gamesPlayed, goals, assists, plusMinus));
-        } else {
-            seasons.add(new SkaterSeason("2023-2024", gamesPlayed, goals, assists, plusMinus));
+    public void updateSkaterSeason(String season, int gamesPlayed, int goals, int assists, int plusMinus) {
+        for (int i = 0; i < seasons.size(); i++) {
+            if (InputAnalyzer.checkSpecificInput(season, seasons.get(i).getYear())) {
+                seasons.set(i, new SkaterSeason(season, gamesPlayed, goals, assists, plusMinus));
+            }
         }
     }
 
@@ -229,11 +234,7 @@ public abstract class Player implements Serializable {
         String currentSeasonStats = "";
         currentSeasonStats += "\n";
         currentSeasonStats += name;
-        if (name.length() < 15) {
-            currentSeasonStats +=  ":\t\t";
-        } else {
-            currentSeasonStats +=  ":\t";
-        }
+        currentSeasonStats +=  ":\t";
         currentSeasonStats += seasons.get(seasons.size() - 1).toString();
         return currentSeasonStats;
     }

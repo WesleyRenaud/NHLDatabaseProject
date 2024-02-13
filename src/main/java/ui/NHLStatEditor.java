@@ -25,7 +25,7 @@ public class NHLStatEditor {
      */
     public void printMenu() {
         BufferGenerator.printBufferForScreenWidth();
-        System.out.println(" ~ Back [0]");
+        System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Edit Teams [1]");
         System.out.println(" ~ Edit Players [2]");
         BufferGenerator.printBufferForScreenWidth();
@@ -75,7 +75,7 @@ public class NHLStatEditor {
      */
     private void printTeamsMenu() {
         BufferGenerator.printBufferForScreenWidth();
-        System.out.println(" ~ Back [0]");
+        System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Add a Team [1]");
         System.out.println(" ~ Edit a Team's City [2]");
         System.out.println(" ~ Edit a Team's Name [3]");
@@ -130,7 +130,7 @@ public class NHLStatEditor {
         int choice = -1;
         while (choice != 0) {
             printPlayersMenu();
-            choice = InputReader.getValidInput_AcceptBack(promptMessage, 5);
+            choice = InputReader.getValidInput_AcceptBack(promptMessage, 6);
             completePlayerTask(choice);
         }
     }
@@ -140,12 +140,14 @@ public class NHLStatEditor {
      */
     private void printPlayersMenu() {
         BufferGenerator.printBufferForScreenWidth();
-        System.out.println(" ~ Back [0]");
+        System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Add a Player [1]");
-        System.out.println(" ~ Edit Current Seasons Stats for a Player [2]");
-        System.out.println(" ~ Add Seasons to a Player's Career [3]");
-        System.out.println(" ~ Edit a Player's Team [4]");
-        System.out.println(" ~ Edit a Player's Number [5]");
+        System.out.println(" ~ Edit a Player's Name [2]");
+        System.out.println(" ~ Edit Seasons Stat's for a Player [3]");
+        System.out.println(" ~ Add Seasons to Player's Career [4]");
+        System.out.println(" ~ Edit a Player's Team [5]");
+        System.out.println(" ~ Edit a Player's Number [6]");
+        BufferGenerator.printBufferForScreenWidth();
     }
 
     /**
@@ -165,14 +167,18 @@ public class NHLStatEditor {
                 break;
 
             case 2:
-                playerEditor.editPlayerSeasonStats();
+                playerEditor.editPlayerName();
                 break;
 
             case 3:
-                playerEditor.addPlayerSeasons();
+                playerEditor.editPlayerSeasonStats();
                 break;
 
             case 4:
+                playerEditor.addPlayerSeasons();
+                break;
+
+            case 5:
                 playerEditor.editPlayerTeam();
                 break;
 

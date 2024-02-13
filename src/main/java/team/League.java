@@ -104,103 +104,96 @@ public class League implements Serializable {
     }
 
     /**
-     * Returns a string showing the standings filtered by points.
-     * 
-     * @return  The standings filtered by only points.
+     * Prints the league-wide standings.
      */
-    public String getStandings_ByLeague_ByPoints() {
-        if (teams.size() > 0) {
+    public void printStandings_ByLeague_ByPoints() {
+        if (teams.size() == 0) {
+            System.out.println("\n ! No Teams In League !\n");
+        } else {
             sortByPoints();
-            return getLeagueString();
+            printTeams_ByLeague();
         }
-        return "\n ! No Teams In League !\n\n";
+        
     }
 
     /**
-     * Returns a string showing the playoff/wildcard race.
-     * 
-     * @return  The standings for the playoff/wildcard race.
+     * Prints the wildcard race standings.
      */
-    public String getStandings_ByWildcard_ByPoints() {
+    public void printStandings_ByWildcard_ByPoints() {
         if (numInDivision("Atlantic") != 8 || numInDivision("Metropolitan") != 8
-            || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
-            return "\n ! Teams are not in Proper Divisions ! \n\n";
+                || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
+            System.out.println("\n ! Teams are not in Proper Divisions ! \n");
         } else {
             sortByWildcard();
-            return getWildcardString();
+            printTeams_ByWildcard();
         }
     }
 
     /**
-     * Returns a string showing the standings filtered by division and then by points.
-     * 
-     * @return  The standings filtered by division and then points.
+     * Prints the divisional standings.
      */
-    public String getStandings_ByDivision_ByPoints() {
+    public void printStandings_ByDivision_ByPoints() {
         if (numInDivision("Atlantic") != 8 || numInDivision("Metropolitan") != 8
-            || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
-            return "\n ! Teams are not in Proper Divisions ! \n\n";
+                || numInDivision("Central") != 8 || numInDivision("Pacific") != 8) {
+            System.out.println("\n ! Teams are not in Proper Divisions ! \n");
+        } else {
+            sortByDivision();
+            sortByPoints(0, 7);
+            sortByPoints(8, 15);
+            sortByPoints(16, 23);
+            sortByPoints(24, 31);
+            printTeams_ByDivision();
         }
-        sortByDivision();
-        sortByPoints(0, 7);
-        sortByPoints(8, 15);
-        sortByPoints(16, 23);
-        sortByPoints(24, 31);
-        return getDivisionString();
     }
 
     /**
-     * Returns a string showing the standings filtered by conference and then by points.
-     * 
-     * @return  The standings filtered by conference and then by points.
+     * Prints the standings by conference. 
      */
-    public String getStandings_ByConference_ByPoints() {
+    public void printStandings_ByConference_ByPoints() {
         if (numInConference("Eastern") != 16 || numInConference("Western") != 16) {
-            return "\n ! Teams are not in Proper Conferences ! \n\n";
+            System.out.println("\n ! Teams are not in Proper Conferences ! \n");
+        } else {
+            sortByConference();
+            sortByPoints(0, 15);
+            sortByPoints(16, 31);
+            printTeams_ByConference();
         }
-        sortByConference();
-        sortByPoints(0, 15);
-        sortByPoints(16, 31);
-        return getConferenceString();
     }
 
     /**
-     * Returns a string showing the standings filtered by wins.
-     * 
-     * @return  The standings filtered by wins.
+     * Prints the league-wide standings by wins.
      */
-    public String getStandings_ByLeague_ByWins() {
-        if (teams.size() > 0) {
+    public void printStandings_ByLeague_ByWins() {
+        if (teams.size() == 0) {
+            System.out.println("\n ! No Teams In League !\n");
+        } else {
             sortByWins();
-            return getLeagueString();
+            printTeams_ByLeague();
         }
-        return "\n ! No Teams In League !\n\n";
     }
 
     /**
-     * Returns a string showing the standings filtered by loses.
-     * 
-     * @return  The standings filtered by loses.
+     * Prints the league-wide standings by loses.
      */
-    public String getStandings_ByLeague_ByLoses() {
-        if (teams.size() > 0) {
+    public void printStandings_ByLeague_ByLoses() {
+        if (teams.size() == 0) {
+            System.out.println("\n ! No Teams In League !\n");
+        } else {
             sortByLoses();
-            return getLeagueString();
+            printTeams_ByLeague();
         }
-        return "\n ! No Teams In League !\n\n";
     }
 
     /**
-     * Returns a string showing the standings filtered by overtime loses.
-     * 
-     * @return  The standings filtered by overtime loses.
+     * Prints the league-wide standings by overtime loses.
      */
-    public String getStandings_ByLeague_ByOvertimeLoses() {
-        if (teams.size() > 0) {
+    public void printStandings_ByLeague_ByOvertimeLoses() {
+        if (teams.size() == 0) {
+            System.out.println("\n ! No Teams In League !\n");
+        } else {
             sortByOvertimeLoses();
-            return getLeagueString();
+            printTeams_ByLeague();
         }
-        return "\n ! No Teams In League !\n\n";
     }
 
 
@@ -366,142 +359,121 @@ public class League implements Serializable {
     }
 
     /**
-     * Returns a string for the standings assuming the teams are not sorted by division nor by
-     * conference.
-     * 
-     * @return  A string showing the standings by league.
+     * Prints the teams in the league.
      */
-    private String getLeagueString() {
-        String listString = "";
-        listString += "\t\t\t\t\tLeague\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+    private void printTeams_ByLeague() {
+        System.out.println("\t\t\t\t\tLeague");
+        BufferGenerator.printBufferForScreenWidth();
         for (int i = 0; i < teams.size(); i++) {
-            listString += i+1 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i + 1) +  ". \t" + teams.get(i));
         }
-        return listString;
     }
 
     /**
-     * Returns a string for the standings assuming the teams are sorted into the wildcard
-     * race.
-     * 
-     * @return  A string showing the wildcard standings.
+     * Prints the teams in the league assuming they are sorted according to the wildcare race
      */
-    private String getWildcardString() {
-        String listString = "";
+    private void printTeams_ByWildcard() {
         int i = 0;
-        listString += "\nEast\n";
-        listString += "\t\t\t\t\tAtlantic\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\nEast");
+        System.out.println("\t\t\t\t\tAtlantic");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 3) {
-            listString += i+1 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i + 1) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\n\t\t\t\t\tMetropolitan\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\n\t\t\t\tMetropolitan");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 6) {
-            listString += i-2 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 2) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\n\t\t\t\t\tWildcard\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\n\t\t\t\t\tWildcard");
+        BufferGenerator.printBufferForScreenWidth();
+        while (i < 8) {
+            System.out.println((i - 5) + ". \t" + teams.get(i));
+            i++;
+        }
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 16) {
-            listString += i-5 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 5) + ". \t" + teams.get(i));
             i++;
         }
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        BufferGenerator.printBufferForScreenWidth();
 
-        listString += "West\n";
-        listString += "\t\t\t\t\tCentral\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("West");
+        System.out.println("\t\t\t\t\tCentral");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 19) {
-            listString += i-15 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 15) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\n\t\t\t\t\tPacific\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\n\t\t\t\t\tPacific");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 22) {
-            listString += i-18 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 18) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\n\t\t\t\t\tWildcard\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\n\t\t\t\t\tWildcard");
+        BufferGenerator.printBufferForScreenWidth();
+        while (i < 24) {
+            System.out.println((i - 21) + ". \t" + teams.get(i));
+            i++;
+        }
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 32) {
-            listString +=  i-21 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 21) + ". \t" + teams.get(i));
             i++;
         }
-        return listString;
     }
 
     /**
-     * Returns a string for the standings assuming the teams are sorted by division.
-     * 
-     * @return  A string showing the standings by division.
+     * Prints the teams in the league assuming they are sorted by division.
      */
-    private String getDivisionString() {
-        String listString = "";
-        listString += "\t\t\t\t\tAtlantic\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+    private void printTeams_ByDivision() {
+        System.out.println("\t\t\t\t\tAtlantic");
+        BufferGenerator.printBufferForScreenWidth();
         int i = 0;
         while (i < 8) {
-            listString += i+1 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i + 1) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\t\t\t\t\tMetropolitan\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\t\t\t\t\tMetropolitan");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 16) {
-            listString += i-7 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 7) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\t\t\t\t\tCentral\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\t\t\t\t\tCentral");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 24) {
-            listString += i-15 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 15) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\t\t\t\t\tPacific\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\t\t\t\t\tPacific");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 32) {
-            listString += i-23 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 23) + ". \t" + teams.get(i));
             i++;
         }
-        return listString;
     }
 
     /**
-     * Returns a string for the standings assuming the teams are sorted by conference.
-     * 
-     * @return  A string showing the standings by conference.
+     * Prints the teams in the league assuming they are sorted by conference.
      */
-    private String getConferenceString() {
-        String listString = "";
-        listString += "\t\t\t\t\tEastern\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+    private void printTeams_ByConference() {
+        System.out.println("\t\t\t\t\tEastern");
+        BufferGenerator.printBufferForScreenWidth();
         int i = 0;
         while (i < 16) {
-            listString += i+1 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i + 1) + ". \t" + teams.get(i));
             i++;
         }
-        listString += "\t\t\t\t\tWestern\n";
-        listString += BufferGenerator.addLineBufferForScreenWidth();
+        System.out.println("\t\t\t\t\tWestern");
+        BufferGenerator.printBufferForScreenWidth();
         while (i < 32) {
-            listString += i-15 + ". \t" + teams.get(i).toString();
-            listString += "\n";
+            System.out.println((i - 15) + ". \t" + teams.get(i));
             i++;
         }
-        return listString;
     }
 
     /**
@@ -571,7 +543,7 @@ public class League implements Serializable {
     private int numInConference(String conference) {
         int numInConference = 0;
         for (int i = 0; i < teams.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(teams.get(i).getDivision(), conference)) {
+            if (InputAnalyzer.checkSpecificInput(teams.get(i).getConference(), conference)) {
                 numInConference++;
             }
         }

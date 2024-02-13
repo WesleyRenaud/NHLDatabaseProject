@@ -82,15 +82,16 @@ public class Players implements Serializable {
     /**
      * Updates the current season's stats for a given skater.
      * 
-     * @param playerName    The skater whose stats are being updated.
+     * @param playerName    The skater whose stats are being edited.
+     * @param season        The season of which the stats are being edited.
      * @param gamesPlayed   The new number of games played.
      * @param goals         The new number of goals.
      * @param assists       The new number of assists.
      * @param plusMinus     The new plus-minus.
      */
-    public void updateSkaterSeasonStats(String playerName, int gamesPlayed, int goals, int assists, int plusMinus) {
+    public void updateSkaterSeasonStats(String playerName, String season, int gamesPlayed, int goals, int assists, int plusMinus) {
         int index = getPlayerIndex(playerName);
-        players.get(index).updateSkaterSeason(gamesPlayed, goals, assists, plusMinus);
+        players.get(index).updateSkaterSeason(season, gamesPlayed, goals, assists, plusMinus);
     }
 
     /**
@@ -106,6 +107,17 @@ public class Players implements Serializable {
     public void updateGoalieSeasonStats(String playerName, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
         int index = getPlayerIndex(playerName);
         players.get(index).updateGoalieSeason(wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
+    }
+
+    /**
+     * Updates the name of a given player.
+     * 
+     * @param currentName   The current name of the player.
+     * @param newName       The new name of the player.
+     */
+    public void updateName(String currentName, String newName) {
+        int index = getPlayerIndex(currentName);
+        players.get(index).setName(currentName);
     }
 
     /**

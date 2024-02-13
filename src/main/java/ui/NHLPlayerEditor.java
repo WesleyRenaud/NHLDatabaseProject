@@ -79,7 +79,7 @@ public class NHLPlayerEditor {
      */
     private void addCurrentSkaterStats(String firstSeason, String name, String birthday, String handedness, int number, String team) {
         String currentSeason = firstSeason;
-        for (int i = SeasonHandler.getFirstYear_AsInt(firstSeason); i <= 2023; i++) {
+        while (SeasonHandler.getFirstYear_AsInt(currentSeason) < 2024) {
             System.out.println();
             System.out.println(" * Entering stats for " + currentSeason);
             int gamesPlayed = InputReader.getIntegerInput(" * Games Played >> ");
@@ -106,7 +106,7 @@ public class NHLPlayerEditor {
      */
     private void addRetiredSkaterStats(String firstSeason, String lastSeason, String name, String birthday, String handedness, int number, String team) {
         String currentSeason = firstSeason;
-        for (int i = SeasonHandler.getFirstYear_AsInt(firstSeason); i <= SeasonHandler.getFirstYear_AsInt(lastSeason); i++) {
+        while (SeasonHandler.getFirstYear_AsInt(currentSeason) < 2024) {
             System.out.println(" * Entering stats for " + currentSeason);
             int gamesPlayed = InputReader.getIntegerInput(" * Games Played >> ");
             int goals = InputReader.getIntegerInput(" * Goals >> ");
@@ -132,7 +132,7 @@ public class NHLPlayerEditor {
      */
     private void addCurrentGoalieStats(String firstSeason, String name, String birthday, String handedness, int number, String team) {
         String currentSeason = firstSeason;
-        for (int i = SeasonHandler.getFirstYear_AsInt(firstSeason); i <= 2023; i++) {
+        while (SeasonHandler.getFirstYear_AsInt(currentSeason) < 2024) {
             System.out.println(" * Entering stats for " + currentSeason);
             int wins = InputReader.getIntegerInput(" * Wins >> ");
             int loses = InputReader.getIntegerInput(" * Loses >> ");
@@ -160,7 +160,7 @@ public class NHLPlayerEditor {
      */
     private void addRetiredGoalieStats(String firstSeason, String lastSeason, String name, String birthday, String handedness, int number, String team) {
         String currentSeason = firstSeason;
-        for (int i = SeasonHandler.getFirstYear_AsInt(firstSeason); i <= SeasonHandler.getFirstYear_AsInt(lastSeason); i++) {
+        while (SeasonHandler.getFirstYear_AsInt(currentSeason) < 2024) {
             System.out.println(" * Entering stats for " + currentSeason);
             int wins = InputReader.getIntegerInput(" * Wins >> ");
             int loses = InputReader.getIntegerInput("* Loses >> ");
@@ -180,11 +180,13 @@ public class NHLPlayerEditor {
     protected void editPlayerSeasonStats() {
         String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
         if (players.checkPlayerExists(playerName)) {
+            String season = NHLInputReader.getSeasonInput(" * Enter Season >> ");
             if (players.checkPlayerIsSkater(playerName)) {
-                editSkaterSeasonStats(playerName);
+                editSkaterSeasonStats(playerName, season);
             } else {
                 editGoalieSeasonStats(playerName);
             }
+            InputReader.readBuffer();
         } else {
             System.out.println(" ! The Player Does not Exist !");
         }
@@ -192,13 +194,16 @@ public class NHLPlayerEditor {
 
     /**
      * Updates the current season stats for a skater supplied as a parameter.
+     * 
+     * @param playerName    The name of the player whose stats are being edited.
+     * @param season        The season of which the stats are being edited.
      */
-    protected void editSkaterSeasonStats(String playerName) {
+    protected void editSkaterSeasonStats(String playerName, String season) {
         int gamesPlayed = InputReader.getIntegerInput(" * Games Played >> ");
         int goals = InputReader.getIntegerInput(" * Goals >> ");
         int assists = InputReader.getIntegerInput(" * Assists >> ");
         int plusMinus = InputReader.getIntegerInput(" * Plus-Minus >> ");
-        players.updateSkaterSeasonStats(playerName, gamesPlayed, goals, assists, plusMinus);
+        players.updateSkaterSeasonStats(playerName, season, gamesPlayed, goals, assists, plusMinus);
     }
 
     /**
@@ -257,6 +262,19 @@ public class NHLPlayerEditor {
         double savePercentage = InputReader.getDoubleInput(" * Save Percentage >> ");
         double goalsAgainstAverage = InputReader.getDoubleInput(" * Goals Against Average >> ");
         players.addGoalieSeason(playerName, season, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
+    }
+
+    /**
+     * Updates the name for a player supplied as input.
+     */
+    protected void editPlayerName() {
+        String currentName = InputReader.getLineInput(" * Enter Current Full Player Name >> ");
+        if (players.checkPlayerExists(currentName)) {
+            String newName = InputReader.getLineInput(" * Enter New Name >> ");
+            players.updateName(currentName, newName);
+        } else {
+            System.out.println(" ! The Player Does not Exist !");
+        }
     }
 
     /**

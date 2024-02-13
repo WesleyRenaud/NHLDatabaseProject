@@ -74,13 +74,13 @@ public class NHLUI {
      * Helper method to print the options of the menu
      */
     private static void printMenuOptions() {
-        System.out.println(" ~ Enter data into the database [1]");
-        System.out.println(" ~ Print Standings for this season [2] ");
-        System.out.println(" ~ Print out standings from a previous season [3] ");
-        System.out.println(" ~ Individual player lookup [4] ");
-        System.out.println(" ~ Print out stats leaders for a specific team [5] ");
-        System.out.println(" ~ Print out league leaders for a specific stat [6] ");
-        System.out.println(" ~ Exit the program ['Q' or 'q']");
+        System.out.println(" ~ Edit Database [1]");
+        System.out.println(" ~ Print Standings for Current Season [2] ");
+        System.out.println(" ~ Print Standings from Previous Season [3] ");
+        System.out.println(" ~ Lookup Individual Player [4] ");
+        System.out.println(" ~ Print Team Leaders [5] ");
+        System.out.println(" ~ Print League Leaders [6] ");
+        System.out.println(" ~ Exit Program ['Q' or 'q']");
     }
 
     /**

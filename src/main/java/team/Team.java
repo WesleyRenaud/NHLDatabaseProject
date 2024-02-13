@@ -175,14 +175,11 @@ public class Team implements Serializable {
 
     
     /**
-     * Returns a string showing the team and its record.
-     * 
-     * @return  The team's city and name plus its record and number of points.
+     * Prints a string showing the team and its record.
      */
+    @Override
     public String toString() {
-        if (getFullName().length() <= 15) {
-            return getFullName() + "\t\t| GP: " + getGamesPlayed() + "\t| PTS: " + getPoints() + "\t| Record " + getRecord() + "\t|PP%: " + getPointsPercentage();
-        }
-        return getFullName() + "\t| GP: " + getGamesPlayed() + "\t| PTS: " + getPoints() + "\t| Record " + getRecord() + "\t|PP%: " + getPointsPercentage();
+        return String.format("%-23s| GP: %-5d| Points: %-5d| Record: %-10s|PP%%: %-7.3f", getFullName(), getGamesPlayed(), 
+                            getPoints(), getRecord(), getPointsPercentage());
     }
 }

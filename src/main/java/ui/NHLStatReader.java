@@ -25,9 +25,9 @@ public class NHLStatReader {
      * A method used to display the standings in the way selected by the user.
      */
     public void printStandings() {
-        printStandingsMenu();
         int choice = -1;
         while (choice != 0) {
+            printStandingsMenu();
             choice = InputReader.getValidInput_AcceptBack(" * Enter User Choice >> ", 7);
             printProperStandings(choice);
         }
@@ -60,31 +60,31 @@ public class NHLStatReader {
                 break;
 
             case 1:
-                System.out.print(league.getStandings_ByLeague_ByPoints());    
+                league.printStandings_ByLeague_ByPoints();    
                 break;
 
             case 2:
-                System.out.print(league.getStandings_ByWildcard_ByPoints());
+                league.printStandings_ByWildcard_ByPoints();
                 break;
 
             case 3:
-                System.out.print(league.getStandings_ByDivision_ByPoints());
+                league.printStandings_ByDivision_ByPoints();
                 break;
 
             case 4:
-                System.out.print(league.getStandings_ByConference_ByPoints());
+                league.printStandings_ByConference_ByPoints();
                 break;
 
             case 5:
-                System.out.print(league.getStandings_ByLeague_ByWins());
+                league.printStandings_ByLeague_ByWins();
                 break;
 
             case 6:
-                System.out.print(league.getStandings_ByLeague_ByLoses());
+                league.printStandings_ByLeague_ByLoses();
                 break;
 
             default:
-                System.out.print(league.getStandings_ByLeague_ByOvertimeLoses());
+                league.printStandings_ByLeague_ByOvertimeLoses();
                 break;
         }
     }
