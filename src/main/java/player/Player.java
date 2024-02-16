@@ -49,6 +49,14 @@ public abstract class Player implements Serializable {
         seasons = new ArrayList<>();
     }
 
+    public void setTeam(String playerTeam) {
+        team = playerTeam;
+    }
+
+    public void setNumber(int playerNumber) {
+        number = playerNumber;
+    }
+
     public void setRetired(boolean playerRetired) {
         retired = playerRetired;
     }
@@ -57,13 +65,9 @@ public abstract class Player implements Serializable {
         name = newName;
     }
 
-    public void setNumber(int playerNumber) {
-        number = playerNumber;
-    }
-
-    public void setTeam(String playerTeam) {
-        team = playerTeam;
-    }
+    protected void setBirthday(String newBirthday) {
+        birthday = newBirthday;
+    }    
 
     /**
      * Updates the skater stats for the current season.
@@ -149,6 +153,7 @@ public abstract class Player implements Serializable {
     }
 
     public boolean isSkater() {
+        System.out.println(name + "'s Class = " + getClass());
         if (getClass().equals(Skater.class)) {
             return true;
         }
@@ -210,131 +215,104 @@ public abstract class Player implements Serializable {
         }
         return -1;
     }
-
-
-    /**
-     * Returns the player's stats from the current year.
-     * 
-     * @return  A string for the stats of the player in the current year.
-     */
-    public String getCurrentSeasonStats() {
-        String currentSeasonStats = "";
-        currentSeasonStats += "\n";
-        currentSeasonStats += BufferGenerator.addLineBufferForScreenWidth();
-        currentSeasonStats += seasons.get(seasons.size() - 1).toString();
-        return currentSeasonStats;
-    }
+ 
 
     /**
-     * Returns the player's stats from the current year.
-     * 
-     * @return  A string for the stats of the player in the current year.
+     * Prints the player's career stats.
      */
-    public String getCurrentSeasonStats_WithPlayerInformation() {
-        String currentSeasonStats = "";
-        currentSeasonStats += "\n";
-        currentSeasonStats += name;
-        currentSeasonStats +=  ":\t";
-        currentSeasonStats += seasons.get(seasons.size() - 1).toString();
-        return currentSeasonStats;
-    }
-
-    /**
-     * Returns the player's career stats.
-     * 
-     * @return  A string for the career stats of the player.
-     */
-    public String getCareerStats() {
-        String careerStats = "";
-        careerStats += "\n";
-        careerStats += BufferGenerator.addLineBufferForScreenWidth();
+    public void printCareerStats() {
+        System.out.println(this);
+        BufferGenerator.printBuffer(112);
         for (int i = 0; i < seasons.size(); i++) {
-            careerStats += "\n";
-            careerStats += seasons.get(i).getYear() + " | \t";
-            careerStats += seasons.get(i).toString();
+            System.out.println(seasons.get(i));
         }
-        return careerStats;
     }
 
     /**
-     * Returns the stats for a player from a specific season they played in.
+     * Prints the player's stats from a given season
      * 
-     * @param season    The season whose stats we are looking for.
-     * @return  The stats of the season if found, or an error string.
+     * @param season    The season whose stats we are printing.
      */
-    public String getStatsFromSeason(String season) {
+    public void printStatsFromSeason(String season) {
         if (getSeasonsIndex(season) == -1) {
-            return "Season not Found for Player";
-        }
-        String seasonStats = "";
-        seasonStats += "\n";
-        seasonStats += BufferGenerator.addLineBufferForScreenWidth();
-        seasonStats += seasons.get(getSeasonsIndex(season)).toString();
-        return seasonStats;
+            System.out.println(" ! " + name + " did not play during the " + season + " season !");
+        } else {
+            System.out.println(this);
+            BufferGenerator.printBuffer(112);
+            System.out.println(seasons.get(getSeasonsIndex(season)));
+        }        
     }
 
     /**
-     * Returns the stats of a player over a range of seasons, given a start and an end.
+     * Prints the given player's stats over a range of seasons, given a start and an end.
      * 
-     * @param firstSeason   The first season to get the stats of.
-     * @param lastSeason    The last season to get the stats of.
-     * @return  A string holding the stats of all of the sasons, or an error message.
+     * @param firstSeason   The first season to print the stats of.
+     * @param lastSeason    The last season to print the stats of.
      */
-    public String getStatsFromStartUntilEnd(String firstSeason, String lastSeason) {
+    public void printStatsFromStartUntilEnd(String firstSeason, String lastSeason) {
         int startingIndex = getSeasonsIndex(firstSeason), endingIndex = getSeasonsIndex(lastSeason);
 
         if (startingIndex == -1 || endingIndex == -1) {
-            return "Player did not Player over These Seasons";
+            System.out.println(" ! " + name + " did not play over this range !");
         }
-        String seasonsStats = "";
-        seasonsStats += "\n";
-        seasonsStats += BufferGenerator.addLineBufferForScreenWidth();
-        for (int i = startingIndex; i <= endingIndex; i++) {
-            seasonsStats += seasons.get(i).toString();
+        else {
+            System.out.println(this);
+            BufferGenerator.printBuffer(112);
+            for (int i = startingIndex; i <= endingIndex; i++) {
+                System.out.println(seasons.get(i));
+            }
         }
-        return seasonsStats;
     }
 
     /**
-     * Returns the stats of a player from a given start season until the present.
+     * Prints the given player's stats from a given starting season until the end of their
+     * career.
      * 
-     * @param firstSeason   The first season to get the stats of.
-     * @return  A string holding the stats of all seasons, or an error message.
+     * @param firstSeason   The first season to print the stats of.
      */
-    public String getStatsFromStart(String firstSeason) {
+    public void printStatsFromStart(String firstSeason) {
         int startingIndex = getSeasonsIndex(firstSeason);
 
         if (startingIndex == -1) {
-            return "Player did not Play in the Starting Season";
+            System.out.println(" ! " + name + " did not play during the " + firstSeason + " season !");
+        } else {
+            BufferGenerator.printBuffer(112);
+            for (int i = startingIndex; i < seasons.size(); i++) {
+                System.out.println(seasons.get(i));
+            }
         }
-        String statsString = "";
-        for (int i = startingIndex; i < seasons.size(); i++) {
-            statsString += seasons.get(i).toString();
-        }
-        return statsString;
     }
 
     /**
-     * Returns the stats of a player from their first season up until a given ending season.
+     * Prints the player's stats from the start of their career up until a given ending
+     * season.
      * 
-     * @param lastSeason   The first season to get the stats of.
-     * @return  A string holding the stats of all seasons, or an error message.
+     * @param lastSeason   The first season to print the stats of.
      */
-    public String getStatsUntilEnd(String lastSeason) {
+    public void printStatsUntilEnd(String lastSeason) {
         int endingIndex = getSeasonsIndex(lastSeason);
 
         if (endingIndex == -1) {
-            return "Player did not Play in the Starting Season";
+            System.out.println(" ! " + name + " did not play during the " + lastSeason + " season !");
+        } else {
+            BufferGenerator.printBuffer(112);
+            for (int i = 0; i <= endingIndex; i++) {
+                System.out.println(seasons.get(i));
+            }
         }
-        String statsString = "";
-        for (int i = 0; i <= endingIndex; i++) {
-            statsString += seasons.get(i).toString();
-        }
-        return statsString;
     }
 
     /**
-     * Returns the index of a season concerning a player's career.
+     * Prints the player's stats for the current season, plus their information.
+     */
+    public void printCurrentSeasonStats_WithPlayerName() {
+        int seasonIndex = getSeasonsIndex("2023-2024");
+        System.out.printf(" %-20s" + seasons.get(seasonIndex).printWithoutYear() + "\n", name);
+    }
+
+
+    /**
+     * Returns the index of a season concerning the player's career.
      * 
      * @param season    The season to get the index of.
      * @return  The index of the season if found, or -1.
@@ -346,5 +324,11 @@ public abstract class Player implements Serializable {
             }
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\t\t\t\t\t\t%-25s\n\n\tNumber: %-7d \t\t\tAge: %-7d \t\t\tHandedness: %-15s",
+                    name, number, getAge(), handedness);
     }
 }

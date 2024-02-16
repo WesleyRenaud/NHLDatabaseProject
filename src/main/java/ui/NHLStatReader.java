@@ -5,6 +5,8 @@
 package ui;
 
 
+import java.io.BufferedReader;
+
 import input.InputReader;
 import input.NHLInputReader;
 import utilities.BufferGenerator;
@@ -94,6 +96,7 @@ public class NHLStatReader {
      */
     public void printStandingsFromPastSeason() {
         //TO DO:
+        System.out.println(" ! TO DO !");
     }
 
     /**
@@ -140,32 +143,36 @@ public class NHLStatReader {
                 break;
 
             case 1:
-                System.out.print(players.getCurrentSeasonStats(playerName));
+                players.printCurrentSeasonStats(playerName);
                 break;
 
             case 2:
-                System.out.print(players.getCareerStats(playerName));
+                players.printCareerStats(playerName);
                 break;
 
             case 3:
                 String season = NHLInputReader.getSeasonInput(" * Enter Season >> ");
-                System.out.print(players.getStatsFromSeason(playerName, season));
+                players.printStatsFromSeason(playerName, season);
+                InputReader.readBuffer();
                 break;
 
             case 4:
                 String startSeason = NHLInputReader.getSeasonInput(" * Enter Starting Season >> ");
                 String endSeason = NHLInputReader.getSeasonInput(" * Enter Ending Season >> ");
-                System.out.print(players.getStatsFromStartUntilEnd(playerName, startSeason,  endSeason));
+                players.printStatsFromStartUntilEnd(playerName, startSeason,  endSeason);
+                InputReader.readBuffer();
                 break;
 
             case 5:
                 startSeason = NHLInputReader.getSeasonInput(" * Enter Starting Season >> ");
-                System.out.print(players.getStatsFromStart(playerName, startSeason));
+                players.printStatsFromStart(playerName, startSeason);
+                InputReader.readBuffer();
                 break;
 
             default:
                 endSeason = NHLInputReader.getSeasonInput(" * Enter Last Season >> ");
-                System.out.print(players.getStatsUntilEnd(playerName, endSeason));
+                players.printStatsUntilEnd(playerName, endSeason);
+                InputReader.readBuffer();
                 break;
         }
     }
@@ -210,31 +217,31 @@ public class NHLStatReader {
                 break;
 
             case 1:
-                System.out.println(players.getTeamLeaders_InPoints(fullTeamName));
+                players.printTeamLeaders_InPoints(fullTeamName);
                 break;
 
             case 2:
-                System.out.println(players.getTeamLeaders_InGoals(fullTeamName));
+                players.printTeamLeaders_InGoals(fullTeamName);
                 break;
 
             case 3:
-                System.out.println(players.getTeamLeaders_InAssists(fullTeamName));
+                players.printTeamLeaders_InAssists(fullTeamName);
                 break;
 
             case 4:
-                System.out.println(players.getTeamLeaders_InPlusMinus(fullTeamName));
+                players.printTeamLeaders_InPlusMinus(fullTeamName);
                 break;
 
             case 5:
-                System.out.println(players.getTeamLeaders_InWins(fullTeamName));
+                players.printTeamLeaders_InWins(fullTeamName);
                 break;
 
             case 6:
-                System.out.println(players.getTeamLeaders_InSavePercentage(fullTeamName));
+                players.printTeamLeaders_InSavePercentage(fullTeamName);
                 break;
         
             default:
-                System.out.println(players.getTeamLeaders_InGoalsAgainstAverage(fullTeamName));
+                players.printTeamLeaders_InGoalsAgainstAverage(fullTeamName);
                 break;
         }
     }
@@ -279,31 +286,31 @@ public class NHLStatReader {
                 break;
 
             case 1:
-                System.out.println(players.getPointLeaders());
+                players.printPointLeaders();
                 break;
 
             case 2:
-                System.out.println(players.getGoalLeaders());
+                players.printGoalLeaders();
                 break;
 
             case 3:
-                System.out.println(players.getAssistLeaders());
+                players.printAssistLeaders();
                 break;
 
             case 4:
-                System.out.println(players.getPlusMinusLeaders());
+                players.printPlusMinusLeaders();
                 break;
 
             case 5:
-                System.out.println(players.getWinLeaders());
+                players.printWinLeaders();
                 break;
 
             case 6:
-                System.out.println(players.getSavePercentageLeaders());
+                players.printSavePercentageLeaders();
                 break;
         
             default:
-                System.out.println(players.getGoalsAgainstAverageLeaders());
+                players.printGoalsAgainstAverageLeaders();
                 break;
         }
     }

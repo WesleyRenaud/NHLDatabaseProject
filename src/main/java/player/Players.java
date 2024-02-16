@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import input.InputAnalyzer;
+import utilities.BufferGenerator;
 
 
 public class Players implements Serializable {
@@ -44,7 +45,7 @@ public class Players implements Serializable {
      * @param team          The goalie's team.
      */
     public void addGoalie(String name, String birthday, String handedness, boolean retired, int number, String team) {
-        players.add(new Skater(name, birthday, handedness, retired, number, team));
+        players.add(new Goalie(name, birthday, handedness, retired, number, team));
     }
 
     /**
@@ -110,14 +111,14 @@ public class Players implements Serializable {
     }
 
     /**
-     * Updates the name of a given player.
+     * Updates the team of a given player.
      * 
-     * @param currentName   The current name of the player.
-     * @param newName       The new name of the player.
+     * @param playerName    The name of the player whose team is being updated.
+     * @param team          The new team of the player.
      */
-    public void updateName(String currentName, String newName) {
-        int index = getPlayerIndex(currentName);
-        players.get(index).setName(currentName);
+    public void updateTeam(String playerName, String team) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).setTeam(team);
     }
 
     /**
@@ -132,241 +133,300 @@ public class Players implements Serializable {
     }
 
     /**
-     * Updates the team of a given player.
+     * Updates the name of a given player.
      * 
-     * @param playerName    The name of the player whose team is being updated.
-     * @param team          The new team of the player.
+     * @param currentName   The current name of the player.
+     * @param newName       The new name of the player.
      */
-    public void updateTeam(String playerName, String team) {
+    public void updateName(String currentName, String newName) {
+        int index = getPlayerIndex(currentName);
+        players.get(index).setName(currentName);
+    }
+
+    /**
+     * Updates the name of a given player.
+     * 
+     * @param playerName    The name of the player.
+     * @param birthday      The new birthday of the player.
+     */
+    public void updateBirthday(String playerName, String birthday) {
         int index = getPlayerIndex(playerName);
-        players.get(index).setTeam(team);
+        players.get(index).setBirthday(birthday);
+    }
+
+    /**
+     * Prints a given player's stats for the current season.
+     * 
+     * @param playerName    The name of the player whose stats we are printing.
+     */
+    public void printCurrentSeasonStats(String playerName) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).printStatsFromSeason("2023-2024");
+    }
+
+    /**
+     * Prints a given player's career stats.
+     * 
+     * @param playerName    The name of the player whose stats we are printing.
+     */
+    public void printCareerStats(String playerName) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).printCareerStats();
+    }
+
+    /**
+     * Prints a given player's stats from a given season.
+     * 
+     * @param playerName    The name of the player whose stats we are printing.
+     */
+    public void printStatsFromSeason(String playerName, String season) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).printStatsFromSeason(season);
+    }
+
+    /**
+     * Prints a given player's stats over a range of seasons, given a start and an end.
+     * 
+     * @param firstSeason   The first season to print the stats of.
+     * @param lastSeason    The last season to print the stats of.
+     */
+    public void printStatsFromStartUntilEnd(String playerName, String firstSeason, String lastSeason) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).printStatsFromStartUntilEnd(firstSeason, lastSeason);
+    }
+
+    /**
+     * Prints a given player's stats from a given starting season until the end of their
+     * career.
+     * 
+     * @param firstSeason   The first season to print the stats of.
+     */
+    public void printStatsFromStart(String playerName, String firstSeason) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).printStatsFromStart(firstSeason);
+
+    }
+
+    /**
+     * Prints a player's stats from the start of their career up until a given ending
+     * season.
+     * 
+     * @param lastSeason   The first season to print the stats of.
+     */
+    public void printStatsUntilEnd(String playerName, String lastSeason) {
+        int index = getPlayerIndex(playerName);
+        players.get(index).printStatsUntilEnd(lastSeason);
     }
 
 
     /**
-     * Returns a string showing a given player's stats during the most recent season.
+     * Prints the skaters' stats of a team, sorted by points.
      * 
-     * @param playerName    The name of the player whose stats we are retreiving.
-     * @return  The player's stats for the current season.
+     * @param team  The team to print the skaters stats of.
      */
-    public String getCurrentSeasonStats(String playerName) {
-        int index = getPlayerIndex(playerName);
-        return players.get(index).getCurrentSeasonStats();
-    }
-
-    /**
-     * Returns a string showing a given player's career stats.
-     * 
-     * @param playerName    The name of the player whose stats we are retreiving.
-     * @return  The player's career stats.
-     */
-    public String getCareerStats(String playerName) {
-        int index = getPlayerIndex(playerName);
-        return players.get(index).getCareerStats();
-    }
-
-    public String getStatsFromSeason(String playerName, String season) {
-        int index = getPlayerIndex(playerName);
-        return players.get(index).getStatsFromSeason(season);
-    }
-
-    /**
-     * Returns the stats of a player over a range of seasons, given a start and an end.
-     * 
-     * @param firstSeason   The first season to get the stats of.
-     * @param lastSeason    The last season to get the stats of.
-     * @return  A string holding the stats of all of the sasons, or an error message.
-     */
-    public String getStatsFromStartUntilEnd(String playerName, String firstSeason, String lastSeason) {
-        int index = getPlayerIndex(playerName);
-        return players.get(index).getStatsFromStartUntilEnd(firstSeason, lastSeason);
-    }
-
-    /**
-     * Returns the stats of a player from a given start season until the present.
-     * 
-     * @param firstSeason   The first season to get the stats of.
-     * @return  A string holding the stats of all seasons, or an error message.
-     */
-    public String getStatsFromStart(String playerName, String firstSeason) {
-        int index = getPlayerIndex(playerName);
-        return players.get(index).getStatsFromStart(firstSeason);
-
-    }
-
-    /**
-     * Returns the stats of a player from their first season up until a given ending season.
-     * 
-     * @param lastSeason   The first season to get the stats of.
-     * @return  A string holding the stats of all seasons, or an error message.
-     */
-    public String getStatsUntilEnd(String playerName, String lastSeason) {
-        int index = getPlayerIndex(playerName);
-        return players.get(index).getStatsUntilEnd(lastSeason);
-    }
-
-
-    /**
-     * Gets the skaters' stats of a team, sorted by points.
-     * 
-     * @param team  The team to get the skaters stats of.
-     * @return  A string showing the team's skaters sorted by points.
-     */
-    public String getTeamLeaders_InPoints(String team) {
+    public void printTeamLeaders_InPoints(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
-        sortByPoints(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortByPoints(teamPlayers);
+            printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the skaters' stats of a team, sorted by goals.
+     * Prints the skaters' stats of a team, sorted by goals.
      * 
-     * @param team  The team to get the skaters stats of.
-     * @return  A string showing the team's skaters sorted by goals.
+     * @param team  The team to print the skaters stats of.
      */
-    public String getTeamLeaders_InGoals(String team) {
+    public void printTeamLeaders_InGoals(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
-        sortByGoals(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortByGoals(teamPlayers);
+            printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the skaters' stats of a team, sorted by assists.
+     * Prints the skaters' stats of a team, sorted by assists.
      * 
-     * @param team  The team to get the skaters stats of.
-     * @return  A string showing the team's skaters sorted by assists.
+     * @param team  The team to print the skaters stats of.
      */
-    public String getTeamLeaders_InAssists(String team) {
+    public void printTeamLeaders_InAssists(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
-        sortByAssists(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortByAssists(teamPlayers);
+            printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the skaters' stats of a team, sorted by plus-minus.
+     * Prints the skaters' stats of a team, sorted by plus-minus.
      * 
-     * @param team  The team to get the skaters stats of.
-     * @return  A string showing the team's skaters sorted by plus-minus.
+     * @param team  The team to print the skaters stats of.
      */
-    public String getTeamLeaders_InPlusMinus(String team) {
+    public void printTeamLeaders_InPlusMinus(String team) {
         List<Player> teamPlayers = getSkatersOnTeam(team);
-        sortByPlusMinus(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortByPlusMinus(teamPlayers);
+        printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the goalie's stats of a team, sorted by wins.
+     * Prints the goalie's stats of a team, sorted by wins.
      * 
-     * @param team  The team to get the goalie' stats of.
-     * @return  A string showing the team's goalies sorted by wins.
+     * @param team  The team to print the goalie' stats of.
      */
-    public String getTeamLeaders_InWins(String team) {
+    public void printTeamLeaders_InWins(String team) {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
-        sortByWins(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortByWins(teamPlayers);
+            printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the goalies' stats of a team, sorted by wins.
+     * Prints the goalies' stats of a team, sorted by wins.
      * 
-     * @param team  The team to get the goalies stats of.
-     * @return  A string showing the team's goalies sorted by wins.
+     * @param team  The team to print the goalies stats of.
      */
-    public String getTeamLeaders_InSavePercentage(String team) {
+    public void printTeamLeaders_InSavePercentage(String team) {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
-        sortBySavePercentage(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortBySavePercentage(teamPlayers);
+            printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the goalies' stats of a team, sorted by wins.
+     * Prints the goalies' stats of a team, sorted by wins.
      * 
-     * @param team  The team to get the goalies stats of.
-     * @return  A string showing the team's goalies sorted by wins.
+     * @param team  The team to print the goalies stats of.
      */
-    public String getTeamLeaders_InGoalsAgainstAverage(String team) {
+    public void printTeamLeaders_InGoalsAgainstAverage(String team) {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
-        sortByGoalsAgainstAverage(teamPlayers);
-        return getPlayersString(teamPlayers);
+        if (teamPlayers.size() > 0) {
+            sortByGoalsAgainstAverage(teamPlayers);
+            printPlayersCurrentSeasonStats(teamPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in points.
-     * 
-     * @return  A string showing the league leaders in points.
+     * Prints the league leaders in points.
      */
-    public String getPointLeaders() {
+    public void printPointLeaders() {
         List<Player> currentPlayers = getCurrentSkaters();
-        sortByPoints(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortByPoints(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in goals.
-     * 
-     * @return  A string showing the league leaders in goals.
+     * Prints the league leaders in goals.
      */
-    public String getGoalLeaders() {
+    public void printGoalLeaders() {
         List<Player> currentPlayers = getCurrentSkaters();
-        sortByGoals(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortByGoals(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in assists.
-     * 
-     * @return  A string showing the league leaders in assists.
+     * Prints the league leaders in assists.
      */
-    public String getAssistLeaders() {
+    public void printAssistLeaders() {
         List<Player> currentPlayers = getCurrentSkaters();
-        sortByAssists(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortByAssists(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in plus-minus.
-     * 
-     * @return  A string showing the league leaders in plus-minus.
+     * Prints the league leaders in plus-minus.
      */
-    public String getPlusMinusLeaders() {
+    public void printPlusMinusLeaders() {
         List<Player> currentPlayers = getCurrentSkaters();
-        sortByPlusMinus(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortByPlusMinus(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in wins.
-     * 
-     * @return  A string showing the league leaders in wins.
+     * Prints the league leaders in wins.
      */
-    public String getWinLeaders() {
+    public void printWinLeaders() {
         List<Player> currentPlayers = getCurrentGoalies();
-        sortByWins(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortByWins(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in save percentage.
-     * 
-     * @return  A string showing the league leaders in save percentage.
+     * Prints the league leaders in save percentage.
      */
-    public String getSavePercentageLeaders() {
+    public void printSavePercentageLeaders() {
         List<Player> currentPlayers = getCurrentGoalies();
-        sortBySavePercentage(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortBySavePercentage(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
     /**
-     * Gets the league leaders in goals against average.
-     * 
-     * @return  A string showing the league leaders in goals against average.
+     * Prints the league leaders in goals against average.
      */
-    public String getGoalsAgainstAverageLeaders() {
+    public void printGoalsAgainstAverageLeaders() {
         List<Player> currentPlayers = getCurrentGoalies();
-        sortByGoalsAgainstAverage(currentPlayers);
-        return getPlayersString(currentPlayers);
+        if (currentPlayers.size() > 0) {
+            sortByGoalsAgainstAverage(currentPlayers);
+            printPlayersCurrentSeasonStats(currentPlayers);
+        } else {
+            System.out.println("\n ! No Players Found !");
+        }
     }
 
+    /**
+     * Prints a list of players' stats for the current season.
+     * 
+     * @param list  The list of players we are printing.
+     */
+    private void printPlayersCurrentSeasonStats(List<Player> list) {
+        System.out.println();
+        BufferGenerator.printBuffer(115);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).printCurrentSeasonStats_WithPlayerName();
+        }
+    }
 
     /**
      * Gets a list of all the skaters on a given team.
@@ -377,6 +437,8 @@ public class Players implements Serializable {
     private List<Player> getSkatersOnTeam(String team) {
         List<Player> teamSkaters = new ArrayList<>();
         for (int i = 0; i < players.size(); i++) {
+            //System.out.println("Comparing " + players.get(i).getName() + " with the team " + players.get(i).getTeam() + " to " + 
+            //team);
             if (!players.get(i).isRetired() && players.get(i).isSkater() && players.get(i).getTeam().equals(team)) {
                 teamSkaters.add(players.get(i));
             }
@@ -393,6 +455,9 @@ public class Players implements Serializable {
     private List<Player> getGoaliesOnTeam(String team) {
         List<Player> teamGoalies = new ArrayList<>();
         for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getName().equals("John Gibson")) {
+                System.out.println(!players.get(i).isRetired() + " , " + players.get(i).isSkater() + " , " + players.get(i).getTeam().equals(team));
+            }
             if (!players.get(i).isRetired() && players.get(i).isGoalie() && players.get(i).getTeam().equals(team)) {
                 teamGoalies.add(players.get(i));
             }
@@ -522,20 +587,6 @@ public class Players implements Serializable {
         return currentPlayers;
     }
 
-
-    /**
-     * Returns the string of a team's players ordered by number of points.
-     * 
-     * @param list  The list of the teams of the player.
-     * @return  The string of players' stats from the list.
-     */
-    private String getPlayersString(List<Player> list) {
-        String listString = "";
-        for (int i = 0; i < list.size(); i++) {
-            listString += list.get(i).getCurrentSeasonStats_WithPlayerInformation();
-        }
-        return listString;
-    }
 
     /**
      * Swaps two given players' positions in the list of teams.

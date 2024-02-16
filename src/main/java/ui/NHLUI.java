@@ -1,5 +1,5 @@
 /**
- * UI used to gt user input from a menu option and call the corresponding handling code.
+ * UI class used to operate the main page of the interface.
  */
 
 package ui;

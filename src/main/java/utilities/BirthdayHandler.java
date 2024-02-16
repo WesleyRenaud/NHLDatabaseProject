@@ -8,7 +8,7 @@ package utilities;
 import input.InputAnalyzer;
 
 public class BirthdayHandler {
-    private static String currentDate = "2024-01-15";
+    private static String currentDate = "2024-02-16";
 
     /**
      * Checks if a string follows the format of a birthday for an NHL player.
@@ -160,10 +160,10 @@ public class BirthdayHandler {
     }
 
     private static int getBirthYear(String birthday) {
-        return Integer.parseInt(birthday.substring(0, 3));
+        return Integer.parseInt(birthday.substring(0, 4));
     }
 
     private static int getMonth(String birthday) {
-        return Integer.parseInt(birthday.substring(5, 6));
+        return Integer.parseInt(birthday.substring(5, 7));
     }
 }

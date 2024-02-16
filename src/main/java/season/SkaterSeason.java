@@ -63,6 +63,15 @@ public class SkaterSeason extends Season {
      */
     @Override
     public String toString() {
-        return "Games Played: " + getGamesPlayed() + "\t| Goals: " + goals + "\t| Assists: " + assists  + "\t| Points: " + getPoints() + "\t| Plus/Minus: " + plusMinus + "\n";
+        return String.format(" %s\t: Games Played: %-7d | Goals: %-7d | Assists: %-7d | Points: %-7d | Plus-Minus: %-7d",
+                getYear(), getGamesPlayed(), goals, assists, getPoints(), plusMinus);
+    }
+
+    /**
+     * Creates a String generation of the skater season without the year of the season.
+     */
+    public String printWithoutYear() {
+        return String.format("Games Played: %-7d | Goals: %-7d | Assists: %-7d | Points: %-7d | Plus-Minus: %-7d",
+                getGamesPlayed(), goals, assists, getPoints(), plusMinus);
     }
 }

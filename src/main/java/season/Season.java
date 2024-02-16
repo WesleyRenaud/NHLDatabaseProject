@@ -78,4 +78,6 @@ public abstract class Season implements Serializable {
         }
         return -1;
     }
+
+    public abstract String printWithoutYear();
 }

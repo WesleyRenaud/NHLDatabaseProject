@@ -1,5 +1,5 @@
 /**
- * A (UI) class used to add NHL stats to the database.
+ * A UI class used to add NHL stats to the database.
  */
 
 package ui;
@@ -77,11 +77,11 @@ public class NHLStatEditor {
         BufferGenerator.printBufferForScreenWidth();
         System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Add a Team [1]");
-        System.out.println(" ~ Edit a Team's City [2]");
-        System.out.println(" ~ Edit a Team's Name [3]");
+        System.out.println(" ~ Edit a Team's Record [2]");
+        System.out.println(" ~ Edit a Team's Division [3]");
         System.out.println(" ~ Edit a Team's Conference [4]");
-        System.out.println(" ~ Edit a Team's Division [5]");
-        System.out.println(" ~ Edit a Team's Record [6]");
+        System.out.println(" ~ Edit a Team's City [5]");
+        System.out.println(" ~ Edit a Team's Name [6]");
         BufferGenerator.printBufferForScreenWidth();
     }
 
@@ -101,23 +101,23 @@ public class NHLStatEditor {
                 break;
 
             case 2:
-                teamEditor.editTeamCity();
+                teamEditor.editTeamRecord();
                 break;
 
             case 3:
-                teamEditor.editTeamName();
+                teamEditor.editTeamDivision();
                 break;
-
+            
             case 4:
                 teamEditor.editTeamConference();
                 break;
 
             case 5:
-                teamEditor.editTeamDivision();
+                teamEditor.editTeamCity();
                 break;
 
             default:
-                teamEditor.editTeamRecord();
+                teamEditor.editTeamName();
                 break;
         }
     }
@@ -130,7 +130,7 @@ public class NHLStatEditor {
         int choice = -1;
         while (choice != 0) {
             printPlayersMenu();
-            choice = InputReader.getValidInput_AcceptBack(promptMessage, 6);
+            choice = InputReader.getValidInput_AcceptBack(promptMessage, 8);
             completePlayerTask(choice);
         }
     }
@@ -142,11 +142,13 @@ public class NHLStatEditor {
         BufferGenerator.printBufferForScreenWidth();
         System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Add a Player [1]");
-        System.out.println(" ~ Edit a Player's Name [2]");
-        System.out.println(" ~ Edit Seasons Stat's for a Player [3]");
-        System.out.println(" ~ Add Seasons to Player's Career [4]");
+        System.out.println(" ~ Edit Player's Current Season Stats [2]");
+        System.out.println(" ~ Edit Player's Past Seasons Stats [3]");
+        System.out.println(" ~ Add a Season to a Player's Career [4]");
         System.out.println(" ~ Edit a Player's Team [5]");
         System.out.println(" ~ Edit a Player's Number [6]");
+        System.out.println(" ~ Edit a Player's Name [7]");
+        System.out.println(" ~ Edit a Player's Birthday [8]");
         BufferGenerator.printBufferForScreenWidth();
     }
 
@@ -167,23 +169,31 @@ public class NHLStatEditor {
                 break;
 
             case 2:
-                playerEditor.editPlayerName();
+                playerEditor.editPlayerCurrentSeasonStats();
                 break;
 
             case 3:
-                playerEditor.editPlayerSeasonStats();
+                playerEditor.editPlayerPastSeasonStats();
                 break;
 
             case 4:
-                playerEditor.addPlayerSeasons();
+                playerEditor.addPlayerSeason();
                 break;
 
             case 5:
                 playerEditor.editPlayerTeam();
                 break;
 
-            default:
+            case 6:
                 playerEditor.editPlayerNumber();
+                break;
+
+            case 7:
+                playerEditor.editPlayerName();
+                break;
+
+            default:
+                playerEditor.editPlayerBirthday();
                 break;
         }
     }

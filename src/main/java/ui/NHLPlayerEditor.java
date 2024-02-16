@@ -177,10 +177,28 @@ public class NHLPlayerEditor {
     /**
      * Updates the current season stats for a player supplied as input.
      */
-    protected void editPlayerSeasonStats() {
+    protected void editPlayerCurrentSeasonStats() {
         String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
         if (players.checkPlayerExists(playerName)) {
-            String season = NHLInputReader.getSeasonInput(" * Enter Season >> ");
+            String season = "2023-2024";
+            if (players.checkPlayerIsSkater(playerName)) {
+                editSkaterSeasonStats(playerName, season);
+            } else {
+                editGoalieSeasonStats(playerName);
+            }
+            InputReader.readBuffer();
+        } else {
+            System.out.println(" ! The Player Does not Exist !");
+        }
+    }
+
+    /**
+     * Updates the current season stats for a player supplied as input.
+     */
+    protected void editPlayerPastSeasonStats() {
+        String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
+        if (players.checkPlayerExists(playerName)) {
+            String season = NHLInputReader.getSeasonInput(" * Enter the Season >> ");
             if (players.checkPlayerIsSkater(playerName)) {
                 editSkaterSeasonStats(playerName, season);
             } else {
@@ -219,20 +237,16 @@ public class NHLPlayerEditor {
     }
 
     /**
-     * Adds one or more historical seasons' stats for a player supplied as input.
+     * Adds a season's stats for a player.
      */
-    protected void addPlayerSeasons() {
+    protected void addPlayerSeason() {
         String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
+        String season = NHLInputReader.getSeasonInput(" * Enter Season >> ");
         if (players.checkPlayerExists(playerName)) {
-            int num = InputReader.getIntegerInput(" * Enter Number of Seasons to Add >> ");
             if (players.checkPlayerIsSkater(playerName)) {
-                for (int i = 0; i < num; i++) {
-                    addSkaterSeason(playerName);
-                }
+                addSkaterSeason(playerName, season);
             }  else {
-                for (int i = 0; i < num; i++) {
-                    addGoalieSeason(playerName);
-                }
+                addGoalieSeason(playerName, season);
             }
         } else {
             System.out.println(" ! The Player Does not Exist !");
@@ -240,10 +254,12 @@ public class NHLPlayerEditor {
     }
 
     /**
-     * Adds one or more historical seasons' stats for a player supplied as input.
+     * Adds a season's stats for a skater supplied as input.
+     * 
+     * @param playerName    The name of the skater whose stats are being updated.
+     * @param season        The season of which the stats are being added.
      */
-    protected void addSkaterSeason(String playerName) {
-        String season = NHLInputReader.getSeasonInput(playerName);
+    protected void addSkaterSeason(String playerName, String season) {
         int gamesPlayed = InputReader.getIntegerInput(" * Games Played >> ");
         int goals = InputReader.getIntegerInput(" * Goals >> ");
         int assists = InputReader.getIntegerInput(" * Assists >> ");
@@ -252,10 +268,12 @@ public class NHLPlayerEditor {
     }
 
     /**
-     * Adds one or more historical seasons' stats for a player supplied as input.
+     * Adds a season's stats for a goalie supplied as input.
+     * 
+     * @param playerName    The name of the goalie whose stats are being updated.
+     * @param season        The season of which the stats are being added.
      */
-    protected void addGoalieSeason(String playerName) {
-        String season = NHLInputReader.getSeasonInput(playerName);
+    protected void addGoalieSeason(String playerName, String season) {
         int wins = InputReader.getIntegerInput(" * Wins >> ");
         int loses = InputReader.getIntegerInput(" * Loses >> ");
         int overtimeLoses = InputReader.getIntegerInput(" * Overtime Loses >> ");
@@ -265,20 +283,20 @@ public class NHLPlayerEditor {
     }
 
     /**
-     * Updates the name for a player supplied as input.
+     * Updates the team of a player.
      */
-    protected void editPlayerName() {
-        String currentName = InputReader.getLineInput(" * Enter Current Full Player Name >> ");
-        if (players.checkPlayerExists(currentName)) {
-            String newName = InputReader.getLineInput(" * Enter New Name >> ");
-            players.updateName(currentName, newName);
+    protected void editPlayerTeam() {
+        String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
+        if (players.checkPlayerExists(playerName)) {
+            String team = InputReader.getLineInput(" * Enter New Team >> ");
+            players.updateTeam(playerName, team);
         } else {
             System.out.println(" ! The Player Does not Exist !");
         }
     }
 
     /**
-     * Updates the jersey number for a player supplied as input.
+     * Updates the jersey number of a player.
      */
     protected void editPlayerNumber() {
         String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
@@ -291,13 +309,26 @@ public class NHLPlayerEditor {
     }
 
     /**
-     * Updates the team for a player supplied as input.
+     * Updates the name of a player.
      */
-    protected void editPlayerTeam() {
+    protected void editPlayerName() {
+        String currentName = InputReader.getLineInput(" * Enter Current Full Player Name >> ");
+        if (players.checkPlayerExists(currentName)) {
+            String newName = InputReader.getLineInput(" * Enter New Name >> ");
+            players.updateName(currentName, newName);
+        } else {
+            System.out.println(" ! The Player Does not Exist !");
+        }
+    }
+
+    /**
+     * Updates the birthday of a player.
+     */
+    protected void editPlayerBirthday() {
         String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
         if (players.checkPlayerExists(playerName)) {
-            String team = InputReader.getLineInput(" * Enter New Team >> ");
-            players.updateTeam(playerName, team);
+            String birthday = NHLInputReader.getBirthdayInput(" * Enter New Birthday >> ");
+            players.updateBirthday(playerName, birthday);
         } else {
             System.out.println(" ! The Player Does not Exist !");
         }

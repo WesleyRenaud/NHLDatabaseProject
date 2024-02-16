@@ -24,7 +24,13 @@
 
 ## Progress Log ##
 
- ~Feb 13
+~ Feb 13
  * Added string formatting to allow teams to appear nicer in the standings
  * Updated data/records for all teams
  * Fixed error where teams' conferences were not being properly checked
+~ Feb 14
+ * Changed workings of printing player's stats to allow for string formatting
+~ Feb 15
+ * Worked on formatting of players' information for individual player lookup,
+   and looking up teams' skaters' stats
+ * Fixed error with adding goalies, how it was registering them as skaters
