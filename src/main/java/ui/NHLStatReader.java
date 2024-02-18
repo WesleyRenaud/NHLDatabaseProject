@@ -5,8 +5,6 @@
 package ui;
 
 
-import java.io.BufferedReader;
-
 import input.InputReader;
 import input.NHLInputReader;
 import utilities.BufferGenerator;
@@ -48,7 +46,7 @@ public class NHLStatReader {
         System.out.println(" ~ See League Standings By Wins [5]");
         System.out.println(" ~ See League Standings By Losses [6]");
         System.out.println(" ~ See League Standings By Overtime Loses [7]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -128,7 +126,7 @@ public class NHLStatReader {
         System.out.println(" ~ See Stats Between Two Seasons [4]");
         System.out.println(" ~ See Stats Starting From One Season [5]");
         System.out.println(" ~ See Stats Up Until One Season [6]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -203,7 +201,7 @@ public class NHLStatReader {
         System.out.println(" ~ Win Leaders [5]");
         System.out.println(" ~ Save Percentage Leaders [6]");
         System.out.println(" ~ Goals Against Average Leaders [7]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -272,7 +270,7 @@ public class NHLStatReader {
         System.out.println(" ~ Win Leaders [5]");
         System.out.println(" ~ Save Percentage Leaders [6]");
         System.out.println(" ~ Goals Against Average Leaders [7]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**

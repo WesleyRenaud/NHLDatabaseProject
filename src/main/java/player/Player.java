@@ -153,7 +153,6 @@ public abstract class Player implements Serializable {
     }
 
     public boolean isSkater() {
-        System.out.println(name + "'s Class = " + getClass());
         if (getClass().equals(Skater.class)) {
             return true;
         }

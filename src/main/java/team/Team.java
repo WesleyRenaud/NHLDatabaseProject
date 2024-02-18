@@ -179,7 +179,7 @@ public class Team implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("%-23s| GP: %-5d| Points: %-5d| Record: %-10s|PP%%: %-7.3f", getFullName(), getGamesPlayed(), 
+        return String.format("%-23s| GP: %-5d| Points: %-5d| Record: %-10s| PP%%: %-7.3f", getFullName(), getGamesPlayed(), 
                             getPoints(), getRecord(), getPointsPercentage());
     }
 }

@@ -79,6 +79,7 @@ public class GoalieSeason extends Season {
      * Creates a String generation of the goalie season.
      */
     public String printWithoutYear() {
-        return "Wins: " + wins + "\t| Loses: " + loses + "\t| Overtime Loses: " + overtimeLoses + "\t Sv%: " + savePercentage + "\t| GAA: " + goalsAgainstAverage + "\n";
+        return String.format("Games Played: %-7d| Wins: %-7d| Loses: %-7d| Overtime Loses: %-7d| SVS: %-7.3f| GAA: %-7.2f",
+            getGamesPlayed(), wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage); 
     }
 }

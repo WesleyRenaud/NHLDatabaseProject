@@ -28,7 +28,7 @@ public class NHLStatEditor {
         System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Edit Teams [1]");
         System.out.println(" ~ Edit Players [2]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -82,7 +82,7 @@ public class NHLStatEditor {
         System.out.println(" ~ Edit a Team's Conference [4]");
         System.out.println(" ~ Edit a Team's City [5]");
         System.out.println(" ~ Edit a Team's Name [6]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -149,7 +149,7 @@ public class NHLStatEditor {
         System.out.println(" ~ Edit a Player's Number [6]");
         System.out.println(" ~ Edit a Player's Name [7]");
         System.out.println(" ~ Edit a Player's Birthday [8]");
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -178,6 +178,7 @@ public class NHLStatEditor {
 
             case 4:
                 playerEditor.addPlayerSeason();
+                InputReader.readBuffer();
                 break;
 
             case 5:
@@ -186,6 +187,7 @@ public class NHLStatEditor {
 
             case 6:
                 playerEditor.editPlayerNumber();
+                InputReader.readBuffer();
                 break;
 
             case 7:

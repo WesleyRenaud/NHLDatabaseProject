@@ -228,6 +228,8 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortByPoints(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -243,6 +245,8 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortByGoals(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -258,6 +262,8 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortByAssists(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -273,7 +279,9 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getSkatersOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortByPlusMinus(teamPlayers);
-        printPlayersCurrentSeasonStats(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
+            printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
         }
@@ -288,6 +296,8 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortByWins(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(125);
             printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -303,6 +313,8 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortBySavePercentage(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(125);
             printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -318,6 +330,8 @@ public class Players implements Serializable {
         List<Player> teamPlayers = getGoaliesOnTeam(team);
         if (teamPlayers.size() > 0) {
             sortByGoalsAgainstAverage(teamPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(125);
             printPlayersCurrentSeasonStats(teamPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -331,6 +345,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentSkaters();
         if (currentPlayers.size() > 0) {
             sortByPoints(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -344,6 +360,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentSkaters();
         if (currentPlayers.size() > 0) {
             sortByGoals(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -357,6 +375,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentSkaters();
         if (currentPlayers.size() > 0) {
             sortByAssists(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -370,6 +390,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentSkaters();
         if (currentPlayers.size() > 0) {
             sortByPlusMinus(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(115);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -383,6 +405,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentGoalies();
         if (currentPlayers.size() > 0) {
             sortByWins(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(125);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -396,6 +420,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentGoalies();
         if (currentPlayers.size() > 0) {
             sortBySavePercentage(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(125);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -409,6 +435,8 @@ public class Players implements Serializable {
         List<Player> currentPlayers = getCurrentGoalies();
         if (currentPlayers.size() > 0) {
             sortByGoalsAgainstAverage(currentPlayers);
+            System.out.println();
+            BufferGenerator.printBuffer(125);
             printPlayersCurrentSeasonStats(currentPlayers);
         } else {
             System.out.println("\n ! No Players Found !");
@@ -421,8 +449,6 @@ public class Players implements Serializable {
      * @param list  The list of players we are printing.
      */
     private void printPlayersCurrentSeasonStats(List<Player> list) {
-        System.out.println();
-        BufferGenerator.printBuffer(115);
         for (int i = 0; i < list.size(); i++) {
             list.get(i).printCurrentSeasonStats_WithPlayerName();
         }
@@ -454,10 +480,7 @@ public class Players implements Serializable {
      */
     private List<Player> getGoaliesOnTeam(String team) {
         List<Player> teamGoalies = new ArrayList<>();
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getName().equals("John Gibson")) {
-                System.out.println(!players.get(i).isRetired() + " , " + players.get(i).isSkater() + " , " + players.get(i).getTeam().equals(team));
-            }
+        for (int i = 0; i < players.size(); i++) {        
             if (!players.get(i).isRetired() && players.get(i).isGoalie() && players.get(i).getTeam().equals(team)) {
                 teamGoalies.add(players.get(i));
             }

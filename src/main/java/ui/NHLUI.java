@@ -67,7 +67,7 @@ public class NHLUI {
         System.out.println("\n\t\t\t\t\t\t\t\t\tWelcome to NHL Stat Analyzer -> Explore the Menu Below");
         BufferGenerator.printBufferForScreenWidth();
         printMenuOptions();
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**
@@ -89,7 +89,7 @@ public class NHLUI {
     private static void reprintMenu() {
         BufferGenerator.printBufferForScreenWidth();
         printMenuOptions();
-        BufferGenerator.printBufferForScreenWidth();
+        System.out.println();
     }
 
     /**

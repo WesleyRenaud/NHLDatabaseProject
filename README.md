@@ -34,3 +34,6 @@
  * Worked on formatting of players' information for individual player lookup,
    and looking up teams' skaters' stats
  * Fixed error with adding goalies, how it was registering them as skaters
+~ Feb 17
+ * Added Anaheim skater stats, Arizona skater stats, and Boston skater stats
+   up to Jakub Lauko
