@@ -38,5 +38,7 @@
  * Added Anaheim skater stats, Arizona skater stats, Boston skater stats, and
    Buffalo skater stats up to Tage Thompson
 ~ Feb 19
- * Finish Buffalo skater stats, added Calgary skater stats up to Rasmus
-   Andersson 
+ * Finished Buffalo skater stats, added Calgary skater stats up to Rasmus
+   Andersson
+~ Feb 20
+ * Finished Calgary skater stats, and Carolina Skater Stats
