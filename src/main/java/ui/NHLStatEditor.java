@@ -196,6 +196,7 @@ public class NHLStatEditor {
 
             default:
                 playerEditor.editPlayerBirthday();
+                InputReader.readBuffer();
                 break;
         }
     }

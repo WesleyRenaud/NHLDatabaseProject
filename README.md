@@ -42,6 +42,9 @@
    Andersson
 ~ Feb 20
  * Finished Calgary skater stats, and Carolina Skater Stats
-~ Fwb 21
+~ Feb 21
  * Added Chicago skater stats, Colorado skater stats, and Columbus skater
    stats up to Erik Gudbranson
+~ Feb 22
+ * Finished Columbus skater stats, added Dallas skater stats, Detroit skater
+   stats, Edmonton skater stats, and Florida skater stats up to Aaron Ekblad
