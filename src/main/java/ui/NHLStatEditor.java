@@ -168,6 +168,9 @@ public class NHLStatEditor {
                 InputReader.readBuffer();
                 break;
 
+            //case 2:
+                //playerEditor.deletePlayer();
+
             case 2:
                 playerEditor.editPlayerCurrentSeasonStats();
                 break;

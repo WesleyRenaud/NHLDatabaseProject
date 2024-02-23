@@ -48,3 +48,6 @@
 ~ Feb 22
  * Finished Columbus skater stats, added Dallas skater stats, Detroit skater
    stats, Edmonton skater stats, and Florida skater stats up to Aaron Ekblad
+~ Feb 23
+ * Finished Florida skater stats, added Los Angeles skater stats up to Alex
+   Laferriere

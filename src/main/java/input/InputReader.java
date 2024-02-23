@@ -63,6 +63,7 @@ public class InputReader {
         System.out.print(prompt);
         String in = input.next();
         while (!InputAnalyzer.isIntegerInput(in)) {
+            InputReader.readBuffer();
             System.out.print("Error - input must be an integer.\nEnter new input >> ");
             in = input.next();
             if (InputAnalyzer.checkSpecificInput("Q", in) || InputAnalyzer.checkSpecificInput("q", in)) {

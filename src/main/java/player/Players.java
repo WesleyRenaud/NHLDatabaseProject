@@ -140,7 +140,7 @@ public class Players implements Serializable {
      */
     public void updateName(String currentName, String newName) {
         int index = getPlayerIndex(currentName);
-        players.get(index).setName(currentName);
+        players.get(index).setName(newName);
     }
 
     /**
