@@ -79,6 +79,15 @@ public class Players implements Serializable {
         players.get(index).addGoalieSeason(season, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage);
     }
 
+    /**
+     * Removes a given player from the database.
+     * 
+     * @param playerName    The name of the player to remove.
+     */
+    public void removePlayer(String playerName) {
+        int index = getPlayerIndex(playerName);
+        players.remove(players.get(index));
+    }
 
     /**
      * Updates the current season's stats for a given skater.

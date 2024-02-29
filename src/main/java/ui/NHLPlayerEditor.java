@@ -172,7 +172,18 @@ public class NHLPlayerEditor {
             System.out.println();
         }
     }
-    
+
+    /**
+     * Removes a given player from the database.
+     */
+    protected void removePlayer() {
+        String playerName = InputReader.getLineInput(" * Enter Full Player Name >> ");
+        if (players.checkPlayerExists(playerName)) {
+            players.removePlayer(playerName);
+        } else {
+            System.out.println(" ! The Player Does not Exist !");
+        }   
+    }
 
     /**
      * Updates the current season stats for a player supplied as input.

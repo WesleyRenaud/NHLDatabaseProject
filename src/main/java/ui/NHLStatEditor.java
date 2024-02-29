@@ -130,7 +130,7 @@ public class NHLStatEditor {
         int choice = -1;
         while (choice != 0) {
             printPlayersMenu();
-            choice = InputReader.getValidInput_AcceptBack(promptMessage, 8);
+            choice = InputReader.getValidInput_AcceptBack(promptMessage, 9);
             completePlayerTask(choice);
         }
     }
@@ -142,13 +142,14 @@ public class NHLStatEditor {
         BufferGenerator.printBufferForScreenWidth();
         System.out.println(" ~ Save and Exit [0]");
         System.out.println(" ~ Add a Player [1]");
-        System.out.println(" ~ Edit Player's Current Season Stats [2]");
-        System.out.println(" ~ Edit Player's Past Seasons Stats [3]");
-        System.out.println(" ~ Add a Season to a Player's Career [4]");
-        System.out.println(" ~ Edit a Player's Team [5]");
-        System.out.println(" ~ Edit a Player's Number [6]");
-        System.out.println(" ~ Edit a Player's Name [7]");
-        System.out.println(" ~ Edit a Player's Birthday [8]");
+        System.out.println(" ~ Remove a Player [2]");
+        System.out.println(" ~ Edit Player's Current Season Stats [3]");
+        System.out.println(" ~ Edit Player's Past Seasons Stats [4]");
+        System.out.println(" ~ Add a Season to a Player's Career [5]");
+        System.out.println(" ~ Edit a Player's Team [6]");
+        System.out.println(" ~ Edit a Player's Number [7]");
+        System.out.println(" ~ Edit a Player's Name [8]");
+        System.out.println(" ~ Edit a Player's Birthday [9]");
         System.out.println();
     }
 
@@ -168,32 +169,33 @@ public class NHLStatEditor {
                 InputReader.readBuffer();
                 break;
 
-            //case 2:
-                //playerEditor.deletePlayer();
-
             case 2:
-                playerEditor.editPlayerCurrentSeasonStats();
+                playerEditor.removePlayer();
                 break;
 
             case 3:
-                playerEditor.editPlayerPastSeasonStats();
+                playerEditor.editPlayerCurrentSeasonStats();
                 break;
 
             case 4:
+                playerEditor.editPlayerPastSeasonStats();
+                break;
+
+            case 5:
                 playerEditor.addPlayerSeason();
                 InputReader.readBuffer();
                 break;
 
-            case 5:
+            case 6:
                 playerEditor.editPlayerTeam();
                 break;
 
-            case 6:
+            case 7:
                 playerEditor.editPlayerNumber();
                 InputReader.readBuffer();
                 break;
 
-            case 7:
+            case 8:
                 playerEditor.editPlayerName();
                 break;
 
