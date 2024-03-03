@@ -54,3 +54,6 @@
 ~ Feb 28
  * Finished Los Angeles skater stats, added Minnesota through Philadelphia
    skater stats, and added Pittsburgh skater stats up to Erik Karlsson
+~ Mar 3
+ * Finished Pittsburgh skater stats, San Jose skater stats, Seattle skater
+   stats, and St. Louis skater stats up to Kasperi Kapanen
