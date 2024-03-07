@@ -57,3 +57,5 @@
 ~ Mar 3
  * Finished Pittsburgh skater stats, San Jose skater stats, Seattle skater
    stats, and St. Louis skater stats up to Kasperi Kapanen
+~ Mar 7
+ * Finished adding skater stats, and added up to Edmonton goalie stats
