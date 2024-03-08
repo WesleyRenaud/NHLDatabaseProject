@@ -59,3 +59,6 @@
    stats, and St. Louis skater stats up to Kasperi Kapanen
 ~ Mar 7
  * Finished adding skater stats, and added up to Edmonton goalie stats
+~ Mar 8
+ * Finished adding goaltender stats; the next step is to make all current
+   features work
