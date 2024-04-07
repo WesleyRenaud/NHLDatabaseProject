@@ -1,19 +1,24 @@
 ## Overview ##
 
- * This project is a database of NHL data, specifically regarding players' and teams' stats of history.
- * The goal of the program is to provide availability to extra forms of data, and present data in ways
-   in which it is currently difficult to find (i.e. new ways to sort data, find leaders in categories,
+ * This project is a database of NHL data, specifically regarding players' and 
+   teams' stats of history.
+ * The goal of the program is to provide availability to extra forms of data, and 
+   present data in ways
+   in which it is currently difficult to find (i.e. new ways to sort data, find 
+   leaders in categories,
    etc.)
  * The project is a work in progress with most functionality still to be added
 
 ## Current Focus ##
 
-* The current focus on the project is about uploading players' data to test out functionality regarding
+* The current focus on the project is about uploading players' data to test out 
+  functionality regarding
   the team leaders and league leaders components of the program.
 
 ## Current Functionality ##
 
- * Team stats leaders (stats are only recorded for certain teams, and are not necessarily updated, some
+ * Team stats leaders (stats are only recorded for certain teams, and are not 
+   necessarily updated, some
    mistakes within the stats still exist)
 
 ## Resources ##
@@ -62,3 +67,10 @@
 ~ Mar 8
  * Finished adding goaltender stats; the next step is to make all current
    features work
+
+Version 0.1:
+~ Apr 7
+ * Got the standings working for current and past seasons
+ * Stats are added back to the 2021-2022 season, but the wildcard/divisional/
+   conference standings are not viewable before 2021-2022 due to different
+   divisional set ups

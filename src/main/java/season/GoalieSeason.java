@@ -5,7 +5,8 @@
 package season;
 
 
-public class GoalieSeason extends Season {
+public class GoalieSeason extends Season
+{
     private static final long serialVersionUID = -2958302393599929753L;
     private int wins;
     private int loses;
@@ -13,6 +14,7 @@ public class GoalieSeason extends Season {
     private double savePercentage;
     private double goalsAgainstAverage;
 
+    
     /**
      * Makes a goalie season with given stats.
      * 
@@ -23,9 +25,11 @@ public class GoalieSeason extends Season {
      * @param playerSavePercentage      The save percentage during the season.
      * @param playerGoalsAgainstAverage The goals against average during the season.
      */
-    public GoalieSeason(String year, int playerWins, int playerLoses, int playerOvertimeLoses, double playerSavePercentage, double playerGoalsAgainstAverage) {
-        setYear(year);
-        setGamesPlayed(playerWins + playerLoses + playerOvertimeLoses);
+    public GoalieSeason( String year, int playerWins, int playerLoses, int playerOvertimeLoses, double playerSavePercentage, 
+                                                                                                double playerGoalsAgainstAverage )
+    {
+        setYear( year );
+        setGamesPlayed( playerWins + playerLoses + playerOvertimeLoses );
         wins = playerWins;
         loses = playerLoses;
         overtimeLoses = playerOvertimeLoses;
@@ -33,53 +37,75 @@ public class GoalieSeason extends Season {
         goalsAgainstAverage = playerGoalsAgainstAverage;
     }
 
-    protected void setWins(int newWins) {
+    protected void setWins( int newWins )
+    {
         wins = newWins;
     }
 
-    protected void setLoses(int newLoses) {
+    protected void setLoses( int newLoses )
+    {
         loses = newLoses;
     }
 
-    protected void setOvertimeLoses(int newOvertimeLoses) {
+    protected void setOvertimeLoses( int newOvertimeLoses )
+    {
         overtimeLoses = newOvertimeLoses;
     }
 
-    protected void setSavePercentage(double newSavePercentage) {
+    protected void setSavePercentage( double newSavePercentage )
+    {
         savePercentage = newSavePercentage;
     }
 
-    protected void setGoalsAgainstAverage(double newGoalsAgainstAverage) {
+    protected void setGoalsAgainstAverage( double newGoalsAgainstAverage )
+    {
         goalsAgainstAverage = newGoalsAgainstAverage;
     }
 
 
-    public int getWins() {
+    public int getWins()
+    {
         return wins;
     }
 
-    public int getLoses() {
+    public int getLoses()
+    {
         return loses;
     }
 
-    public int getOvertimeLoses() {
+    public int getOvertimeLoses()
+    {
         return overtimeLoses;
     }
 
-    public double getSavePercentage() {
+    public double getSavePercentage()
+    {
         return savePercentage;
     }
 
-    public double getGoalsAgainstAverage() {
+    public double getGoalsAgainstAverage()
+    {
         return goalsAgainstAverage;
     }
 
+
+    /**
+     * Creates a String generation of the goalie season.
+     */
+    @Override
+    public String toString()
+    {
+        return String.format( " %s\\t: Games Played: %-7d| Wins: %-7d| Loses: %-7d| Overtime Loses: %-7d| SVS: %-7.3f| GAA: %-7.2f",
+                                        getYear(), getGamesPlayed(), wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage ); 
+    }
     
     /**
      * Creates a String generation of the goalie season.
      */
-    public String printWithoutYear() {
-        return String.format("Games Played: %-7d| Wins: %-7d| Loses: %-7d| Overtime Loses: %-7d| SVS: %-7.3f| GAA: %-7.2f",
-            getGamesPlayed(), wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage); 
+    @Override
+    public String printWithoutYear()
+    {
+        return String.format( "Games Played: %-7d| Wins: %-7d| Loses: %-7d| Overtime Loses: %-7d| SVS: %-7.3f| GAA: %-7.2f",
+                                        getGamesPlayed(), wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage ); 
     }
 }

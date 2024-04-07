@@ -4,30 +4,35 @@
 
 package ui;
 
+
 import input.InputReader;
 import utilities.BufferGenerator;
-import team.League;
+import team.Seasons;
 import player.Players;
 
 
-public class NHLStatEditor {
+public class NHLStatEditor
+{
     private NHLTeamEditor teamEditor = new NHLTeamEditor();
     private NHLPlayerEditor playerEditor = new NHLPlayerEditor();
     private static String promptMessage = " * Enter an option from the menu or Q to quit >> ";
 
-    protected void setData(League league, Players players) {
-        teamEditor.setLeague(league);
-        playerEditor.setPlayers(players);
+
+    protected void setData( Seasons seasons, Players players )
+    {
+        teamEditor.setSeasons( seasons );
+        playerEditor.setPlayers( players );
     }
 
     /**
      * Displays the menu for which part of the database we are to edit.
      */
-    public void printMenu() {
+    public void printMenu()
+    {
         BufferGenerator.printBufferForScreenWidth();
-        System.out.println(" ~ Save and Exit [0]");
-        System.out.println(" ~ Edit Teams [1]");
-        System.out.println(" ~ Edit Players [2]");
+        System.out.println( " ~ Save and Exit [0]" );
+        System.out.println( " ~ Edit Teams [1]" );
+        System.out.println( " ~ Edit Players [2]" );
         System.out.println();
     }
 
@@ -36,8 +41,9 @@ public class NHLStatEditor {
      * 
      * @return  The user input corresponding to the part of the database they want to enter.
      */
-    protected int getUserChoice() {
-        return InputReader.getValidInput_AcceptBack(promptMessage, 2);
+    protected int getUserChoice()
+    {
+        return InputReader.getValidInput_AcceptBack( promptMessage, 2 );
     }
 
     /**
@@ -45,7 +51,8 @@ public class NHLStatEditor {
      * 
      * @param input The user input given; 1 for teams and 2 for players.
      */
-    protected void enterSubDatabase(int input) {
+    protected void enterSubDatabase( int input )
+    {
         switch (input) {
             case 0:
                 break;
@@ -62,26 +69,33 @@ public class NHLStatEditor {
 
 
     /**
-     * Adds and edits data for the teams in the database.
+     * Edits data for the teams in the database.
      */
-    private void manageTeams() {
-        printTeamsMenu();
-        int input = InputReader.getValidInput_AcceptBack(promptMessage, 6);
-        completeTeamTask(input);
+    private void manageTeams()
+    {
+        int choice = -1;
+        while (choice != 0)
+        {
+            printTeamsMenu();
+            choice = InputReader.getValidInput_AcceptBack( promptMessage, 6 );
+            completeTeamTask( choice );
+        }
     }
     
     /**
-     * Prints a menu displaying all options for adding/editing data concering teams.
+     * Prints a menu displaying all options for adding/editing data concerning teams.
      */
-    private void printTeamsMenu() {
+    private void printTeamsMenu()
+    {
         BufferGenerator.printBufferForScreenWidth();
-        System.out.println(" ~ Save and Exit [0]");
-        System.out.println(" ~ Add a Team [1]");
-        System.out.println(" ~ Edit a Team's Record [2]");
-        System.out.println(" ~ Edit a Team's Division [3]");
-        System.out.println(" ~ Edit a Team's Conference [4]");
-        System.out.println(" ~ Edit a Team's City [5]");
-        System.out.println(" ~ Edit a Team's Name [6]");
+        System.out.println( " ~ Save and Exit [0]" );
+        System.out.println( " ~ Add a Set of Standings [1]" );
+        System.out.println( " ~ Edit a Team's Record [2]" );
+        System.out.println( " ~ Edit a Team's Division [3]" );
+        System.out.println( " ~ Edit a Team's Conference [4]" );
+        System.out.println( " ~ Edit a Team's City [5]" );
+        System.out.println( " ~ Edit a Team's Name [6]" );
+        
         System.out.println();
     }
 
@@ -91,13 +105,15 @@ public class NHLStatEditor {
      * 
      * @param input The option number for the task to be completed.
      */
-    private void completeTeamTask(int input) {
-        switch (input) {
+    private void completeTeamTask( int input )
+    {
+        switch (input) 
+        {
             case 0:
                 break;
 
             case 1:
-                teamEditor.addTeam();
+                teamEditor.addNewStandings();
                 break;
 
             case 2:
@@ -124,32 +140,35 @@ public class NHLStatEditor {
     
 
     /**
-     * Adds and edits data for the players in the database.
+     * Edits data for the players in the database.
      */
-    private void managePlayers() {
+    private void managePlayers()
+    {
         int choice = -1;
-        while (choice != 0) {
+        while (choice != 0)
+        {
             printPlayersMenu();
-            choice = InputReader.getValidInput_AcceptBack(promptMessage, 9);
-            completePlayerTask(choice);
+            choice = InputReader.getValidInput_AcceptBack( promptMessage, 9 );
+            completePlayerTask( choice );
         }
     }
 
     /**
-     * Prints a menu displaying all options for adding/editing data concering players.
+     * Prints a menu displaying all options for adding/editing data concerning players.
      */
-    private void printPlayersMenu() {
+    private void printPlayersMenu()
+    {
         BufferGenerator.printBufferForScreenWidth();
-        System.out.println(" ~ Save and Exit [0]");
-        System.out.println(" ~ Add a Player [1]");
-        System.out.println(" ~ Remove a Player [2]");
-        System.out.println(" ~ Edit Player's Current Season Stats [3]");
-        System.out.println(" ~ Edit Player's Past Seasons Stats [4]");
-        System.out.println(" ~ Add a Season to a Player's Career [5]");
-        System.out.println(" ~ Edit a Player's Team [6]");
-        System.out.println(" ~ Edit a Player's Number [7]");
-        System.out.println(" ~ Edit a Player's Name [8]");
-        System.out.println(" ~ Edit a Player's Birthday [9]");
+        System.out.println( " ~ Save and Exit [0]" );
+        System.out.println( " ~ Add a Player [1]" );
+        System.out.println( " ~ Remove a Player [2]" );
+        System.out.println( " ~ Edit Player's Current Season Stats [3]" );
+        System.out.println( " ~ Edit Player's Past Seasons Stats [4]" );
+        System.out.println( " ~ Add a Season to a Player's Career [5]" );
+        System.out.println( " ~ Edit a Player's Team [6]" );
+        System.out.println( " ~ Edit a Player's Number [7]" );
+        System.out.println( " ~ Edit a Player's Name [8]" );
+        System.out.println( " ~ Edit a Player's Birthday [9]" );
         System.out.println();
     }
 
@@ -159,8 +178,10 @@ public class NHLStatEditor {
      * 
      * @param input The option number for the task to be completed.
      */
-    private void completePlayerTask(int input) {
-        switch (input) {
+    private void completePlayerTask( int input )
+    {
+        switch (input)
+        {
             case 0:
                 break;
 

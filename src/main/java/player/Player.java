@@ -6,19 +6,21 @@
 package player;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import input.InputAnalyzer;
-import utilities.BufferGenerator;
 import utilities.BirthdayHandler;
+import utilities.BufferGenerator;
+import season.GoalieSeason;
 import season.Season;
 import season.SkaterSeason;
-import season.GoalieSeason;
 
 
-public abstract class Player implements Serializable {
+
+public abstract class Player implements Serializable
+{
     private static final long serialVersionUID = 6670502102885840597L;
     private String name;
     private String birthday;
@@ -28,6 +30,7 @@ public abstract class Player implements Serializable {
     private String team;
     private List<Season> seasons;
 
+    
     /**
      * Creates a new skater given their name, birthday, handedness, retired status,
      * number, and team.
@@ -39,7 +42,8 @@ public abstract class Player implements Serializable {
      * @param playerNumber      The player's jersey number.
      * @param playerTeam        The player's team;
      */
-    public Player(String playerName, String playerBirthday, String playerHandedness, boolean playerRetired, int playerNumber, String playerTeam) {
+    public Player( String playerName, String playerBirthday, String playerHandedness, boolean playerRetired, int playerNumber, String playerTeam )
+    {
         name = playerName;
         birthday = playerBirthday;
         handedness = playerHandedness;
@@ -49,45 +53,51 @@ public abstract class Player implements Serializable {
         seasons = new ArrayList<>();
     }
 
-    public void setTeam(String playerTeam) {
+    public void setTeam( String playerTeam )
+    {
         team = playerTeam;
     }
 
-    public void setNumber(int playerNumber) {
+    public void setNumber( int playerNumber )
+    {
         number = playerNumber;
     }
 
-    public void setRetired(boolean playerRetired) {
+    public void setRetired( boolean playerRetired )
+    {
         retired = playerRetired;
     }
 
-    protected void setName(String newName) {
+    protected void setName( String newName )
+    {
         name = newName;
     }
 
-    protected void setBirthday(String newBirthday) {
+    protected void setBirthday( String newBirthday )
+    {
         birthday = newBirthday;
     }    
 
     /**
-     * Updates the skater stats for the current season.
+     * Edits the skater stats a specific season.
      * 
-     * @param season        The season of which the stats are being updated.
+     * @param season        The season of which the stats are being edited.
      * @param gamesPlayed   The number of games played during the season.
      * @param goals         The number of goals scored during the season.
      * @param assists       The number of assists scored during the season.
      * @param plusMinus     The plus-minus during the season.
      */
-    public void updateSkaterSeason(String season, int gamesPlayed, int goals, int assists, int plusMinus) {
+    public void editSkaterSeason( String season, int gamesPlayed, int goals, int assists, int plusMinus )
+    {
         for (int i = 0; i < seasons.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(season, seasons.get(i).getYear())) {
-                seasons.set(i, new SkaterSeason(season, gamesPlayed, goals, assists, plusMinus));
+            if (InputAnalyzer.checkSpecificInput( season, seasons.get(i).getYear() )) {
+                seasons.set( i, new SkaterSeason( season, gamesPlayed, goals, assists, plusMinus ) );
             }
         }
     }
 
     /**
-     * Appends a skater season to the career.
+     * Appends a skater season to their career.
      * 
      * @param season        The year which the stats occurred.
      * @param gamesPlayed   The number of games played during the season.
@@ -95,120 +105,137 @@ public abstract class Player implements Serializable {
      * @param assists       The number of assists scored during the season.
      * @param plusMinus     The plus-minus during the season.
      */
-    public void addSkaterSeason(String season, int gamesPlayed, int goals, int assists, int plusMinus) {
-        seasons.add(new SkaterSeason(season, gamesPlayed, goals, assists, plusMinus));
+    public void addSkaterSeason( String season, int gamesPlayed, int goals, int assists, int plusMinus )
+    {
+        seasons.add( new SkaterSeason( season, gamesPlayed, goals, assists, plusMinus ) );
     }
 
     /**
-     * Updates the goalie stats for the current season.
+     * Edits the goalie stats for a specific season.
      * 
-     * @param year                  The year which the stats occurred.
+     * @param season                The season of which the stats are being edited.
      * @param wins                  The number of wins during the season.
      * @param loses                 The number of loses during the season.
      * @param overtimeLoses         The number of overtime loses during the season.
      * @param savePercentage        The save percentage during the season.
      * @param goalsAgainstAverage   The goals against average during the season.
      */
-    public void updateGoalieSeason(int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
-        if (seasons.size() > 0) {
-            seasons.set(seasons.size()-1, new GoalieSeason("2023-2024", wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage));
-        } else {
-            seasons.add(new GoalieSeason("2023-2024", wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage));
+    public void editGoalieSeason( String season, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage )
+    {
+        for (int i = 0; i < seasons.size(); i++) {
+            if (InputAnalyzer.checkSpecificInput( season, seasons.get(i).getYear() )) {
+                seasons.set( i, new GoalieSeason( season, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage ) );
+            }
         }
     }
 
     /**
-     * Appends a goalie season the the career.
+     * Appends a goalie season to their career.
      * 
-     * @param year                  The year which the stats occurred.
+     * @param season                The season which the stats occurred.
      * @param wins                  The number of wins during the season.
      * @param loses                 The number of loses during the season.
      * @param overtimeLoses         The number of overtime loses during the season.
      * @param savePercentage        The save percentage during the season.
      * @param goalsAgainstAverage   The goals against average during the season.
      */
-    public void addGoalieSeason(String year, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage) {
-        seasons.add(new GoalieSeason(year, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage));
+    public void addGoalieSeason( String season, int wins, int loses, int overtimeLoses, double savePercentage, double goalsAgainstAverage )
+    {
+        seasons.add( new GoalieSeason( season, wins, loses, overtimeLoses, savePercentage, goalsAgainstAverage ) );
     }
     
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public boolean isRetired() {
+    public boolean isRetired()
+    {
         return retired;
     }
 
-    public int getNumber() {
+    public int getNumber()
+    {
         return number;
     }
 
-    public String getTeam() {
+    public String getTeam()
+    {
         return team;
     }
 
-    public int getAge() {
-        return BirthdayHandler.getAge(birthday);
+    public int getAge()
+    {
+        return BirthdayHandler.getAge( birthday );
     }
 
-    public boolean isSkater() {
-        if (getClass().equals(Skater.class)) {
+    public boolean isSkater()
+    {
+        if (getClass().equals( Skater.class )) {
             return true;
         }
         return false;
     }
 
-    public boolean isGoalie() {
+    public boolean isGoalie()
+    {
         if (!isSkater()) {
             return true;
         }
         return false;
     }
 
-    public int getCurrentSeasonPoints() {
+    public int getCurrentSeasonPoints()
+    {
         if (!isRetired() && isSkater()) {
             return seasons.get(seasons.size() - 1).getPoints();
         }
         return -1;
     }
 
-    public int getCurrentSeasonGoals() {
+    public int getCurrentSeasonGoals()
+    {
         if (!isRetired() && isSkater()) {
             return seasons.get(seasons.size() - 1).getGoals();
         }
         return -1;
     }
 
-    public int getCurrentSeasonAssists() {
+    public int getCurrentSeasonAssists()
+    {
         if (!isRetired() && isSkater()) {
             return seasons.get(seasons.size() - 1).getAssists();
         }
         return -1;
     }
 
-    public int getCurrentSeasonPlusMinus() {
+    public int getCurrentSeasonPlusMinus()
+    {
         if (!isRetired() && isSkater()) {
             return seasons.get(seasons.size() - 1).getPlusMinus();
         }
         return -1;
     }
 
-    public int getCurrentSeasonWins() {
+    public int getCurrentSeasonWins()
+    {
         if (!isRetired() && isGoalie()) {
             return seasons.get(seasons.size() - 1).getWins();
         }
         return -1;
     }
 
-    public double getCurrentSeasonSavePercentage() {
+    public double getCurrentSeasonSavePercentage()
+    {
         if (!isRetired() && isGoalie()) {
             return seasons.get(seasons.size() - 1).getSavePercentage();
         }
         return -1;
     }
 
-    public double getCurrentSeasonGoalsAgainstAverage() {
+    public double getCurrentSeasonGoalsAgainstAverage()
+    {
         if (!isRetired() && isGoalie()) {
             return seasons.get(seasons.size() - 1).getGoalsAgainstAverage();
         }
@@ -219,11 +246,12 @@ public abstract class Player implements Serializable {
     /**
      * Prints the player's career stats.
      */
-    public void printCareerStats() {
-        System.out.println(this);
-        BufferGenerator.printBuffer(112);
+    public void printCareerStats()
+    {
+        System.out.println( this );
+        BufferGenerator.printBuffer( 112 );
         for (int i = 0; i < seasons.size(); i++) {
-            System.out.println(seasons.get(i));
+            System.out.println( seasons.get(i) );
         }
     }
 
@@ -232,13 +260,14 @@ public abstract class Player implements Serializable {
      * 
      * @param season    The season whose stats we are printing.
      */
-    public void printStatsFromSeason(String season) {
-        if (getSeasonsIndex(season) == -1) {
-            System.out.println(" ! " + name + " did not play during the " + season + " season !");
+    public void printStatsFromSeason( String season )
+    {
+        if (getSeasonsIndex( season ) == -1) {
+            System.out.println( " ! " + name + " did not play during the " + season + " season !" );
         } else {
-            System.out.println(this);
-            BufferGenerator.printBuffer(112);
-            System.out.println(seasons.get(getSeasonsIndex(season)));
+            System.out.println( this );
+            BufferGenerator.printBuffer( 112 );
+            System.out.println( seasons.get(getSeasonsIndex(season)) );
         }        
     }
 
@@ -248,17 +277,18 @@ public abstract class Player implements Serializable {
      * @param firstSeason   The first season to print the stats of.
      * @param lastSeason    The last season to print the stats of.
      */
-    public void printStatsFromStartUntilEnd(String firstSeason, String lastSeason) {
-        int startingIndex = getSeasonsIndex(firstSeason), endingIndex = getSeasonsIndex(lastSeason);
+    public void printStatsFromStartUntilEnd( String firstSeason, String lastSeason )
+    {
+        int startingIndex = getSeasonsIndex( firstSeason ), endingIndex = getSeasonsIndex( lastSeason );
 
         if (startingIndex == -1 || endingIndex == -1) {
-            System.out.println(" ! " + name + " did not play over this range !");
+            System.out.println( " ! " + name + " did not play over this range !" );
         }
         else {
-            System.out.println(this);
-            BufferGenerator.printBuffer(112);
+            System.out.println( this );
+            BufferGenerator.printBuffer( 112 );
             for (int i = startingIndex; i <= endingIndex; i++) {
-                System.out.println(seasons.get(i));
+                System.out.println( seasons.get(i) );
             }
         }
     }
@@ -269,15 +299,16 @@ public abstract class Player implements Serializable {
      * 
      * @param firstSeason   The first season to print the stats of.
      */
-    public void printStatsFromStart(String firstSeason) {
-        int startingIndex = getSeasonsIndex(firstSeason);
+    public void printStatsFromStart( String firstSeason )
+    {
+        int startingIndex = getSeasonsIndex( firstSeason );
 
         if (startingIndex == -1) {
-            System.out.println(" ! " + name + " did not play during the " + firstSeason + " season !");
+            System.out.println( " ! " + name + " did not play during the " + firstSeason + " season !" );
         } else {
-            BufferGenerator.printBuffer(112);
+            BufferGenerator.printBuffer( 112 );
             for (int i = startingIndex; i < seasons.size(); i++) {
-                System.out.println(seasons.get(i));
+                System.out.println( seasons.get(i) );
             }
         }
     }
@@ -288,25 +319,27 @@ public abstract class Player implements Serializable {
      * 
      * @param lastSeason   The first season to print the stats of.
      */
-    public void printStatsUntilEnd(String lastSeason) {
-        int endingIndex = getSeasonsIndex(lastSeason);
+    public void printStatsUntilEnd( String lastSeason )
+    {
+        int endingIndex = getSeasonsIndex( lastSeason );
 
         if (endingIndex == -1) {
-            System.out.println(" ! " + name + " did not play during the " + lastSeason + " season !");
+            System.out.println( " ! " + name + " did not play during the " + lastSeason + " season !" );
         } else {
-            BufferGenerator.printBuffer(112);
+            BufferGenerator.printBuffer( 112 );
             for (int i = 0; i <= endingIndex; i++) {
-                System.out.println(seasons.get(i));
+                System.out.println( seasons.get(i) );
             }
         }
     }
 
     /**
-     * Prints the player's stats for the current season, plus their information.
+     * Prints the player's stats for the current season, plus their name.
      */
-    public void printCurrentSeasonStats_WithPlayerName() {
-        int seasonIndex = getSeasonsIndex("2023-2024");
-        System.out.printf(" %-20s" + seasons.get(seasonIndex).printWithoutYear() + "\n", name);
+    public void printCurrentSeasonStats_WithPlayerName()
+    {
+        int seasonIndex = getSeasonsIndex( "2023-2024" );
+        System.out.printf( " %-20s" + seasons.get(seasonIndex).printWithoutYear() + "\n", name );
     }
 
 
@@ -316,9 +349,10 @@ public abstract class Player implements Serializable {
      * @param season    The season to get the index of.
      * @return  The index of the season if found, or -1.
      */
-    private int getSeasonsIndex(String season) {
+    private int getSeasonsIndex( String season )
+    {
         for (int i = 0; i < seasons.size(); i++) {
-            if (InputAnalyzer.checkSpecificInput(seasons.get(i).getYear(), season)) {
+            if (InputAnalyzer.checkSpecificInput( seasons.get(i).getYear(), season )) {
                 return i;
             }
         }
@@ -326,8 +360,9 @@ public abstract class Player implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return String.format("\t\t\t\t\t\t%-25s\n\n\tNumber: %-7d \t\t\tAge: %-7d \t\t\tHandedness: %-15s",
-                    name, number, getAge(), handedness);
+    public String toString()
+    {
+        return String.format( "\t\t\t\t\t\t%-25s\n\n\tNumber: %-7d \t\t\tAge: %-7d \t\t\tHandedness: %-15s",
+                    name, number, getAge(), handedness );
     }
 }

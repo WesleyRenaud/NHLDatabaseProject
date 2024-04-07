@@ -9,7 +9,8 @@ import java.io.Serializable;
 
 import utilities.DoubleRounder;
 
-public class Team implements Serializable {
+public class Team implements Serializable
+{
     private static final long serialVersionUID = 535072393016375807L;
     private String city;
     private String name;
@@ -30,7 +31,9 @@ public class Team implements Serializable {
      * @param teamLoses The team's number of loses.
      * @param teamOvertimeLoses The team's number of overtime loses.
      */
-    public Team(String teamCity, String teamName, String teamConference, String teamDivision, int teamPoints, int teamWins, int teamLoses, int teamOvertimeLoses) {
+    public Team( String teamCity, String teamName, String teamConference, String teamDivision, int teamPoints, int teamWins, 
+                                                                                               int teamLoses, int teamOvertimeLoses )
+    {
         city = teamCity;
         name = teamName;
         conference = teamConference;
@@ -51,7 +54,9 @@ public class Team implements Serializable {
      * @param teamLoses The team's number of loses.
      * @param teamOvertimeLoses The team's number of overtime loses.
      */
-    public Team(String teamCity, String teamName, String teamConference, String teamDivision, int teamWins, int teamLoses, int teamOvertimeLoses) {
+    public Team( String teamCity, String teamName, String teamConference, String teamDivision, int teamWins, int teamLoses, 
+                                                                                                             int teamOvertimeLoses )
+    {
         city = teamCity;
         name = teamName;
         conference = teamConference;
@@ -67,7 +72,8 @@ public class Team implements Serializable {
      * @param teamCity  The team's city.
      * @param teamName  The team's name.
      */
-    public Team(String teamCity, String teamName, String teamConference, String teamDivision) {
+    public Team( String teamCity, String teamName, String teamConference, String teamDivision )
+    {
         city = teamCity;
         name = teamName;
         conference = teamConference;
@@ -78,80 +84,98 @@ public class Team implements Serializable {
         
     }
 
-    protected void setCity(String newCity) {
+    protected void setCity( String newCity )
+    {
         city = newCity;
     }
 
-    protected void setName(String newName) {
+    protected void setName( String newName )
+    {
         name = newName;
     }
 
-    protected void setConference(String newConference) {
+    protected void setConference( String newConference )
+    {
         conference = newConference;
     }
 
-    protected void setDivision(String newDivision) {
+    protected void setDivision( String newDivision )
+    {
         division = newDivision;
     }
 
-    protected void setWins(int newWins) {
+    protected void setWins( int newWins )
+    {
         wins = newWins;
     }
 
-    protected void setLoses(int newLoses) {
+    protected void setLoses( int newLoses )
+    {
         loses = newLoses;
     }
 
-    protected void setOvertimeLoses(int newOvertimeLoses) {
+    protected void setOvertimeLoses( int newOvertimeLoses )
+    {
         overtimeLoses = newOvertimeLoses;
     }
 
-    protected void setRecord(int newWins, int newLoses, int newOvertimeLoses) {
+    protected void setRecord( int newWins, int newLoses, int newOvertimeLoses )
+    {
         wins = newWins;
         loses = newLoses;
         overtimeLoses = newOvertimeLoses;
     }
 
 
-    public String getCity() {
+    public String getCity()
+    {
         return city;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
     
-    public String getConference() {
+    public String getConference()
+    {
         return conference;
     }
 
-    public String getDivision() {
+    public String getDivision()
+    {
         return division;
     }
 
-    public int getWins() {
+    public int getWins()
+    {
         return wins;
     }
 
-    public int getLoses() {
+    public int getLoses()
+    {
         return loses;
     }
 
-    public int getOvertimeLoses() {
+    public int getOvertimeLoses()
+    {
         return overtimeLoses;
     }
 
-    public int getPoints() {
+    public int getPoints()
+    {
         return wins * 2 + overtimeLoses;
     }
 
-    public int getGamesPlayed() {
+    public int getGamesPlayed()
+    {
         return wins + loses + overtimeLoses;
     }
 
-    public double getPointsPercentage() {
+    public double getPointsPercentage()
+    {
         double pointsPercentage = getPoints() / (getGamesPlayed() * 2.0);
-        pointsPercentage = DoubleRounder.round(pointsPercentage, 3);
+        pointsPercentage = DoubleRounder.round( pointsPercentage, 3 );
         return pointsPercentage;
     }
 
@@ -160,7 +184,8 @@ public class Team implements Serializable {
      * 
      * @return  The team city plus the team name.
      */
-    public String getFullName() {
+    public String getFullName()
+    {
         return city + " " + name;
     }
 
@@ -169,7 +194,8 @@ public class Team implements Serializable {
      * 
      * @return  A string showing the team's record.
      */
-    public String getRecord() {
+    public String getRecord()
+    {
         return wins + "-" + loses + "-" + overtimeLoses;
     }
 
@@ -178,8 +204,9 @@ public class Team implements Serializable {
      * Prints a string showing the team and its record.
      */
     @Override
-    public String toString() {
-        return String.format("%-23s| GP: %-5d| Points: %-5d| Record: %-10s| PP%%: %-7.3f", getFullName(), getGamesPlayed(), 
-                            getPoints(), getRecord(), getPointsPercentage());
+    public String toString()
+    {
+        return String.format( "%-23s| GP: %-5d| Points: %-5d| Record: %-10s| PP%%: %-7.3f", getFullName(), getGamesPlayed(), 
+                            getPoints(), getRecord(), getPointsPercentage() );
     }
 }

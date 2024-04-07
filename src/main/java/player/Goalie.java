@@ -4,8 +4,11 @@
 
 package player;
 
-public class Goalie extends Player {
+
+public class Goalie extends Player
+{
     private static final long serialVersionUID = -4933314623253875845L;
+    
     
     /**
      * Creates a new goalie given their name, birthday, handedness, retired status,
@@ -18,7 +21,8 @@ public class Goalie extends Player {
      * @param number        The goalie's jersey number.
      * @param team          The goalie's team.
      */
-    public Goalie(String name, String birthday, String handedness, boolean retired, int number, String team) {
-        super(name, birthday, handedness, retired, number, team);
+    public Goalie( String name, String birthday, String handedness, boolean retired, int number, String team )
+    {
+        super( name, birthday, handedness, retired, number, team );
     }
 }
