@@ -11,12 +11,12 @@ import java.util.List;
 import java.io.Serializable;
 
 import input.InputAnalyzer;
-import utilities.BirthdayHandler;
-import utilities.BufferGenerator;
 import season.GoalieSeason;
 import season.Season;
 import season.SkaterSeason;
-
+import utilities.BirthdayHandler;
+import utilities.BufferGenerator;
+import utilities.NHLConstants;
 
 
 public abstract class Player implements Serializable
@@ -249,7 +249,7 @@ public abstract class Player implements Serializable
     public void printCareerStats()
     {
         System.out.println( this );
-        BufferGenerator.printBuffer( 112 );
+        BufferGenerator.printBuffer( NHLConstants.bufferLength );
         for (int i = 0; i < seasons.size(); i++) {
             System.out.println( seasons.get(i) );
         }
@@ -266,8 +266,8 @@ public abstract class Player implements Serializable
             System.out.println( " ! " + name + " did not play during the " + season + " season !" );
         } else {
             System.out.println( this );
-            BufferGenerator.printBuffer( 112 );
-            System.out.println( seasons.get(getSeasonsIndex(season)) );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
+            System.out.println( seasons.get(getSeasonsIndex( season )) );
         }        
     }
 
@@ -286,7 +286,7 @@ public abstract class Player implements Serializable
         }
         else {
             System.out.println( this );
-            BufferGenerator.printBuffer( 112 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             for (int i = startingIndex; i <= endingIndex; i++) {
                 System.out.println( seasons.get(i) );
             }
@@ -306,7 +306,8 @@ public abstract class Player implements Serializable
         if (startingIndex == -1) {
             System.out.println( " ! " + name + " did not play during the " + firstSeason + " season !" );
         } else {
-            BufferGenerator.printBuffer( 112 );
+            System.out.println( this );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             for (int i = startingIndex; i < seasons.size(); i++) {
                 System.out.println( seasons.get(i) );
             }
@@ -326,7 +327,8 @@ public abstract class Player implements Serializable
         if (endingIndex == -1) {
             System.out.println( " ! " + name + " did not play during the " + lastSeason + " season !" );
         } else {
-            BufferGenerator.printBuffer( 112 );
+            System.out.println( this );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             for (int i = 0; i <= endingIndex; i++) {
                 System.out.println( seasons.get(i) );
             }
@@ -339,7 +341,7 @@ public abstract class Player implements Serializable
     public void printCurrentSeasonStats_WithPlayerName()
     {
         int seasonIndex = getSeasonsIndex( "2023-2024" );
-        System.out.printf( " %-20s" + seasons.get(seasonIndex).printWithoutYear() + "\n", name );
+        System.out.printf( " %-22s | " + seasons.get(seasonIndex).printWithoutYear() + "\n", name );
     }
 
 

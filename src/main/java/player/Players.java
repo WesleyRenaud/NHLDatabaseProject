@@ -14,6 +14,7 @@ import java.util.List;
 
 import input.InputAnalyzer;
 import utilities.BufferGenerator;
+import utilities.NHLConstants;
 
 
 public class Players implements Serializable
@@ -273,7 +274,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByPoints( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -291,7 +292,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByGoals( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -309,7 +310,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByAssists( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -327,7 +328,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByPlusMinus( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -345,7 +346,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByWins( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 125 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -363,7 +364,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortBySavePercentage( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 125 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -381,7 +382,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByGoalsAgainstAverage( teamPlayers) ;
             System.out.println();
-            BufferGenerator.printBuffer( 125 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -397,7 +398,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByPoints( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -413,7 +414,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByGoals( currentPlayers) ;
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -429,7 +430,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByAssists( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -445,7 +446,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByPlusMinus( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 115 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -461,7 +462,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByWins( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 125 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -477,7 +478,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortBySavePercentage( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 125 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -493,7 +494,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByGoalsAgainstAverage( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( 125 );
+            BufferGenerator.printBuffer( NHLConstants.bufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -508,6 +509,7 @@ public class Players implements Serializable
     private void printPlayersCurrentSeasonStats( List<Player> list )
     {
         for (int i = 0; i < list.size(); i++) {
+            System.out.printf( "%d.\t", (i + 1) );
             list.get(i).printCurrentSeasonStats_WithPlayerName();
         }
     }
@@ -554,7 +556,7 @@ public class Players implements Serializable
     {
         Collections.sort( list, new Comparator<Player>() {
             public int compare( Player player1, Player player2 ) {
-                return player1.getCurrentSeasonPoints() - player2.getCurrentSeasonPoints();
+                return player2.getCurrentSeasonPoints() - player1.getCurrentSeasonPoints();
             }
         });
     }
@@ -566,7 +568,7 @@ public class Players implements Serializable
     {
         Collections.sort( list, new Comparator<Player>() {
             public int compare( Player player1, Player player2 ) {
-                return player1.getCurrentSeasonGoals() - player2.getCurrentSeasonGoals();
+                return player2.getCurrentSeasonGoals() - player1.getCurrentSeasonGoals();
             }
         });
     }
@@ -578,7 +580,7 @@ public class Players implements Serializable
     {
         Collections.sort( list, new Comparator<Player>() {
             public int compare( Player player1, Player player2 ) {
-                return player1.getCurrentSeasonAssists() - player2.getCurrentSeasonAssists();
+                return player2.getCurrentSeasonAssists() - player1.getCurrentSeasonAssists();
             }
         });
     }
@@ -590,7 +592,7 @@ public class Players implements Serializable
     {
         Collections.sort( list, new Comparator<Player>() {
             public int compare( Player player1, Player player2 ) {
-                return player1.getCurrentSeasonPlusMinus() - player2.getCurrentSeasonPlusMinus();
+                return player2.getCurrentSeasonPlusMinus() - player1.getCurrentSeasonPlusMinus();
             }
         });
     }
@@ -602,7 +604,7 @@ public class Players implements Serializable
     {
         Collections.sort( list, new Comparator<Player>() {
             public int compare( Player player1, Player player2 ) {
-                return player1.getCurrentSeasonWins() - player2.getCurrentSeasonWins();
+                return player2.getCurrentSeasonWins() - player1.getCurrentSeasonWins();
             }
         });
     }
@@ -614,7 +616,7 @@ public class Players implements Serializable
     {
         Collections.sort( list, new Comparator<Player>() {
             public int compare( Player player1, Player player2 ) {
-                return (int)(100 * (player1.getCurrentSeasonSavePercentage() - player2.getCurrentSeasonSavePercentage()));
+                return (int)(100 * (player2.getCurrentSeasonSavePercentage() - player1.getCurrentSeasonSavePercentage()));
             }
         });
     }

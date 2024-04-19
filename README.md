@@ -74,3 +74,6 @@ Version 0.1:
  * Stats are added back to the 2021-2022 season, but the wildcard/divisional/
    conference standings are not viewable before 2021-2022 due to different
    divisional set ups
+~ Apr 19
+ * Added stats for Anaheim, Arizona, Boston, Buffalo, Calgary, Carolina, and
+   Chicago
