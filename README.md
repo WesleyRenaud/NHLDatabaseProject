@@ -77,3 +77,6 @@ Version 0.1:
 ~ Apr 19
  * Added stats for Anaheim, Arizona, Boston, Buffalo, Calgary, Carolina, and
    Chicago
+~ Apr 21
+ * Added stats for Colorado, Columbus, Dallas, Detroit, Edmonton, Florida,
+   Los Angeles, Minnesota, Montreal, and Nashville
