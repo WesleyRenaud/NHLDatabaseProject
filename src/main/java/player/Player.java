@@ -249,7 +249,7 @@ public abstract class Player implements Serializable
     public void printCareerStats()
     {
         System.out.println( this );
-        BufferGenerator.printBuffer( NHLConstants.bufferLength );
+        BufferGenerator.printBuffer( NHLConstants.withoutName_BufferLength );
         for (int i = 0; i < seasons.size(); i++) {
             System.out.println( seasons.get(i) );
         }
@@ -266,7 +266,7 @@ public abstract class Player implements Serializable
             System.out.println( " ! " + name + " did not play during the " + season + " season !" );
         } else {
             System.out.println( this );
-            BufferGenerator.printBuffer( NHLConstants.bufferLength );
+            BufferGenerator.printBuffer( NHLConstants.withoutName_BufferLength );
             System.out.println( seasons.get(getSeasonsIndex( season )) );
         }        
     }
@@ -286,7 +286,7 @@ public abstract class Player implements Serializable
         }
         else {
             System.out.println( this );
-            BufferGenerator.printBuffer( NHLConstants.bufferLength );
+            BufferGenerator.printBuffer( NHLConstants.withoutName_BufferLength );
             for (int i = startingIndex; i <= endingIndex; i++) {
                 System.out.println( seasons.get(i) );
             }
@@ -307,7 +307,7 @@ public abstract class Player implements Serializable
             System.out.println( " ! " + name + " did not play during the " + firstSeason + " season !" );
         } else {
             System.out.println( this );
-            BufferGenerator.printBuffer( NHLConstants.bufferLength );
+            BufferGenerator.printBuffer( NHLConstants.withoutName_BufferLength );
             for (int i = startingIndex; i < seasons.size(); i++) {
                 System.out.println( seasons.get(i) );
             }
@@ -328,7 +328,7 @@ public abstract class Player implements Serializable
             System.out.println( " ! " + name + " did not play during the " + lastSeason + " season !" );
         } else {
             System.out.println( this );
-            BufferGenerator.printBuffer( NHLConstants.bufferLength );
+            BufferGenerator.printBuffer( NHLConstants.withoutName_BufferLength );
             for (int i = 0; i <= endingIndex; i++) {
                 System.out.println( seasons.get(i) );
             }

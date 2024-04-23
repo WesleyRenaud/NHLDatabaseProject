@@ -80,3 +80,6 @@ Version 0.1:
 ~ Apr 21
  * Added stats for Colorado, Columbus, Dallas, Detroit, Edmonton, Florida,
    Los Angeles, Minnesota, Montreal, and Nashville
+~ Apr 23
+ * Added stats for New Jersey, New York Islanders, New York Rangers, Ottawa,
+   Philadelphia, and Pittsburgh
