@@ -274,7 +274,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByPoints( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -292,7 +292,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByGoals( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -310,7 +310,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByAssists( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -328,7 +328,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByPlusMinus( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -346,7 +346,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByWins( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -364,7 +364,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortBySavePercentage( teamPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -382,7 +382,7 @@ public class Players implements Serializable
         if (teamPlayers.size() > 0) {
             sortByGoalsAgainstAverage( teamPlayers) ;
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( teamPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -398,7 +398,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByPoints( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -414,7 +414,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByGoals( currentPlayers) ;
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -430,7 +430,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByAssists( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -446,7 +446,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByPlusMinus( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -462,7 +462,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByWins( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -478,7 +478,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortBySavePercentage( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );
@@ -494,7 +494,7 @@ public class Players implements Serializable
         if (currentPlayers.size() > 0) {
             sortByGoalsAgainstAverage( currentPlayers );
             System.out.println();
-            BufferGenerator.printBuffer( NHLConstants.withName_BufferLength );
+            BufferGenerator.printBuffer( NHLConstants.players_WithName_BufferLength );
             printPlayersCurrentSeasonStats( currentPlayers );
         } else {
             System.out.println( "\n ! No Players Found !" );

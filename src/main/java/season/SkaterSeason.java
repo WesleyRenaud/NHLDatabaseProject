@@ -82,7 +82,7 @@ public class SkaterSeason extends Season
      */
     @Override
     public String printWithoutYear() {
-        return String.format( "Games Played: %-7d | Goals: %-7d | Assists: %-7d | Points: %-7d | Plus-Minus: %-7d",
+        return String.format( "Games Played: %-9d | Goals: %-9d | Assists: %-9d | Points: %-9d | Plus-Minus: %-9d",
                                     getGamesPlayed(), goals, assists, getPoints(), plusMinus );
     }
 }

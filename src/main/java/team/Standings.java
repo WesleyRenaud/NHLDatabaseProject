@@ -13,6 +13,7 @@ import java.util.List;
 
 import input.InputAnalyzer;
 import utilities.BufferGenerator;
+import utilities.NHLConstants;
 
 
 public class Standings implements Serializable
@@ -405,7 +406,7 @@ public class Standings implements Serializable
     private void printTeams_ByLeague()
     {
         System.out.println( "\t\t\t\t\tLeague" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         for (int i = 0; i < teams.size(); i++) {
             System.out.println( (i + 1) +  ". \t" + teams.get(i) );
         }
@@ -419,19 +420,19 @@ public class Standings implements Serializable
         int i = 0;
         System.out.println( "\nEast" );
         System.out.println( "\t\t\t\t\tAtlantic" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 3) {
             System.out.println( (i + 1) + ". \t" + teams.get(i) );
             i++;
         }
         System.out.println( "\n\t\t\t\tMetropolitan" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 6) {
             System.out.println( (i - 2) + ". \t" + teams.get(i) );
             i++;
         }
         System.out.println( "\n\t\t\t\t\tWildcard" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 8) {
             System.out.println( (i - 5) + ". \t" + teams.get(i) );
             i++;
@@ -441,11 +442,11 @@ public class Standings implements Serializable
             System.out.println(( i - 5) + ". \t" + teams.get(i) );
             i++;
         }
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
 
         System.out.println( "West" );
         System.out.println( "\t\t\t\t\tCentral" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 19) {
             System.out.println( (i - 15) + ". \t" + teams.get(i) );
             i++;
@@ -457,12 +458,12 @@ public class Standings implements Serializable
             i++;
         }
         System.out.println( "\n\t\t\t\t\tWildcard" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 24) {
             System.out.println( (i - 21) + ". \t" + teams.get(i) );
             i++;
         }
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 32) {
             System.out.println( (i - 21) + ". \t" + teams.get(i) );
             i++;
@@ -475,26 +476,26 @@ public class Standings implements Serializable
     private void printTeams_ByDivision()
     {
         System.out.println( "\t\t\t\t\tAtlantic" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         int i = 0;
         while (i < 8) {
             System.out.println( (i + 1) + ". \t" + teams.get(i) );
             i++;
         }
         System.out.println( "\t\t\t\t\tMetropolitan" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 16) {
             System.out.println( (i - 7) + ". \t" + teams.get(i) );
             i++;
         }
         System.out.println( "\t\t\t\t\tCentral" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 24) {
             System.out.println( (i - 15) + ". \t" + teams.get(i) );
             i++;
         }
         System.out.println( "\t\t\t\t\tPacific" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 32) {
             System.out.println( (i - 23) + ". \t" + teams.get(i) );
             i++;
@@ -507,14 +508,14 @@ public class Standings implements Serializable
     private void printTeams_ByConference()
     {
         System.out.println( "\t\t\t\t\tEastern" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         int i = 0;
         while (i < 16) {
             System.out.println( (i + 1) + ". \t" + teams.get(i) );
             i++;
         }
         System.out.println( "\t\t\t\t\tWestern" );
-        BufferGenerator.printBufferForScreenWidth();
+        BufferGenerator.printBuffer( NHLConstants.teams_BufferLength );
         while (i < 32) {
             System.out.println( (i - 15) + ". \t" + teams.get(i) );
             i++;
